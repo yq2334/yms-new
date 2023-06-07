@@ -298,7 +298,7 @@
 		}
 
 		.user-section {
-			height: 600upx;
+			height: 500upx;
 			// padding: 100upx 30upx 0;
 			position: relative;
 
@@ -320,9 +320,9 @@
 				top: 0;
 				background: url(@/static/images/user-bg.png) no-repeat;
 				background-size: 100% 100%;
-				height: 355rpx;
+				height: 255rpx;
 				z-index: 9;
-				padding-top: 180upx;
+				padding-top: 80upx;
 			}
 
 			.user-info-box {
@@ -412,8 +412,8 @@
 				top: 0;
 				transform: translateX(-50%);
 				left: 50%;
-				height: 605rpx;
-				padding-top: 380upx;
+				height: 500rpx;
+				padding-top: 280upx;
 
 				.title {
 					display: block;
