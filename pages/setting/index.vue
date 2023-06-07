@@ -64,40 +64,40 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      windowHeight: uni.getSystemInfoSync().windowHeight,
-    };
-  },
-  methods: {
-    handleToPwd() {
-      this.$tab.navigateTo("/pages/mine/pwd/index");
+  export default {
+    data() {
+      return {
+        windowHeight: uni.getSystemInfoSync().windowHeight
+      }
     },
-    handleAbout() {
-      this.$tab.navigateTo("/pages/mine/about/index");
-    },
-    handleJiaoLiuQun() {
-      this.$modal.showToast("客服QQ：599854767");
-    },
-    handleBuilding() {
-      this.$modal.showToast("模块建设中~");
-    },
-    handleToUpgrade() {
-      this.$modal.showToast("模块建设中~");
-    },
-    handleCleanTmp() {
-      this.$modal.showToast("模块建设中~");
-    },
-    handleLogout() {
-      this.$modal.confirm("确定注销并退出系统吗？").then(() => {
-        this.$store.dispatch("LogOut").then(() => {
-          this.$tab.reLaunch("/pages/index");
-        });
-      });
-    },
-  },
-};
+    methods: {
+      handleToPwd() {
+        this.$tab.navigateTo('/pages/mine/pwd/index')
+      },
+	  handleAbout() {
+	  	this.$tab.navigateTo('/pages/mine/about/index')
+	  },
+	  handleJiaoLiuQun() {
+	  	this.$modal.showToast('模块建设中~')
+	  },
+	  handleBuilding() {
+	  	this.$modal.showToast('模块建设中~')
+	  },
+      handleToUpgrade() {
+        this.$modal.showToast('模块建设中~')
+      },
+      handleCleanTmp() {
+        this.$modal.showToast('模块建设中~')
+      },
+      handleLogout() {
+        this.$modal.confirm('确定注销并退出系统吗？').then(() => {
+          this.$store.dispatch('LogOut').then(() => {
+            this.$tab.reLaunch('/pages/index')
+          })
+        })
+      }
+    }
+  }
 </script>
 
 <style lang="scss" scoped>

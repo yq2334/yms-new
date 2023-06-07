@@ -17,7 +17,7 @@
         <view class="list-cell list-cell-arrow">
           <view class="menu-item-box">
             <view>官方邮箱</view>
-            <view class="text-right">599854767@qq.com</view>
+            <view class="text-right">249045216@qq.com</view>
           </view>
         </view>
         <view class="list-cell list-cell-arrow">

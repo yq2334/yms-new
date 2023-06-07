@@ -1,6 +1,6 @@
 {
     "name" : "信用就医",
-    "appid" : "__UNI__D6E80BF",
+    "appid" : "__UNI__37EC74E",
     "description" : "",
     "versionName" : "1.2.0",
     "versionCode" : 120,
@@ -68,6 +68,9 @@
         "router" : {
             "mode" : "hash",
             "base" : "/h5/"
+        },
+        "uniStatistics" : {
+            "enable" : false
         }
     }
 }

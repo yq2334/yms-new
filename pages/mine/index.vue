@@ -18,7 +18,7 @@
 						<view class="portrait-box" @tap="navTo(userInfo ? '/pages/user/userinfo/userinfo' : 'login')">
 							<image class="portrait" src="../../static/images/avatar.png"></image>
 							<text class="username">
-								陈鹏 
+								信用用户 
 							</text>
 						</view>
 						<view class="portrait-indent">
@@ -229,7 +229,7 @@
 				this.$tab.navigateTo('/pages/mine/about/index')
 			},
 			handleJiaoLiuQun() {
-				this.$modal.showToast('客服QQ：599854767')
+				this.$modal.showToast('客服QQ：249045216')
 			},
 			handleBuilding() {
 				this.$modal.showToast('模块建设中~')
