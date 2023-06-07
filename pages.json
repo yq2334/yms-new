@@ -2,8 +2,8 @@
 	"pages": [{
 			"path": "pages/index",
 			"style": {
-				"navigationBarTitleText": "信用就医"
-				// "navigationStyle": "custom"
+				"navigationBarTitleText": "信用就医",
+				"navigationStyle": "custom"
 			}
 		},
 		{
@@ -54,7 +54,8 @@
 		{
 			"path": "pages/setting/index",
 			"style": {
-				"navigationBarTitleText": "设置"
+				"navigationBarTitleText": "设置",
+				 "navigationStyle": "custom"
 			}
 		},
 		{

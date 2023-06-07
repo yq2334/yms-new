@@ -3,7 +3,7 @@
 		<!--顶部个人信息栏-->
 		 
 		<view class="header-section btn" :style="{'padding-top':statusBarHeight + 'px'}">
-			<u-navbar
+			<!-- <u-navbar
 			         title="我的账户"
 			         @rightClick="rightClick"
 			         :autoBack="false"
@@ -11,7 +11,7 @@
 					 bgColor="transparent"
 					 :titleStyle="{'fontSize': '33rpx'}"
 			     >
-			     </u-navbar>
+			     </u-navbar> -->
 			<view class="user-section">
 				<view class="user-wrapper">
 					<view class="user-info-box">
