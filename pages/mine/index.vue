@@ -16,7 +16,7 @@
 				<view class="user-wrapper">
 					<view class="user-info-box">
 						<view class="portrait-box" @tap="navTo(userInfo ? '/pages/user/userinfo/userinfo' : 'login')">
-							<image class="portrait" src=""></image>
+							<image class="portrait" src="../../static/images/avatar.png"></image>
 							<text class="username">
 								陈鹏
 							</text>
