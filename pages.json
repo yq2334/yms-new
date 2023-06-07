@@ -1,0 +1,199 @@
+{
+	"pages": [{
+			"path": "pages/index",
+			"style": {
+				"navigationBarTitleText": "信用就医"
+				// "navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/work/index",
+			"style": {
+				"navigationBarTitleText": "工作台"
+				// "navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/mine/index",
+			"style": {
+				"navigationBarTitleText": "我的",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/mine/avatar/index",
+			"style": {
+				"navigationBarTitleText": "修改头像"
+			}
+		},
+		{
+			"path": "pages/mine/info/index",
+			"style": {
+				"navigationBarTitleText": "个人信息"
+			}
+		},
+		{
+			"path": "pages/mine/info/edit",
+			"style": {
+				"navigationBarTitleText": "编辑资料"
+			}
+		},
+		{
+			"path": "pages/mine/pwd/index",
+			"style": {
+				"navigationBarTitleText": "修改密码"
+			}
+		},
+		{
+			"path": "pages/setting/index",
+			"style": {
+				"navigationBarTitleText": "设置"
+			}
+		},
+		{
+			"path": "pages/mine/help/index",
+			"style": {
+				"navigationBarTitleText": "常见问题"
+			}
+		},
+		{
+			"path": "pages/mine/about/index",
+			"style": {
+				"navigationBarTitleText": "关于我们"
+			}
+		},
+		{
+			"path": "pages/common/webview/index",
+			"style": {
+				"navigationBarTitleText": "浏览网页"
+			}
+		},
+		{
+			"path": "pages/common/textview/index",
+			"style": {
+				"navigationBarTitleText": "浏览文本"
+			}
+		},
+		{
+			"path": "pages/feedback/index",
+			"style": {
+				"navigationBarTitleText": "意见反馈",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/search/index",
+			"style": {
+				"navigationBarTitleText": "搜索",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/message/message",
+			"style": {
+				"enablePullDownRefresh": true,
+				"navigationBarTitleText": "消息"
+			}
+		},
+		{
+			"path": "pages/demo/demo",
+			"style": {
+				"navigationBarTitleText": "演示",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/monitor/logininfo",
+			"style": {
+				"navigationBarTitleText": "登录日志"
+			}
+		},
+		{
+			"path": "pages/monitor/operlog",
+			"style": {
+				"navigationBarTitleText": "操作日志",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/demo/table/table",
+			"style": {
+				"navigationBarTitleText": "table演示",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/demo/table/edit/edit",
+			"style": {
+				"navigationBarTitleText": "demo编辑",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/message/details",
+			"style": {
+				"navigationBarTitleText": "公告详情",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/monitor/onlineuser",
+			"style": {
+				"navigationBarTitleText": "在线用户列表",
+				"enablePullDownRefresh": false
+			}
+
+		},
+		{
+			"path": "pages/demo/table/table2",
+			"style": {
+				"navigationBarTitleText": "表格演示",
+				"enablePullDownRefresh": false
+			}
+
+		}
+	],
+	"tabBar": {
+		"color": "#BFBFBF",
+		"selectedColor": "#38A4D1",
+		"borderStyle": "white",
+		"backgroundColor": "#ffffff",
+		"list": [{
+				"pagePath": "pages/index",
+				"iconPath": "static/images/tabbar/tab-home.png",
+				"selectedIconPath": "static/images/tabbar/tab-home-active.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/mine/index",
+				"iconPath": "static/images/tabbar/tab-mine.png",
+				"selectedIconPath": "static/images/tabbar/tab-mine-active.png",
+				"text": "我的"
+			},
+			// {
+			//   "pagePath": "pages/message/message",
+			//   "iconPath": "static/images/tabbar/message.png",
+			//   "selectedIconPath": "static/images/tabbar/message_.png",
+			//   "text": "消息"
+			// },
+			{
+				"pagePath": "pages/setting/index",
+				"iconPath": "static/images/tabbar/tab-set.png",
+				"selectedIconPath": "static/images/tabbar/tab-set-active.png",
+				"text": "设置"
+			}
+		]
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "信用就医",
+		"navigationBarBackgroundColor": "#FFFFFF"
+	}
+}
