@@ -18,7 +18,7 @@
 						<view class="portrait-box" @tap="navTo(userInfo ? '/pages/user/userinfo/userinfo' : 'login')">
 							<image class="portrait" src="../../static/images/avatar.png"></image>
 							<text class="username">
-								陈鹏
+								陈鹏 
 							</text>
 						</view>
 						<view class="portrait-indent">
