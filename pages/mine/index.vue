@@ -229,7 +229,7 @@
 				this.$tab.navigateTo('/pages/mine/about/index')
 			},
 			handleJiaoLiuQun() {
-				this.$modal.showToast('客服QQ：599854767')
+				this.$modal.showToast('客服QQ：249045216')
 			},
 			handleBuilding() {
 				this.$modal.showToast('模块建设中~')
