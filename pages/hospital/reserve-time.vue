@@ -35,7 +35,7 @@
 						</view>
 						<view class="patient-list">
 							<view class="item" :class="userId == item.id ? 'active' : ''"
-								v-for="(item,index) in patients" :key="index">
+								v-for="(item,index) in patients" :key="index" @tap="changeUser(item)">
 								{{item.name}}
 							</view>
 							<view class="item add">
@@ -77,6 +77,9 @@
 
 		},
 		methods: {
+			changeUser(item) {
+				this.userId = item.id
+			},
 			// 通用跳转
 			navTo(route) {
 				if (!route) return;

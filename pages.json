@@ -55,7 +55,7 @@
 			"path": "pages/setting/index",
 			"style": {
 				"navigationBarTitleText": "设置",
-				 "navigationStyle": "custom"
+				"navigationStyle": "custom"
 			}
 		},
 		{
@@ -159,68 +159,72 @@
 				"enablePullDownRefresh": false
 			}
 
+		}, {
+			"path": "pages/hospital/list",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/hospital/index",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/hospital/reserve",
+			"style": {
+				"navigationBarTitleText": "预约挂号",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/hospital/reserve-doctor",
+			"style": {
+				"navigationBarTitleText": "预约医生",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		}, {
+			"path": "pages/hospital/reserve-time",
+			"style": {
+				"navigationBarTitleText": "预约排班",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/hospital/submit",
+			"style": {
+				"navigationBarTitleText": "提交预约",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/hospital/pay-order",
+			"style": {
+				"navigationBarTitleText": "已支付订单",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/hospital/paying-order",
+			"style": {
+				"navigationBarTitleText": "支付订单",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": false
+			}
+
 		}
-	    ,{
-            "path" : "pages/hospital/list",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-				"navigationStyle": "custom",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/hospital/index",
-            "style" :                                                                                    
-            {
-               "navigationBarTitleText": "",
-               "navigationStyle": "custom",
-               "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/hospital/reserve",
-            "style" :                                                                                    
-            {
-               "navigationBarTitleText": "预约挂号",
-               "navigationStyle": "custom",
-               "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/hospital/reserve-doctor",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "预约医生",
-                "enablePullDownRefresh": false,
-				 "navigationStyle": "custom"
-            }
-            
-        }
-        ,{
-            "path" : "pages/hospital/reserve-time",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "预约排班",
-				"navigationStyle": "custom",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/hospital/submit",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "提交预约",
-				"navigationStyle": "custom",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+	],
 	"tabBar": {
 		"color": "#BFBFBF",
 		"selectedColor": "#38A4D1",

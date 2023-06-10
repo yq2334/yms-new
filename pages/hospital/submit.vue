@@ -44,7 +44,7 @@
 					</view>
 				</view>
 			</view>
-			<u-button @tap="navTo('submit')" type="primary" color="#388CEB" size="large" text="确认支付">
+			<u-button @tap="navTo('pay-order')" type="primary" color="#388CEB" size="large" text="确认支付">
 			</u-button>
 		</view>
 	</view>
@@ -62,7 +62,14 @@
 			}
 		},
 		methods: {
+// 通用跳转
+			navTo(route) {
+				if (!route) return;
 
+				uni.navigateTo({
+					url:route
+				})
+			},
 		}
 	}
 </script>

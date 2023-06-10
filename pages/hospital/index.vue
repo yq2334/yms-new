@@ -12,21 +12,21 @@
 					门诊
 				</view>
 				<view class="list">
-					<view class="item">
+					<view class="item" @tap="navTo('reserve')">
 						<view class="img">
-							<img src="" alt="">
+							<img src="../../static/images/yuyueguahao.png" alt="">
 						</view>
 						<text class="tit">预约挂号</text>
 					</view>
 					<view class="item">
 						<view class="img">
-							<img src="" alt="">
+							<img src="../../static/images/guahaojilu.png" alt="">
 						</view>
 						<text class="tit">挂号记录</text>
 					</view>
 					<view class="item">
 						<view class="img">
-							<img src="" alt="">
+							<img src="../../static/images/jiaofeijilu.png" alt="">
 						</view>
 						<text class="tit">缴费订单</text>
 					</view>
@@ -39,7 +39,7 @@
 				<view class="list">
 					<view class="item">
 						<view class="img">
-							<img src="" alt="">
+							<img src="../../static/images/riqingdan.png" alt="">
 						</view>
 						<text class="tit">每日清单</text>
 					</view>
@@ -59,7 +59,13 @@
 			}
 		},
 		methods: {
-
+			navTo(route) {
+				if (!route) return;
+			
+				uni.navigateTo({
+					url:route
+				})
+			},
 		}
 	}
 </script>
@@ -135,6 +141,10 @@
 					background-color: #3360DE;
 					margin-bottom: 50rpx;
 					margin: 0 auto;
+					img{
+						width: 100%;
+						height: 100%;
+					}
 				}
 
 				.tit {
