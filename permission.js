@@ -20,6 +20,7 @@ let list = ["navigateTo", "redirectTo", "reLaunch", "switchTab"]
 list.forEach(item => {
   uni.addInterceptor(item, {
     invoke(to) {
+		return true;
       if (getToken()) {
         if (to.path === loginPage) {
           uni.reLaunch({ url: "/" })

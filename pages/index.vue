@@ -19,9 +19,9 @@
 			</swiper>
 		</view>
 		<view class="notice">
-			<uni-notice-bar :showIconImg="notice"  scrollable backgroundColor="transparent" color="#121212"
+			<uni-notice-bar :showIconImg="notice" scrollable backgroundColor="transparent" color="#121212"
 				text="信用+医疗正式上线" />
-				
+
 		</view>
 		<view class="home-list">
 			<view class="item" @tap="showTips">
@@ -33,7 +33,7 @@
 
 				</view>
 			</view>
-			<view class="item" @tap="showTips">
+			<view class="item" @tap="navToHospital(1)">
 				<view class="city">
 					长沙县
 				</view>
@@ -71,7 +71,7 @@
 			</view>
 		</view>
 		<view class="home-foot">
-			<text >主办单位：长沙市发展和改革委员会</text>
+			<text>主办单位：长沙市发展和改革委员会</text>
 		</view>
 	</view>
 </template>
@@ -87,7 +87,7 @@
 			return {
 				banner,
 				notice,
-				 text1: '欢迎体验ZRAdmin移动版'
+				text1: '欢迎体验ZRAdmin移动版'
 			};
 		},
 		components: {
@@ -112,16 +112,19 @@
 					route
 				});
 			},
+			navToHospital(id) {
+				uni.navigateTo({
+					url: "hospital/list?id=" + id,
+				});
+			},
 			showTips() {
-				 this.$modal.showToast('模块建设中~')
+				this.$modal.showToast('模块建设中~')
 			}
 
 		}
 	};
 </script>
 <style lang="scss">
-	
-
 	.home {
 		padding: 15rpx;
 
@@ -170,7 +173,8 @@
 				}
 			}
 		}
-		&-foot{
+
+		&-foot {
 			text-align: center;
 			color: #010101;
 			font-size: 27rpx;
@@ -186,5 +190,3 @@
 		background-size: 100% 100%;
 	}
 </style>
-
-
