@@ -26,20 +26,20 @@
 				<view class="pay-list">
 					<view class="item">
 						<text>信用支付</text>
-						<u--image  src="../../static/images/pay-credient.png" width="65rpx" height="55rpx" ></u--image>
-						<u-gap height="10" ></u-gap>
+						<u--image src="../../static/images/pay-credient.png" width="65rpx" height="55rpx"></u--image>
+						<u-gap height="10"></u-gap>
 						<u-checkbox v-model="checked" shape="square" label=""></u-checkbox>
 					</view>
 					<view class="item">
 						<text>微信支付</text>
-						<u--image  src="../../static/images/pay-weixin.png" width="58rpx" height="50rpx" ></u--image>
-						<u-gap height="10" ></u-gap>
+						<u--image src="../../static/images/pay-weixin.png" width="58rpx" height="50rpx"></u--image>
+						<u-gap height="10"></u-gap>
 						<u-checkbox v-model="checked" shape="square" label=""></u-checkbox>
 					</view>
 					<view class="item">
 						<text>信用支付</text>
-						<u--image  src="../../static/images/pay-ali.png" width="58rpx" height="58rpx" ></u--image>
-						<u-gap height="10" ></u-gap>
+						<u--image src="../../static/images/pay-ali.png" width="58rpx" height="58rpx"></u--image>
+						<u-gap height="10"></u-gap>
 						<u-checkbox v-model="checked" shape="square" label=""></u-checkbox>
 					</view>
 				</view>
@@ -62,12 +62,12 @@
 			}
 		},
 		methods: {
-// 通用跳转
+			// 通用跳转
 			navTo(route) {
 				if (!route) return;
 
 				uni.navigateTo({
-					url:route
+					url: route
 				})
 			},
 		}
@@ -109,19 +109,23 @@
 			font-size: 40rpx;
 		}
 	}
-	.select-pay{
+
+	.select-pay {
 		padding: 0 45rpx;
-		.title{
+
+		.title {
 			font-size: 27rpx;
 			font-family: Adobe Heiti Std;
 			font-weight: normal;
 			color: #7F8081;
 			line-height: 81rpx;
 		}
-		.pay-list{
+
+		.pay-list {
 			display: flex;
 			align-items: center;
-			.item{
+
+			.item {
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
@@ -130,18 +134,21 @@
 				color: #030303;
 				font-size: 27rpx;
 				font-family: Adobe Heiti Std;
-				
+
 			}
 		}
 	}
+
 	/deep/ .u-count-down__text {
 		color: #FFFFFF;
 		font-size: 33rpx;
 	}
+
 	/deep/ .u-cell__value {
 		color: #030303;
 		font-size: 27rpx;
 	}
+
 	/deep/ .u-button--large {
 		margin-top: 150rpx;
 		height: 67rpx;

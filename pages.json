@@ -223,6 +223,88 @@
 				"enablePullDownRefresh": false
 			}
 
+		}, {
+			"path": "pages/hospital/reserve-success",
+			"style": {
+				"navigationBarTitleText": "预约成功",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/order/index",
+			"style": {
+				"navigationBarTitleText": "缴费订单",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/order/zhuyuan",
+			"style": {
+				"navigationBarTitleText": "住院清单",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/order/list1",
+			"style": {
+				"navigationBarTitleText": "缴费订单 ",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/order/list2",
+			"style": {
+				"navigationBarTitleText": "住院清单",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/order/detail1",
+			"style": {
+				"navigationBarTitleText": "费用明细",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/order/detail2",
+			"style": {
+				"navigationBarTitleText": "详情",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		}, {
+			"path": "pages/order/detail3",
+			"style": {
+				"navigationBarTitleText": "详情",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+
+			}
+
+		}, {
+			"path": "pages/order/detail4",
+			"style": {
+				"navigationBarTitleText": "详情",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+
+			}
+
+		}, {
+			"path": "pages/order/guahao",
+			"style": {
+				"navigationBarTitleText": "挂号记录",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": false
+			}
+
 		}
 	],
 	"tabBar": {
