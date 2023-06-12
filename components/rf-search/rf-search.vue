@@ -35,7 +35,7 @@
 			</view>
 		</view>
 		<view
-			v-if="button === 'outside'"
+			v-if="button === 'outside' && show" 
 			class="button"
 			:class="{ active: show || active }"
 			@tap="search"

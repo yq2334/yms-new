@@ -36,19 +36,22 @@
 		{
 			"path": "pages/mine/info/index",
 			"style": {
-				"navigationBarTitleText": "个人信息"
+				"navigationBarTitleText": "个人信息",
+				"navigationStyle": "custom"
 			}
 		},
 		{
 			"path": "pages/mine/info/edit",
 			"style": {
-				"navigationBarTitleText": "编辑资料"
+				"navigationBarTitleText": "编辑资料",
+				"navigationStyle": "custom"
 			}
 		},
 		{
 			"path": "pages/mine/pwd/index",
 			"style": {
-				"navigationBarTitleText": "修改密码"
+				"navigationBarTitleText": "修改密码",
+				"navigationStyle": "custom"
 			}
 		},
 		{
@@ -67,7 +70,8 @@
 		{
 			"path": "pages/mine/about/index",
 			"style": {
-				"navigationBarTitleText": "关于我们"
+				"navigationBarTitleText": "关于我们",
+				"navigationStyle": "custom"
 			}
 		},
 		{
@@ -93,7 +97,8 @@
 			"path": "pages/search/index",
 			"style": {
 				"navigationBarTitleText": "搜索",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
 			}
 		},
 		{
@@ -306,7 +311,86 @@
 			}
 
 		}
-	],
+	    ,{
+            "path" : "pages/mine/info/phone-edit",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "更换手机号码",
+				"navigationStyle": "custom",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/mine/update/index",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "版本更新",
+				"navigationStyle": "custom",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/mine/update/detail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "版本更新",
+				"navigationStyle": "custom",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/mine/auth/index",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "授权书",
+				"navigationStyle": "custom",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/mine/auth/service",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "信用服务",
+				"navigationStyle": "custom",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/mine/auth/logout",
+			"navigationStyle": "custom",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "注销账号",
+				"navigationStyle": "custom",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/mine/add/index",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "家庭共享",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/mine/add/add",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "添加家人",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"tabBar": {
 		"color": "#BFBFBF",
 		"selectedColor": "#38A4D1",

@@ -1,64 +1,77 @@
 <template>
-  <view class="container">
-    <uni-list>
-      <view class="avatar-wrap align-center justify-center flex">
-        <!-- <u--image :showLoading="true" :src="user.avatar" shape="circle" width="100px" height="100px"></u--image> -->
-        <!-- <image style="width: 100px; height: 100px; border-radius: 50%;" :src="user.avatar"></image> -->
-        <u--image :showLoading="true" :src="user.avatar" width="100px" height="100px" mode="widthFix" shape="circle">
-          <view slot="error" style="font-size: 24rpx;">加载失败</view>
-        </u--image>
-      </view>
-      <uni-list-item showExtraIcon="true" :extraIcon="{type: 'person-filled'}" title="昵称" :rightText="user.nickName" />
-      <!-- #ifdef H5 -->
-      <uni-list-item showExtraIcon="true" :extraIcon="{type: 'phone-filled'}" title="手机号码"
-        :rightText="user.phonenumber" />
-      <uni-list-item showExtraIcon="true" :extraIcon="{type: 'email-filled'}" title="邮箱" :rightText="user.email" />
-      <!-- #endif -->
-      <uni-list-item showExtraIcon="true" :extraIcon="{type: 'auth-filled'}" title="岗位"
-        :rightText="user.deptName + '/' + postGroup" />
-      <uni-list-item showExtraIcon="true" :extraIcon="{type: 'staff-filled'}" title="角色" :rightText="roleGroup" />
-      <uni-list-item showExtraIcon="true" :extraIcon="{type: 'calendar-filled'}" title="创建日期"
-        :rightText="user.createTime" />
-    </uni-list>
-  </view>
+	<view class="container">
+
+		<u-cell-group>
+			<u-cell title="头像" :isLink="true"  url="/pages/mine/info/edit">
+				<view class="" slot="value">
+					<u--image :showLoading="true" :src="user.avatar" width="63rpx" height="63rpx" mode="widthFix"
+						shape="circle">
+						<view slot="error" style="font-size: 24rpx;">加载失败</view>
+					</u--image>
+				</view>
+			</u-cell>
+			<u-cell :isLink="true"  title="手机号码" value="133****4567"></u-cell>
+			<u-cell :isLink="true"  title="实名认证" value="已认证"></u-cell>
+		</u-cell-group>
+		<u-button @tap="navTo('edit')" type="primary" color="#388CEB" size="large" text="更多就诊档案信息">
+		</u-button>
+	</view>
 </template>
 
 <script>
-  import {
-    getUserProfile
-  } from "@/api/system/user"
+	import {
+		getUserProfile
+	} from "@/api/system/user"
 
-  export default {
-    data() {
-      return {
-        user: {},
-        roleGroup: "",
-        postGroup: ""
-      }
-    },
-    onLoad() {
-      this.getUser()
-    },
-    methods: {
-      getUser() {
-        getUserProfile().then(response => {
-          this.user = response.data.user
-          this.postGroup = response.data.postGroup
+	export default {
+		data() {
+			return {
+				user: {},
+				roleGroup: "",
+				postGroup: ""
+			}
+		},
+		onLoad() {
+			this.getUser()
+		},
+		methods: {
+			getUser() {
+				getUserProfile().then(response => {
+					this.user = response.data.user
+					this.postGroup = response.data.postGroup
 
-          var groups = response.data.roles
-          this.roleGroup = groups.toString()
-        })
-      }
-    }
-  }
+					var groups = response.data.roles
+					this.roleGroup = groups.toString()
+				})
+			},
+			// 通用跳转
+			navTo(route) {
+				if (!route) return;
+			
+				uni.navigateTo({
+					url: route
+				})
+			},
+		}
+	}
 </script>
 
-<style lang="scss">
-  page {
-    background-color: #ffffff;
-  }
+<style lang="scss" scoped>
+	page {
+		background-color: #ffffff;
+	}
 
-  .avatar-wrap {
-    margin: 10px 20px;
-  }
+	.avatar-wrap {
+		margin: 10px 20px;
+	}
+	/deep/ .u-button--large {
+		
+		height: 91rpx;
+		background: #388CEB;
+		border-radius: 7rpx;
+		color: #FFFCFC;
+		font-size: 27rpx;
+		width: 606rpx;
+		margin: 67rpx auto;
+	}
 </style>
