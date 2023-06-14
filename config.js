@@ -3,11 +3,11 @@ module.exports = {
   // 应用信息
   appInfo: {
     // 应用名称
-    name: "zradmin-app",
+    name: "信用医疗",
     // 应用版本
-    version: "1.2.0",
+    version: "1.1.0",
     // 应用logo
-    logo: "/static/logo.png",
+    logo: "/static/images/logo.png", 
     // 官方网站
     site_url: "http://www.izhaorui.cn",
     // 政策协议

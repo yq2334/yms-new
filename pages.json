@@ -390,6 +390,60 @@
             }
             
         }
+        ,{
+            "path" : "pages/credit/index",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "我的信用",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/credit/bank",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "专属额度授信",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/credit/order",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "守约记录",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/credit/class",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "教程",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/credit/quota",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "获取额度",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/mine/auth/identy",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "身份认证",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#BFBFBF",
