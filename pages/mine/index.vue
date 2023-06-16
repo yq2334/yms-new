@@ -16,9 +16,13 @@
 				<view class="user-wrapper">
 					<view class="user-info-box">
 						<view class="portrait-box" @tap="navTo(userInfo ? '/pages/user/userinfo/userinfo' : 'login')">
-							<image class="portrait" src="../../static/images/avatar.png"></image>
+							<!-- <image class="portrait" src="../../static/images/avatar.png"></image> -->
+							<u--image :showLoading="true" :src="userInfo.avatar" width="100upx" height="100upx" mode="widthFix"
+								shape="circle">
+								<view slot="error" style="font-size: 24rpx;">加载失败</view>
+							</u--image>
 							<text class="username">
-								信用用户 
+								{{userInfo.name}} 
 							</text>
 						</view>
 						<view class="portrait-indent">
@@ -27,11 +31,11 @@
 						</view>
 					</view>
 					<view class="tag-wrapper">
-						<text>已实名 </text>
+						<text> {{userInfo.isRealNameAuth ? '已实名' : '未实名'}} </text>
 						<text class="split"></text>
-						<text>医保待认证</text>
+						<text> {{userInfo.medicalInsuranceAuth == 1 ? '医保已认证' : '医保待认证' }} </text>
 						<text class="split"></text>
-						<text>信用申请已通过</text>
+						<text> {{userInfo.isUseCreditMedical == 1 ? '信用申请已通过' : '信用申请未通过' }} </text>
 					</view>
 				</view>
 				<view class="user-order">
@@ -99,12 +103,12 @@
 					个人信息
 				</view>
 				<view class="mine-actions grid col-2 text-center">
-					<view class="action-item" @click="handleBuilding">
+					<view class="action-item" @click="handleToInfo">
 						<!-- <view class="iconfont icon-friendfill text-warning icon"></view> -->
 						<img src="../../static/images/user.png" alt="">
 						<text class="text">个人中心</text>
 					</view>
-					<view class="action-item" @click="handleBuilding">
+					<view class="action-item" @click="handleToMyFamily">
 						<img src="../../static/images/home.png" alt="">
 						<text class="text">家庭共享</text>
 					</view>
@@ -112,7 +116,7 @@
 						<img src="../../static/images/help.png" alt="">
 						<text class="text">帮助</text>
 					</view>
-					<view class="action-item" @click="handleBuilding">
+					<view class="action-item" @click="handleToSetting">
 						<img src="../../static/images/setting.png" alt="">
 						<text class="text">设置</text>
 					</view>
@@ -174,6 +178,9 @@
 </template>
 
 <script>
+	import {
+		mapGetters
+	} from 'vuex';
 	import storage from '@/utils/storage'
 
 	export default {
@@ -202,6 +209,9 @@
 		methods: {
 			handleToInfo() {
 				this.$tab.navigateTo('/pages/mine/info/index')
+			},
+			handleToMyFamily() {
+				this.$tab.navigateTo('/pages/mine/add/index')
 			},
 			handleToEditInfo() {
 				this.$tab.navigateTo('/pages/mine/info/edit')

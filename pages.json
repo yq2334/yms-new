@@ -55,7 +55,7 @@
 			}
 		},
 		{
-			"path": "pages/setting/index",
+			"path": "pages/mine/setting/index",
 			"style": {
 				"navigationBarTitleText": "设置",
 				"navigationStyle": "custom"
@@ -377,6 +377,7 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "家庭共享",
+				"navigationStyle": "custom",
                 "enablePullDownRefresh": false
             }
             
@@ -386,6 +387,7 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "添加家人",
+				"navigationStyle": "custom",
                 "enablePullDownRefresh": false
             }
             
@@ -395,6 +397,7 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "我的信用",
+				"navigationStyle": "custom",
                 "enablePullDownRefresh": false
             }
             
@@ -404,6 +407,7 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "专属额度授信",
+				"navigationStyle": "custom",
                 "enablePullDownRefresh": false
             }
             
@@ -413,6 +417,7 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "守约记录",
+				"navigationStyle": "custom",
                 "enablePullDownRefresh": false
             }
             
@@ -422,6 +427,7 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "教程",
+				"navigationStyle": "custom",
                 "enablePullDownRefresh": false
             }
             
@@ -431,6 +437,7 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "获取额度",
+				"navigationStyle": "custom",
                 "enablePullDownRefresh": false
             }
             
@@ -440,6 +447,7 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "身份认证",
+				"navigationStyle": "custom",
                 "enablePullDownRefresh": false
             }
             

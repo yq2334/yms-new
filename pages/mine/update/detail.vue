@@ -1,6 +1,8 @@
 <template>
-  <view>
-   
+  <view class="update">
+   <view class="view-title">
+   	此版本更新内容：
+   </view>
 	<u-parse :content="content"></u-parse>
   </view>
 </template>
@@ -27,9 +29,15 @@
   page {
     background-color: #ffffff;
   }
-
+	.update{
+		padding: 20rpx 50rpx;
+	}
   .view-title {
-    font-weight: bold;
+	font-size: 33rpx;
+	font-family: Adobe Heiti Std;
+	font-weight: normal;
+	color: #000000;
+	padding-bottom: 20rpx;
   }
 
   .view-content {

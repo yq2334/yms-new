@@ -3,8 +3,8 @@
 		<u-cell-group :border="false">
 			<u-cell title="版本更新"  :isLink="true"  v-for="(item,index) in childList" :key="index" @click="handleText(item)">
 				<view class="cell-title" slot="title">
-					<text>{{item.title}}</text>
-					<text class="fs">2023-09-09</text>
+					<text>{{item.name}}</text>
+					<text class="fs">{{item.addTime}}</text>
 				</view>
 			</u-cell>
 			
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+	import {getVersionUpdates} from '@/api/setting/index.js'
 	export default {
 		data() {
 			return {
@@ -28,9 +29,18 @@
 				}]
 			}
 		},
+		onLoad() {
+			this.getUpdateList()
+		},
 		methods: {
+			getUpdateList() {
+				getVersionUpdates().then((res) => {
+					console.log(res)
+					this.childList = res.data
+				})
+			},
 			handleText(item) {
-			  this.$tab.navigateTo(`detail?title=${item.title}&content=${item.content}`)
+			  this.$tab.navigateTo(`detail?title=${item.name}&content=${item.content}`)
 			}
 		}
 	}

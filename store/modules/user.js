@@ -54,15 +54,18 @@ const user = {
     Login({
       commit
     }, userInfo) {
-      const username = userInfo.username.trim()
-      const password = userInfo.password
+      // const username = userInfo.username.trim()
+      const phone = userInfo.phone
       const code = userInfo.code
-      const uuid = userInfo.uuid
+  
       return new Promise((resolve, reject) => {
-        login(username, password, code, uuid).then(res => {
+        login(phone, code).then(res => {
           if (res.code == 200) {
-            setToken(res.data)
-            commit('SET_TOKEN', res.data)
+            setToken(res.data.token)
+            commit('SET_TOKEN', res.data.token)
+			// commit('SET_NAME', res.data.username)
+			// commit('SET_AVATAR', avatar)
+			// commit('SET_USERINFO',  res.data.dto) //新加
             resolve()
           } else {
             reject(res)
@@ -81,7 +84,7 @@ const user = {
       return new Promise((resolve, reject) => {
         getInfo().then(res => {
           const data = res.data
-          const user = res.data.user
+          const user = res.data
           const avatar = (user == null || user.avatar == "" || user.avatar == null) ? require(
             "@/static/images/profile.jpg") : user.avatar
           const username = (user == null || user.userName == "" || user.userName == null) ? "" : user.userName
@@ -93,7 +96,9 @@ const user = {
           }
           commit('SET_NAME', username)
           commit('SET_AVATAR', avatar)
-          commit('SET_USERINFO', data.user) //新加
+		  debugger
+          commit('SET_USERINFO', data) //新加
+		  
           resolve(res)
         }).catch(error => {
           reject(error)

@@ -8,9 +8,9 @@
 				<u-parse :content="content"></u-parse>
 			</view>
 			<view class="btn-box">
-				<u-button @tap="navTo('pay-order')" type="primary" color="#388CEB"  text="开启服务">
+				<u-button @tap="confirm('确认开启信用服务', open)" type="primary" color="#388CEB"  text="开启服务">
 				</u-button>
-				<u-button @tap="navTo('pay-order')" type="primary" color="#388CEB" text="关闭服务">
+				<u-button @tap="confirm('确认关闭信用服务', close)" type="primary" color="#388CEB" text="关闭服务">
 				</u-button>
 			</view>
 		</view>
@@ -20,6 +20,7 @@
 </template>
 
 <script>
+	import {openCm,closeCm } from '@/api/setting/index.js'
 	export default {
 		data() {
 			return {
@@ -28,7 +29,29 @@
 			}
 		},
 		methods: {
-			
+			confirm(content, callback) {
+				uni.showModal({
+					title: '系统提示',
+					content: content,
+					cancelText: '取消',
+					confirmText: '确定',
+					success: function(res) {
+						if (res.confirm) {
+							callback()
+						}
+					}
+				})
+			},
+			open() {
+				openCm().then(() => {
+					this.$modal.msgSuccess("开启服务成功")
+				})
+			},
+			close() {
+				closeCm().then(() => {
+					this.$modal.msgSuccess("关闭服务成功")
+				})
+			}
 		}
 	}
 </script>

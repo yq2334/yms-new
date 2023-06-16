@@ -23,8 +23,9 @@ const request = config => {
   config.header = config.header || {}
   if (getToken() && !isToken) {
     config.header['Authorization'] = 'Bearer ' + getToken()
-    config.header['userid'] = store.getters.userId
+    // config.header['userid'] = store.getters.userId
   }
+  
   // get请求映射params参数，uniapp如果是GET请求会自动在url后面添加参数
   // if (config.params) {
   //   let url = config.url + '?' + tansParams(config.params)
@@ -35,6 +36,7 @@ const request = config => {
   if (config.method.toLowerCase() === 'get') {
     config.data = delEmptyQueryNodes(config.data)
   }
+  console.log( config.header)
   return new Promise((resolve, reject) => {
     uni.request({
         method: config.method || 'GET',
@@ -50,8 +52,9 @@ const request = config => {
           reject('后端接口连接异常')
           return
         }
-        const code = res.data.code || 200
-        const msg = res.data.msg || errorCode[code] || errorCode['default']
+        const code = res.data.code 
+		
+        const msg = res.data.msg || res.msg || errorCode[code] || errorCode['default']
         if (code === 401) {
           showConfirm('登录状态已过期，您可以继续留在该页面，或者重新登录?').then(res => {
             if (res.confirm) {

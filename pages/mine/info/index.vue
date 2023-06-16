@@ -4,14 +4,14 @@
 		<u-cell-group>
 			<u-cell title="头像" :isLink="true"  url="/pages/mine/info/edit">
 				<view class="" slot="value">
-					<u--image :showLoading="true" :src="user.avatar" width="63rpx" height="63rpx" mode="widthFix"
+					<u--image :showLoading="true" :src="userInfo.avatar" width="63rpx" height="63rpx" mode="widthFix"
 						shape="circle">
 						<view slot="error" style="font-size: 24rpx;">加载失败</view>
 					</u--image>
 				</view>
 			</u-cell>
-			<u-cell :isLink="true"  title="手机号码" value="133****4567"></u-cell>
-			<u-cell :isLink="true"  title="实名认证" value="已认证"></u-cell>
+			<u-cell :isLink="true"  title="手机号码" :value="userInfo.phone" url="/pages/mine/info/phone-edit"></u-cell>
+			<u-cell :isLink="true"  title="实名认证" :value="userInfo.isRealNameAuth ? '已认证' : '未认证'" url="/pages/mine/auth/identy"></u-cell>
 		</u-cell-group>
 		<u-button @tap="navTo('edit')" type="primary" color="#388CEB" size="large" text="更多就诊档案信息">
 		</u-button>
@@ -19,6 +19,9 @@
 </template>
 
 <script>
+	import {
+		mapGetters
+	} from 'vuex';
 	import {
 		getUserProfile
 	} from "@/api/system/user"
@@ -31,8 +34,11 @@
 				postGroup: ""
 			}
 		},
+		computed: {
+			...mapGetters(['userInfo'])
+		},
 		onLoad() {
-			this.getUser()
+			// this.getUser()
 		},
 		methods: {
 			getUser() {

@@ -36,7 +36,7 @@
 				<!-- 	<u-checkbox v-model="loginForm.checked" activeColor="#1296DB" labelSize="10" labelColor="#000"
 					shape="circle" label=""></u-checkbox> -->
 
-				<uni-data-checkbox v-model="loginForm.checked" multiple :localdata="agree" @change="change" />
+				<uni-data-checkbox v-model="checked" multiple :localdata="agree" @change="change" />
 				<!-- <text class="text-grey1">登录即代表同意</text> -->
 				<text @click="handleUserAgrement" class="text-blue">《用户协议》</text>
 				<text @click="handlePrivacy" class="text-blue">《隐私协议》</text>
@@ -44,7 +44,7 @@
 			<view class="action-btn">
 				<button @click="handleLogin" class="login-btn cu-btn block bg-blue lg round">登录</button>
 			</view>
-			<u-code ref="uCode" @change="codeChange" seconds="20" @start="disabled1 = true" startText="发送验证码"
+			<u-code ref="uCode" @change="codeChange" seconds="60" @start="disabled1 = true" startText="发送验证码"
 				@end="disabled1 = false"></u-code>
 		</view>
 
@@ -69,25 +69,23 @@
 
 <script>
 	import {
-		getCodeImg
+		getCodeImg,
+		sendCode
 	} from '@/api/login'
 
 	export default {
 		data() {
 			return {
-				checked: 0,
+				checked: [0],
 				disabled1: false,
 				tips: '发送验证码',
 				codeUrl: "",
 				captchaEnabled: true,
 				globalConfig: getApp().globalData.config,
 				loginForm: {
-					username: "admin",
-					password: "123456",
-					phone: '',
-					code: "",
-					uuid: '',
-					checked: [0]
+					phone: '17378205782',
+					code: "123",
+					
 				},
 				agree: [{
 					text: '已阅读并同意',
@@ -101,14 +99,14 @@
 			},
 		},
 		created() {
-			
+
 			// 绑定监听事件
 			window.addEventListener("keydown", this.keyDown);
 		},
 		methods: {
-			change(e){
-							console.log('e:',e);
-						},
+			change(e) {
+				console.log('e:', e);
+			},
 			// 隐私协议
 			handlePrivacy() {
 				let site = this.globalConfig.appInfo.agreements[0]
@@ -123,18 +121,30 @@
 				this.tips = text;
 			},
 			getCode() {
+
+
 				if (this.$refs.uCode.canGetCode) {
 					// 模拟向后端请求验证码
 					uni.showLoading({
 						title: '正在获取验证码'
 					})
-					setTimeout(() => {
-						uni.hideLoading();
-						// 这里此提示会被this.start()方法中的提示覆盖
-						uni.$u.toast('验证码已发送');
-						// 通知验证码组件内部开始倒计时
-						this.$refs.uCode.start();
-					}, 2000);
+					sendCode({
+						phone: '17378205782'
+					}).then(res => {
+						const {
+							code,
+							data
+						} = res
+						if (code == 200) {
+							uni.hideLoading();
+							// 这里此提示会被this.start()方法中的提示覆盖
+							uni.$u.toast('验证码已发送');
+							// 通知验证码组件内部开始倒计时
+							this.$refs.uCode.start();
+						}
+
+					})
+
 				} else {
 					uni.$u.toast('倒计时结束后再发送');
 				}
@@ -151,13 +161,13 @@
 			// },
 			// 登录方法
 			async handleLogin() {
-				this.$tab.reLaunch('/pages/index')
-				return;
-				if (this.loginForm.username === "") {
-					this.$modal.msgError("请输入您的账号")
-				} else if (this.loginForm.password === "") {
-					this.$modal.msgError("请输入您的密码")
-				} else if (this.loginForm.code === "" && this.captchaEnabled) {
+				if(this.checked.length == 0) {
+					this.$modal.msgError("请勾选用户协议")
+					return;
+				}
+				if (this.loginForm.phone === "") {
+					this.$modal.msgError("请输入您的手机号")
+				}  else if (this.loginForm.code === '') {
 					this.$modal.msgError("请输入验证码")
 				} else {
 					this.$modal.loading("登录中，请耐心等待...")
@@ -178,8 +188,17 @@
 			// 登录成功后，处理函数
 			loginSuccess(result) {
 				// 设置用户信息
+				//this.$tab.reLaunch('/pages/index')
 				this.$store.dispatch('GetInfo').then(res => {
-					this.$tab.reLaunch('/pages/index')
+					if(res.data.isBindIdCard) {
+						this.$tab.reLaunch('/pages/index')
+					}else{
+						uni.navigateTo({
+							url:'/pages/mine/auth/identy'
+						})
+					}
+					
+					
 				})
 			},
 			weChatLogin(e) {
@@ -218,7 +237,7 @@
 				}
 			}
 		},
-		
+
 		destroyed() {
 			// 销毁事件
 			window.removeEventListener("keydown", this.keyDown, false);

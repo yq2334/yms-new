@@ -5,26 +5,26 @@
 
 			<view class="u-demo-block__content">
 				<!-- 注意，如果需要兼容微信小程序，最好通过setRules方法设置rules规则 -->
-				<u--form labelPosition="left" :model="model1" ref="form1">
-					<u-form-item labelWidth="0" prop="userInfo.phone" borderBottom ref="item1">
-						<u--input v-model="model1.userInfo.name" placeholder="原手机号：133****4567" placeholderStyle>
+				<u--form labelPosition="left" :model="form" ref="uForm" :rules="rules">
+					<u-form-item labelWidth="0" prop="mobile" borderBottom ref="item1">
+						<u--input v-model="form.mobile" :placeholder="`原手机号：${userInfo.phone}`">
 						</u--input>
 					</u-form-item>
 					<u-form-item label="" prop="code" labelWidth="0" borderBottom>
-						<u-row  justify="space-between">
+						<u-row justify="space-between">
 							<u-col span="7">
-								<u--input v-model="model1.code" placeholder="请输入验证码"></u--input>
-								
+								<u--input v-model="form.code" placeholder="请输入验证码"></u--input>
+
 							</u-col>
 							<u-col span="4">
-								<u-button  @tap="getCode" :text="tips" type="primary" size="mid"
-									:disabled="disabled1"></u-button>
+								<u-button @tap="getCode" :text="tips" type="primary" size="mid" :disabled="disabled1">
+								</u-button>
 							</u-col>
 						</u-row>
 					</u-form-item>
 				</u--form>
 				<u-button type="primary" text="确认更换" customStyle="margin-top: 50px" @click="submit"></u-button>
-				<u-code ref="uCode" @change="codeChange" seconds="20" @start="disabled1 = true" startText="发送验证码"
+				<u-code ref="uCode" @change="codeChange" seconds="60" @start="disabled1 = true" startText="发送验证码"
 					@end="disabled1 = false"></u-code>
 
 			</view>
@@ -33,50 +33,69 @@
 </template>
 
 <script>
+	import {
+		sendNewCode,
+		verifyNewPhone
+	} from '@/api/setting/index.js'
+	import {
+		mapGetters
+	} from 'vuex';
 	export default {
 		data() {
 			return {
 				disabled1: false,
 				tips: '发送验证码',
 				value: '',
-				model1: {
-					userInfo: {
-						phone: '',
-
-					},
+				form: {
+					mobile: '',
 					code: ''
 				},
 				rules: {
-					'userInfo.name': [{
-						type: 'string',
+					mobile: [{
 						required: true,
-						message: '请填写姓名',
+						message: '请填写手机号',
 						trigger: ['blur', 'change']
 					}, {
-						// 此为同步验证，可以直接返回true或者false，如果是异步验证，稍微不同，见下方说明
+						// 自定义验证函数，见上说明
 						validator: (rule, value, callback) => {
-							// 调用uView自带的js验证规则，详见：https://www.uviewui.com/js/test.html
-							return uni.$u.test.chinese(value);
+							// 上面有说，返回true表示校验通过，返回false表示不通过
+							// uni.$u.test.mobile()就是返回true或者false的
+							return uni.$u.test.mobile(value);
 						},
-						message: "姓名必须为中文",
-						// 触发器可以同时用blur和change，二者之间用英文逗号隔开
-						trigger: ["change", "blur"],
+						message: '手机号码不正确',
+						// 触发器可以同时用blur和change
+						trigger: ['change', 'blur'],
 					}],
-					code: {
-						type: 'string',
+					code: [{
 						required: true,
-						len: 4,
-						message: '请填写4位验证码',
+						message: '请填写验证码',
 						trigger: ['blur']
-					},
+					}, ]
+				}
+				// rules: {
+				// 	'form.mobile': {
+				// 		type: 'string',
+				// 		required: true,
+				// 		message: '请填写手机号',
+				// 		trigger: ['blur', 'change']
+				// 	},
+				// 	'form.code': {
+				// 		type: 'string',
+				// 		required: true,
+				// 		message: '请填写验证码',
+				// 		trigger: ['blur']
+				// 	},
+				// },
 
-				},
 
 			}
 		},
+		computed: {
+			...mapGetters(['userInfo'])
+		},
 		onReady() {
 			// 如果需要兼容微信小程序，并且校验规则中含有方法等，只能通过setRules方法设置规则
-			this.$refs.form1.setRules(this.rules)
+			// this.$refs.uForm.setRules(this.rules)
 		},
 		methods: {
 
@@ -86,16 +105,6 @@
 
 			change(e) {
 				// console.log(e);
-			},
-			formatter(day) {
-				const d = new Date()
-				let month = d.getMonth() + 1
-				const date = d.getDate()
-				if (day.month == month && day.day == date + 3) {
-					day.bottomInfo = '有优惠'
-					day.dot = true
-				}
-				return day
 			},
 
 			codeChange(text) {
@@ -107,13 +116,23 @@
 					uni.showLoading({
 						title: '正在获取验证码'
 					})
-					setTimeout(() => {
-						uni.hideLoading();
-						// 这里此提示会被this.start()方法中的提示覆盖
-						uni.$u.toast('验证码已发送');
-						// 通知验证码组件内部开始倒计时
-						this.$refs.uCode.start();
-					}, 2000);
+					sendNewCode({
+						mobile: this.form.mobile
+					}).then(res => {
+						const {
+							code,
+							data
+						} = res
+						if (code == 200) {
+							uni.hideLoading();
+							// 这里此提示会被this.start()方法中的提示覆盖
+							uni.$u.toast('验证码已发送');
+							// 通知验证码组件内部开始倒计时
+							this.$refs.uCode.start();
+						}
+
+					})
+
 				} else {
 					uni.$u.toast('倒计时结束后再发送');
 				}
@@ -121,21 +140,32 @@
 
 			submit() {
 				// 如果有错误，会在catch中返回报错信息数组，校验通过则在then中返回true
-				this.$refs.form1.validate().then(res => {
-					uni.$u.toast('校验通过')
+				console.log(this.$refs.uForm)
+				this.$refs.uForm.validate().then(res => {
+					// uni.$u.toast('校验通过')
+					this.changeMoble()
 				}).catch(errors => {
 					uni.$u.toast('校验失败')
+				})
+			},
+			changeMoble() {
+				verifyNewPhone(this.form).then(res => {
+					uni.$u.toast('更换手机号成功')
+					this.$store.dispatch('GetInfo')
+					uni.navigateBack()
+				}).catch(() => {
+
 				})
 			},
 			reset() {
 				const validateList = ['userInfo.name',
 					'code',
 				]
-				this.$refs.form1.resetFields()
-				this.$refs.form1.clearValidate()
+				this.$refs.uForm.resetFields()
+				this.$refs.uForm.clearValidate()
 				setTimeout(() => {
-					this.$refs.form1.clearValidate(validateList)
-					// 或者使用 this.$refs.form1.clearValidate()
+					this.$refs.uForm.clearValidate(validateList)
+					// 或者使用 this.$refs.uForm.clearValidate()
 				}, 10)
 			},
 			hideKeyboard() {
@@ -154,6 +184,7 @@
 	/deep/ .u-border {
 		border-color: #2060F0 !important;
 	}
+
 	// /deep/ .u-form-item__body__right__content__slot[data-v-067e4733]{
 	// 	width: 60%;
 	// }

@@ -35,10 +35,10 @@
         >
         </u-cell>
         <u-cell
-          title="短信服务"
+          title="开通关闭信用服务"
           :border="true"
           :isLink="true"
-          @click="handleBuilding()"
+          @click="handleService()"
           :rightIconStyle="{
             fontSize: '20rpx',
             justifyContent: 'center',
@@ -76,6 +76,9 @@
       },
 	  handleAbout() {
 	  	this.$tab.navigateTo('/pages/mine/about/index')
+	  },
+	  handleService() {
+	  	this.$tab.navigateTo('/pages/mine/auth/service')
 	  },
 	  handleJiaoLiuQun() {
 	  	this.$modal.showToast('模块建设中~')
