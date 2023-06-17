@@ -58,11 +58,12 @@ const request = config => {
         if (code === 401) {
           showConfirm('登录状态已过期，您可以继续留在该页面，或者重新登录?').then(res => {
             if (res.confirm) {
-              store.dispatch('LogOut').then(res => {
-                uni.reLaunch({
-                  url: '/pages/login'
-                })
-              })
+              // store.dispatch('LogOut').then(res => {
+               
+              // })
+			  uni.reLaunch({
+			    url: '/pages/login'
+			  })
             }
           })
           reject('无效的会话，或者会话已过期，请重新登录。')
