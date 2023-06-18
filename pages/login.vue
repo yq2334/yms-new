@@ -253,7 +253,11 @@ export default {
 			// 设置用户信息
 			//this.$tab.reLaunch('/pages/index')
 			this.$store.dispatch('GetInfo').then(res => {
+<<<<<<< HEAD
 				
+=======
+				debugger
+>>>>>>> f1607d860ce00acda2b7a37d8ffa0a4aa7ba8985
 				if (!res.data.isBindWeixin) {
 					this.getWeiXinCode()
 				} else if (!res.data.isBindIdCard) {
