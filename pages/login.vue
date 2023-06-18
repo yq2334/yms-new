@@ -141,13 +141,14 @@ export default {
 		getOpenidAndUserinfo(code) {
 			weiXinlogin(code, this.appid).then((res) => {
 				// 登录成功，可以将用户信息和token保存到缓存中
-				debugger
+				
 				if (!res.data.isBindIdCard) {
 					uni.navigateTo({
 						url: '/pages/mine/auth/identy'
 					})
 				} else {
-					this.$tab.reLaunch('/pages/index')
+					// this.$tab.reLaunch('/pages/index')
+					this.$tab.navigateTo('/pages/hospital/index')
 				}
 			})
 			// uni.request({
@@ -248,19 +249,21 @@ export default {
 		},
 		// 登录成功后，处理函数
 		loginSuccess(result) {
-			debugger
+			
 			// 设置用户信息
 			//this.$tab.reLaunch('/pages/index')
 			this.$store.dispatch('GetInfo').then(res => {
-				debugger
-				if (!res.data.IsBindWeixin) {
+				
+				if (!res.data.isBindWeixin) {
 					this.getWeiXinCode()
 				} else if (!res.data.isBindIdCard) {
 					uni.navigateTo({
 						url: '/pages/mine/auth/identy'
 					})
 				} else {
-					this.$tab.reLaunch('/pages/index')
+					
+					this.$tab.navigateTo('/pages/hospital/index')
+					
 				}
 
 

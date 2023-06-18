@@ -114,7 +114,7 @@
 			},
 			navToHospital(id) {
 				uni.navigateTo({
-					url: "list?id=" + id,
+					url: "hospital/list?id=" + id,
 				});
 			},
 			showTips() {
@@ -186,7 +186,7 @@
 		display: block;
 		width: 47rpx;
 		height: 47rpx;
-		background: url(../../static/images/circle-arrow-right.png) no-repeat;
+		background: url(../static/images/circle-arrow-right.png) no-repeat;
 		background-size: 100% 100%;
 	}
 </style>

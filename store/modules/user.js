@@ -96,7 +96,7 @@ const user = {
           }
           commit('SET_NAME', username)
           commit('SET_AVATAR', avatar)
-		  debugger
+		  
           commit('SET_USERINFO', data) //新加
 		  
           resolve(res)

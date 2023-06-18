@@ -60,9 +60,10 @@
 				});
 			},
 			navToHospital(item) {
-				uni.navigateTo({
-					url: "index?id=" + item.id,
-				});
+				this.$tab.reLaunch('/pages/index?id='+ item.id)
+				// uni.navigateTo({
+				// 	url: "index?id=" + item.id,
+				// });
 			},
 		}
 	}
