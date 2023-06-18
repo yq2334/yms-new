@@ -68,11 +68,11 @@
 					name: "",
 					idNo: "",
 					phone: "",
-					relation: "",
+					relation: "", 
 
 				},
 				showRelative: false,
-				showPop: true,
+				showPop: false,
 				checked: [0],
 				agree: [{
 					text: '已阅读并同意以上条款',
