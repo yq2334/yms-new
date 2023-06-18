@@ -70,12 +70,18 @@
 <script>
 	import {
 		getCodeImg,
-		sendCode
+		sendCode,
+		weiXinlogin
 	} from '@/api/login'
+	const isWechat = () => {
+		return String(navigator.userAgent.toLowerCase().match(/MicroMessenger/i)) === "micromessenger";
+	}
+
 
 	export default {
 		data() {
 			return {
+				appid: 'wx2a69eb73ee498244',
 				checked: [0],
 				disabled1: false,
 				tips: '发送验证码',
@@ -85,12 +91,13 @@
 				loginForm: {
 					phone: '17378205782',
 					code: "123",
-					
+
 				},
 				agree: [{
 					text: '已阅读并同意',
 					value: 0
 				}, ],
+				code: ''
 			}
 		},
 		computed: {
@@ -103,7 +110,51 @@
 			// 绑定监听事件
 			window.addEventListener("keydown", this.keyDown);
 		},
+		onLoad(e) {
+			let code = this.getUrlCode('code')
+			console.log(code)
+			this.code = code
+			if (code !== null && code !== "") {
+				debugger
+				this.getOpenidAndUserinfo(code)
+			}
+		},
+
+
 		methods: {
+			getUrlCode(name) {
+				return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) ||
+				[, ''
+				])[1].replace(/\+/g, '%20')) || null
+			},
+			getWeiXinCode() {
+				if (isWechat()) {
+					// 截取地址中的code，如果没有code就去微信授权，如果已经获取到code了就直接把code传给后台获取openId
+					let code = this.getUrlCode('code')
+					if (code === null || code === '') {
+						window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + this.appid + '&redirect_uri=' + encodeURIComponent('http://yl.frp.apeskill.com/h5/#/pages/login') + '&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect'
+						// redirect_uri是授权成功后，跳转的url地址，微信会帮我们跳转到该链接，并且通过？的形式拼接code，这里需要用encodeURIComponent对链接进行处理。
+						// 如果配置参数一一对应，那么此时已经通过回调地址刷新页面后，你就会再地址栏中看到code了。
+						// http://127.0.0.1/pages/views/profile/login/login?code=001BWV4J1lRzz00H4J1J1vRE4J1BWV4q&state=1
+					}
+				}
+			},
+			getOpenidAndUserinfo(code) {
+				weiXinlogin(code, this.appid).then((res) => {
+					// 登录成功，可以将用户信息和token保存到缓存中
+				})
+				// uni.request({
+				// 	url: 'http://127.0.0.1/api/wxLogin?code=' + code + '&state=state&appid=' + appid,
+				// 	success: (res) => {
+				// 		console.log('通过code获取openid和accessToken', res)
+				// 		if (res.data.code === 200) {
+				// 			// 登录成功，可以将用户信息和token保存到缓存中
+				// 			uni.setStorageSync('userInfo', res.data.result.userInfo)
+				// 			uni.setStorageSync('token', res.data.result.token)
+				// 		}
+				// 	}
+				// })
+			},
 			change(e) {
 				console.log('e:', e);
 			},
@@ -121,8 +172,6 @@
 				this.tips = text;
 			},
 			getCode() {
-
-
 				if (this.$refs.uCode.canGetCode) {
 					// 模拟向后端请求验证码
 					uni.showLoading({
@@ -161,13 +210,19 @@
 			// },
 			// 登录方法
 			async handleLogin() {
-				if(this.checked.length == 0) {
+				
+				if (this.checked.length == 0) {
 					this.$modal.msgError("请勾选用户协议")
 					return;
 				}
+				if(isWechat()) {
+					this.getWeiXinCode()
+					return;
+				}
+				
 				if (this.loginForm.phone === "") {
 					this.$modal.msgError("请输入您的手机号")
-				}  else if (this.loginForm.code === '') {
+				} else if (this.loginForm.code === '') {
 					this.$modal.msgError("请输入验证码")
 				} else {
 					this.$modal.loading("登录中，请耐心等待...")
@@ -190,15 +245,15 @@
 				// 设置用户信息
 				//this.$tab.reLaunch('/pages/index')
 				this.$store.dispatch('GetInfo').then(res => {
-					if(res.data.isBindIdCard) {
+					if (res.data.isBindIdCard) {
 						this.$tab.reLaunch('/pages/index')
-					}else{
+					} else {
 						uni.navigateTo({
-							url:'/pages/mine/auth/identy'
+							url: '/pages/mine/auth/identy'
 						})
 					}
-					
-					
+
+
 				})
 			},
 			weChatLogin(e) {
@@ -235,7 +290,8 @@
 				if (e.keyCode === 13) {
 					this.handleLogin(); // 定义的登录方法
 				}
-			}
+			},
+
 		},
 
 		destroyed() {
