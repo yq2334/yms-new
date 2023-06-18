@@ -68,399 +68,409 @@
 </template>
 
 <script>
-	import {
-		getCodeImg,
-		sendCode,
-		weiXinlogin
-	} from '@/api/login'
-	const isWechat = () => {
-		return String(navigator.userAgent.toLowerCase().match(/MicroMessenger/i)) === "micromessenger";
-	}
+import {
+	getCodeImg,
+	sendCode,
+	weiXinlogin
+} from '@/api/login'
+const isWechat = () => {
+	return String(navigator.userAgent.toLowerCase().match(/MicroMessenger/i)) === "micromessenger";
+}
 
 
-	export default {
-		data() {
-			return {
-				appid: 'wx2a69eb73ee498244',
-				checked: [0],
-				disabled1: false,
-				tips: '发送验证码',
-				codeUrl: "",
-				captchaEnabled: true,
-				globalConfig: getApp().globalData.config,
-				loginForm: {
-					phone: '17378205782',
-					code: "123",
-
-				},
-				agree: [{
-					text: '已阅读并同意',
-					value: 0
-				}, ],
-				code: ''
-			}
-		},
-		computed: {
-			appName() {
-				return uni.getSystemInfoSync().appName
+export default {
+	data() {
+		return {
+			appid: 'wx2a69eb73ee498244',
+			checked: [0],
+			disabled1: false,
+			tips: '发送验证码',
+			codeUrl: "",
+			captchaEnabled: true,
+			globalConfig: getApp().globalData.config,
+			loginForm: {
+				phone: '17378205782',
+				code: "123",
 			},
+			agree: [{
+				text: '已阅读并同意',
+				value: 0
+			},],
+			code: ''
+		}
+	},
+	computed: {
+		appName() {
+			return uni.getSystemInfoSync().appName
 		},
-		created() {
+	},
+	created() {
 
-			// 绑定监听事件
-			window.addEventListener("keydown", this.keyDown);
-		},
-		onLoad(e) {
-			let code = this.getUrlCode('code')
-			console.log(code)
-			this.code = code
-			if (code !== null && code !== "") {
-				debugger
-				this.getOpenidAndUserinfo(code)
-			}
-		},
+		// 绑定监听事件
+		window.addEventListener("keydown", this.keyDown);
+	},
+	onLoad(e) {
+		let code = this.getUrlCode('code')
+		console.log(code)
+		this.code = code
+		if (code !== null && code !== "") {
+			debugger
+			this.getOpenidAndUserinfo(code)
+		}
+	},
 
 
-		methods: {
-			getUrlCode(name) {
-				return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) ||
+	methods: {
+		getUrlCode(name) {
+			return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) ||
 				[, ''
 				])[1].replace(/\+/g, '%20')) || null
-			},
-			getWeiXinCode() {
-				if (isWechat()) {
-					// 截取地址中的code，如果没有code就去微信授权，如果已经获取到code了就直接把code传给后台获取openId
-					let code = this.getUrlCode('code')
-					if (code === null || code === '') {
-						window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + this.appid + '&redirect_uri=' + encodeURIComponent('http://yl.frp.apeskill.com/h5/#/pages/login') + '&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect'
-						// redirect_uri是授权成功后，跳转的url地址，微信会帮我们跳转到该链接，并且通过？的形式拼接code，这里需要用encodeURIComponent对链接进行处理。
-						// 如果配置参数一一对应，那么此时已经通过回调地址刷新页面后，你就会再地址栏中看到code了。
-						// http://127.0.0.1/pages/views/profile/login/login?code=001BWV4J1lRzz00H4J1J1vRE4J1BWV4q&state=1
-					}
+		},
+		getWeiXinCode() {
+			if (isWechat()) {
+				// 截取地址中的code，如果没有code就去微信授权，如果已经获取到code了就直接把code传给后台获取openId
+				let code = this.getUrlCode('code')
+				if (code === null || code === '') {
+					window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + this.appid + '&redirect_uri=' + encodeURIComponent('http://yl.frp.apeskill.com/h5/#/pages/login') + '&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect'
+					// redirect_uri是授权成功后，跳转的url地址，微信会帮我们跳转到该链接，并且通过？的形式拼接code，这里需要用encodeURIComponent对链接进行处理。
+					// 如果配置参数一一对应，那么此时已经通过回调地址刷新页面后，你就会再地址栏中看到code了。
+					// http://127.0.0.1/pages/views/profile/login/login?code=001BWV4J1lRzz00H4J1J1vRE4J1BWV4q&state=1
 				}
-			},
-			getOpenidAndUserinfo(code) {
-				weiXinlogin(code, this.appid).then((res) => {
-					// 登录成功，可以将用户信息和token保存到缓存中
-				})
-				// uni.request({
-				// 	url: 'http://127.0.0.1/api/wxLogin?code=' + code + '&state=state&appid=' + appid,
-				// 	success: (res) => {
-				// 		console.log('通过code获取openid和accessToken', res)
-				// 		if (res.data.code === 200) {
-				// 			// 登录成功，可以将用户信息和token保存到缓存中
-				// 			uni.setStorageSync('userInfo', res.data.result.userInfo)
-				// 			uni.setStorageSync('token', res.data.result.token)
-				// 		}
-				// 	}
-				// })
-			},
-			change(e) {
-				console.log('e:', e);
-			},
-			// 隐私协议
-			handlePrivacy() {
-				let site = this.globalConfig.appInfo.agreements[0]
-				this.$tab.navigateTo(`/pages/common/webview/index?title=${site.title}&url=${site.url}`)
-			},
-			// 用户协议
-			handleUserAgrement() {
-				let site = this.globalConfig.appInfo.agreements[1]
-				this.$tab.navigateTo(`/pages/common/webview/index?title=${site.title}&url=${site.url}`)
-			},
-			codeChange(text) {
-				this.tips = text;
-			},
-			getCode() {
-				if (this.$refs.uCode.canGetCode) {
-					// 模拟向后端请求验证码
-					uni.showLoading({
-						title: '正在获取验证码'
+			}
+		},
+		getOpenidAndUserinfo(code) {
+			weiXinlogin(code, this.appid).then((res) => {
+				// 登录成功，可以将用户信息和token保存到缓存中
+				debugger
+				if (!res.data.isBindIdCard) {
+					uni.navigateTo({
+						url: '/pages/mine/auth/identy'
 					})
-					sendCode({
-						phone: '17378205782'
-					}).then(res => {
-						const {
-							code,
-							data
-						} = res
-						if (code == 200) {
-							uni.hideLoading();
-							// 这里此提示会被this.start()方法中的提示覆盖
-							uni.$u.toast('验证码已发送');
-							// 通知验证码组件内部开始倒计时
-							this.$refs.uCode.start();
-						}
-
-					})
-
 				} else {
-					uni.$u.toast('倒计时结束后再发送');
+					this.$tab.reLaunch('/pages/index')
 				}
-			},
-			// 获取图形验证码
-			// getCode() {
-			// 	getCodeImg().then(res => {
-			// 		this.captchaEnabled = res.data.captchaOff
-			// 		if (this.captchaEnabled != 'off') {
-			// 			this.codeUrl = 'data:image/gif;base64,' + res.data.img
-			// 			this.loginForm.uuid = res.data.uuid
+			})
+			// uni.request({
+			// 	url: 'http://127.0.0.1/api/wxLogin?code=' + code + '&state=state&appid=' + appid,
+			// 	success: (res) => {
+			// 		console.log('通过code获取openid和accessToken', res)
+			// 		if (res.data.code === 200) {
+			// 			// 登录成功，可以将用户信息和token保存到缓存中
+			// 			uni.setStorageSync('userInfo', res.data.result.userInfo)
+			// 			uni.setStorageSync('token', res.data.result.token)
 			// 		}
-			// 	})
-			// },
-			// 登录方法
-			async handleLogin() {
-				
-				if (this.checked.length == 0) {
-					this.$modal.msgError("请勾选用户协议")
-					return;
-				}
-				if(isWechat()) {
-					this.getWeiXinCode()
-					return;
-				}
-				
-				if (this.loginForm.phone === "") {
-					this.$modal.msgError("请输入您的手机号")
-				} else if (this.loginForm.code === '') {
-					this.$modal.msgError("请输入验证码")
-				} else {
-					this.$modal.loading("登录中，请耐心等待...")
-					this.pwdLogin()
-				}
-			},
-			// 密码登录
-			async pwdLogin() {
-				this.$store.dispatch('Login', this.loginForm).then(() => {
-					this.$modal.closeLoading()
-					this.loginSuccess()
-				}).catch(() => {
-					if (this.captchaEnabled) {
-						this.getCode()
-					}
+			// 	}
+			// })
+		},
+		change(e) {
+			console.log('e:', e);
+		},
+		// 隐私协议
+		handlePrivacy() {
+			let site = this.globalConfig.appInfo.agreements[0]
+			this.$tab.navigateTo(`/pages/common/webview/index?title=${site.title}&url=${site.url}`)
+		},
+		// 用户协议
+		handleUserAgrement() {
+			let site = this.globalConfig.appInfo.agreements[1]
+			this.$tab.navigateTo(`/pages/common/webview/index?title=${site.title}&url=${site.url}`)
+		},
+		codeChange(text) {
+			this.tips = text;
+		},
+		getCode() {
+			if (this.$refs.uCode.canGetCode) {
+				// 模拟向后端请求验证码
+				uni.showLoading({
+					title: '正在获取验证码'
 				})
-			},
-			// 登录成功后，处理函数
-			loginSuccess(result) {
-				// 设置用户信息
-				//this.$tab.reLaunch('/pages/index')
-				this.$store.dispatch('GetInfo').then(res => {
-					if (res.data.isBindIdCard) {
-						this.$tab.reLaunch('/pages/index')
-					} else {
-						uni.navigateTo({
-							url: '/pages/mine/auth/identy'
+				sendCode({
+					phone: this.loginForm.phone
+				}).then(res => {
+					const {
+						code,
+						data
+					} = res
+					if (code == 200) {
+						uni.hideLoading();
+						// 这里此提示会被this.start()方法中的提示覆盖
+						uni.$u.toast('验证码已发送');
+						// 通知验证码组件内部开始倒计时
+						this.$refs.uCode.start();
+					}
+
+				})
+
+			} else {
+				uni.$u.toast('倒计时结束后再发送');
+			}
+		},
+		// 获取图形验证码
+		// getCode() {
+		// 	getCodeImg().then(res => {
+		// 		this.captchaEnabled = res.data.captchaOff
+		// 		if (this.captchaEnabled != 'off') {
+		// 			this.codeUrl = 'data:image/gif;base64,' + res.data.img
+		// 			this.loginForm.uuid = res.data.uuid
+		// 		}
+		// 	})
+		// },
+		// 登录方法
+		async handleLogin() {
+			if (this.checked.length == 0) {
+				this.$modal.msgError("请勾选用户协议")
+				return;
+			}
+			// if(isWechat()) {
+			// this.getWeiXinCode()
+			// return;
+			// }
+			if (this.loginForm.phone === "") {
+				this.$modal.msgError("请输入您的手机号")
+			} else if (this.loginForm.code === '') {
+				this.$modal.msgError("请输入验证码")
+			} else {
+				this.$modal.loading("登录中，请耐心等待...")
+				this.pwdLogin()
+			}
+
+		},
+		// 密码登录
+		async pwdLogin() {
+			this.$store.dispatch('Login', this.loginForm).then(() => {
+				this.$modal.closeLoading()
+				this.loginSuccess()
+			}).catch(() => {
+				if (this.captchaEnabled) {
+					this.getCode()
+				}
+			})
+		},
+		// 登录成功后，处理函数
+		loginSuccess(result) {
+			debugger
+			// 设置用户信息
+			//this.$tab.reLaunch('/pages/index')
+			this.$store.dispatch('GetInfo').then(res => {
+				debugger
+				if (!res.data.IsBindWeixin) {
+					this.getWeiXinCode()
+				} else if (!res.data.isBindIdCard) {
+					uni.navigateTo({
+						url: '/pages/mine/auth/identy'
+					})
+				} else {
+					this.$tab.reLaunch('/pages/index')
+				}
+
+
+			})
+		},
+		weChatLogin(e) {
+			this.$modal.msgError("后端请自行实现")
+			return
+			if (e.detail) {
+				uni.showLoading({
+					title: "登录中....",
+					mask: true
+				})
+				var userInfo = e.detail.userInfo
+				uni.login({
+					provider: 'weixin',
+					success: (loginRes) => {
+						// console.log(loginRes, userInfo);
+						this.$store.dispatch('MiniLogin', {
+							code: loginRes.code,
+							...userInfo
+						}).then(() => {
+							this.$modal.closeLoading()
+							this.loginSuccess()
+						}).catch(() => {
+
 						})
 					}
-
-
-				})
-			},
-			weChatLogin(e) {
-				this.$modal.msgError("后端请自行实现")
-				return
-				if (e.detail) {
-					uni.showLoading({
-						title: "登录中....",
-						mask: true
-					})
-					var userInfo = e.detail.userInfo
-					uni.login({
-						provider: 'weixin',
-						success: (loginRes) => {
-							// console.log(loginRes, userInfo);
-							this.$store.dispatch('MiniLogin', {
-								code: loginRes.code,
-								...userInfo
-							}).then(() => {
-								this.$modal.closeLoading()
-								this.loginSuccess()
-							}).catch(() => {
-
-							})
-						}
-					});
-				} else {
-					this.$modal.msgError("登录失败")
-				}
-			},
-			// 点击回车键登录
-			keyDown(e) {
-				// 回车则执行登录方法 enter键的ASCII是13
-				if (e.keyCode === 13) {
-					this.handleLogin(); // 定义的登录方法
-				}
-			},
-
+				});
+			} else {
+				this.$modal.msgError("登录失败")
+			}
+		},
+		// 点击回车键登录
+		keyDown(e) {
+			// 回车则执行登录方法 enter键的ASCII是13
+			if (e.keyCode === 13) {
+				this.handleLogin(); // 定义的登录方法
+			}
 		},
 
-		destroyed() {
-			// 销毁事件
-			window.removeEventListener("keydown", this.keyDown, false);
-		},
-	}
+	},
+
+	destroyed() {
+		// 销毁事件
+		window.removeEventListener("keydown", this.keyDown, false);
+	},
+}
 </script>
 
 <style lang="scss" scoped>
-	page {
-		background-color: #ffffff;
-	}
+page {
+	background-color: #ffffff;
+}
 
-	.normal-login-container {
+.normal-login-container {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	flex-direction: column;
+
+	.logo-content {
 		width: 100%;
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-		flex-direction: column;
+		font-size: 21px;
+		text-align: center;
+		padding-top: 50rpx;
 
-		.logo-content {
-			width: 100%;
-			font-size: 21px;
-			text-align: center;
-			padding-top: 50rpx;
+		image {
+			border-radius: 4px;
+			width: 416rpx;
+			height: 302.67rpx;
+			vertical-align: middle;
+		}
 
-			image {
-				border-radius: 4px;
-				width: 416rpx;
-				height: 302.67rpx;
-				vertical-align: middle;
-			}
+		.title {
+			margin-left: 10px;
+		}
 
-			.title {
+		.logo-title {
+			width: 497.33rpx;
+			margin-top: 32rpx;
+		}
+	}
+
+	.login-form-content {
+		text-align: center;
+		margin: 20px auto;
+		margin-top: 5%;
+		width: 80%;
+
+		.input-item {
+			margin: 15px auto;
+			background-color: transparent;
+			height: 45px;
+			border-radius: 20px;
+			border: 1rpx solid #94C9FF;
+
+			.icon {
+				font-size: 38rpx;
 				margin-left: 10px;
+				color: #999;
 			}
 
-			.logo-title {
-				width: 497.33rpx;
-				margin-top: 32rpx;
+			.input {
+				width: 100%;
+				font-size: 14px;
+				line-height: 20px;
+				text-align: left;
+				padding-left: 15px;
 			}
+
 		}
 
-		.login-form-content {
-			text-align: center;
-			margin: 20px auto;
-			margin-top: 5%;
-			width: 80%;
-
-			.input-item {
-				margin: 15px auto;
-				background-color: transparent;
-				height: 45px;
-				border-radius: 20px;
-				border: 1rpx solid #94C9FF;
-
-				.icon {
-					font-size: 38rpx;
-					margin-left: 10px;
-					color: #999;
-				}
-
-				.input {
-					width: 100%;
-					font-size: 14px;
-					line-height: 20px;
-					text-align: left;
-					padding-left: 15px;
-				}
-
-			}
-
-			.icon-phone {
-				background: url(@/static/images/phone.png) no-repeat;
-				background-size: 100% 100%;
-				width: 42rpx;
-				height: 54rpx;
-			}
-
-			.icon-validate {
-				background: url(@/static/images/validate.png) no-repeat;
-				background-size: 100% 100%;
-				width: 46rpx;
-				height: 54.67rpx;
-			}
-
-			.login-btn {
-				// margin-top: 40px;
-				height: 45px;
-			}
-
-			.xieyi {
-				color: #333;
-				margin-top: 58px;
-				margin-bottom: 30rpx;
-				display: flex;
-				align-items: center;
-			}
+		.icon-phone {
+			background: url(@/static/images/phone.png) no-repeat;
+			background-size: 100% 100%;
+			width: 42rpx;
+			height: 54rpx;
 		}
 
-		.easyinput {
-			width: 100%;
-		}
-	}
-
-	.login-code-img {
-		height: 45px;
-	}
-
-	.other-login {
-		padding-top: 115rpx;
-
-		.wxLoginBtn {
-			background: transparent !important;
-			border: none;
+		.icon-validate {
+			background: url(@/static/images/validate.png) no-repeat;
+			background-size: 100% 100%;
+			width: 46rpx;
+			height: 54.67rpx;
 		}
 
-		.wxLoginBtn::after {
-			border: none;
+		.login-btn {
+			// margin-top: 40px;
+			height: 45px;
 		}
 
-		.loginType {
+		.xieyi {
+			color: #333;
+			margin-top: 58px;
+			margin-bottom: 30rpx;
 			display: flex;
-			// padding: 140rpx 0;
-			justify-content: center;
-
-			.item {
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				color: skyblue;
-				font-size: 22rpx;
-			}
+			align-items: center;
 		}
 	}
 
+	.easyinput {
+		width: 100%;
+	}
+}
 
-	/deep/ .uni-data-checklist .checklist-group .checklist-box {
-		margin-right: 0px;
+.login-code-img {
+	height: 45px;
+}
+
+.other-login {
+	padding-top: 115rpx;
+
+	.wxLoginBtn {
+		background: transparent !important;
+		border: none;
 	}
 
-	/deep/ .uni-data-checklist {
-		flex: none;
+	.wxLoginBtn::after {
+		border: none;
 	}
 
-	/deep/ .uni-data-checklist .checklist-group .checklist-box .checkbox__inner {
-		border-radius: 50%;
-		width: 16px;
-		height: 16px;
-	}
+	.loginType {
+		display: flex;
+		// padding: 140rpx 0;
+		justify-content: center;
 
-	/deep/ .uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .checkbox__inner {
-		background-color: #fff;
-		border-color: #1296DB;
+		.item {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			color: skyblue;
+			font-size: 22rpx;
+		}
 	}
+}
 
-	/deep/ .uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .checkbox__inner .checkbox__inner-icon {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		background-color: #1296DB;
-		border-radius: 50%;
-		transform: translate(-50%, -50%);
-		width: 10px;
-		height: 10px;
-	}
 
-	/deep/ .uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .checklist-text[data-v-84d5d996] {
-		color: #000;
-	}
+/deep/ .uni-data-checklist .checklist-group .checklist-box {
+	margin-right: 0px;
+}
+
+/deep/ .uni-data-checklist {
+	flex: none;
+}
+
+/deep/ .uni-data-checklist .checklist-group .checklist-box .checkbox__inner {
+	border-radius: 50%;
+	width: 16px;
+	height: 16px;
+}
+
+/deep/ .uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .checkbox__inner {
+	background-color: #fff;
+	border-color: #1296DB;
+}
+
+/deep/ .uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .checkbox__inner .checkbox__inner-icon {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	background-color: #1296DB;
+	border-radius: 50%;
+	transform: translate(-50%, -50%);
+	width: 10px;
+	height: 10px;
+}
+
+/deep/ .uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .checklist-text[data-v-84d5d996] {
+	color: #000;
+}
 </style>
