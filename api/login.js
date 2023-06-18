@@ -18,9 +18,9 @@ export function login(phone, code) {
 export function weiXinlogin(code, appid) {
 	return request({
 		'url': '/CmLogin/WeixinAuthCallBack?code=' + code + '&state=state&appid=' +appid, 
-		headers: {
-			isToken: false
-		},
+		// headers: {
+		// 	isToken: false
+		// },
 		'method': 'post',
 
 	})

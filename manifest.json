@@ -63,6 +63,7 @@
         "devServer" : {
             "port" : 8887,
             "https" : false,
+            "disableHostCheck": true,
 			"proxy": {
 				"/Cm": {
 					"target": "http://1.13.92.138:8828",
