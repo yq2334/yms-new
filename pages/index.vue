@@ -52,13 +52,36 @@
 </template>
 
 <script>
+	import {
+		selectHospital,
+	} from '@/api/hospital/index.js';
 	export default {
 		data() {
 			return {
 
 			}
 		},
+		onLoad(option) {
+			console.log(option.id)
+			this.id = option.id
+			// uni.setNavigationBarTitle({
+			// 	title:'长沙县星沙医院'
+			// })
+		},
+		created() {
+			this.getHospitalList()
+		},
 		methods: {
+			getHospitalList() {
+				selectHospital({
+					id: this.id
+				}).then((res) => {
+					
+				
+				}).catch((err) => {
+					
+				})
+			},
 			navTo(route) {
 				if (!route) return;
 			

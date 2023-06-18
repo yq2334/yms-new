@@ -3,7 +3,7 @@
 		<view class="hospital-list">
 			<view class="item" @tap="navToHospital(item)" v-for="(item, index) in hospitalList" :key="item.id">
 
-				<text>{{item.name}}</text>
+				<text>{{item.name}}{{item.underConstruction ? '（建设中）' : ''}}</text>
 				<view class="icon-circle-arrow-right">
 
 				</view>
@@ -14,16 +14,17 @@
 			<view class="flex">
 				<text class="tit">主办单位: </text>
 				<ul class="cont">
-					<li>长沙县人民政府</li>
+					<li>{{mainDesc}}</li>
 
 				</ul>
 			</view>
 			<view class="flex">
 				<text class="tit">承办单位: </text>
-				<ul class="cont">
-					<li>长沙县发展和改革局</li>
-					<li> 长沙县卫生健康局</li>
-					<li>长沙县医疗保障局</li>
+				<!-- <u-parse :content="hostingDesc"></u-parse> -->
+				<ul class="cont" >
+					<li v-for="(item,index) in hostingDesc" :key="index">{{item}}</li>
+					<!-- <li> 长沙县卫生健康局</li>
+					<li>长沙县医疗保障局</li> -->
 				</ul>
 			</view>
 
@@ -33,24 +34,48 @@
 </template>
 
 <script>
+	import {
+		getHospitalById,
+	} from '@/api/hospital/index.js';
 	export default {
 		data() {
 			return {
+				id: '',
 				hospitalList: [
 					{
 						name: '长沙县星沙医院',
 						id: 1
 					}
-				]
+				],
+				hostingDesc: [],
+				mainDesc: ''
 			}
 		},
 		onLoad(option) {
 			console.log(option.id)
-			uni.setNavigationBarTitle({
-				title:'长沙县星沙医院'
-			})
+			this.id = option.id
+			
+		},
+		created() {
+			this.getHospitalList()
 		},
 		methods: {
+			getHospitalList() {
+				getHospitalById({
+					id: this.id
+				}).then((res) => {
+					
+					this.hospitalList = res.data.list
+					this.hostingDesc =  res.data.hostingDesc.split('\r\n')
+					this.mainDesc = res.data.mainDesc
+					console.log(this.hospitalList)
+					uni.setNavigationBarTitle({
+						title: res.data.mainDesc
+					})
+				}).catch((err) => {
+					
+				})
+			},
 			// 通用跳转
 			navTo(route) {
 				if (!route) return;
@@ -60,11 +85,18 @@
 				});
 			},
 			navToHospital(item) {
+				if(item.underConstruction) {
+					this.showTips()
+					return;
+				}
 				this.$tab.reLaunch('/pages/index?id='+ item.id)
 				// uni.navigateTo({
 				// 	url: "index?id=" + item.id,
 				// });
 			},
+			showTips() {
+				this.$modal.showToast('模块建设中~')
+			}
 		}
 	}
 </script>

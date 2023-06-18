@@ -24,51 +24,17 @@
 
 		</view>
 		<view class="home-list">
-			<view class="item" @tap="showTips">
+			<view class="item" @tap="navToHospital(item)" v-for="(item, index) in hospitalList" :key="item.id">
 				<view class="city">
-					长沙市
+					{{item.contry}}
 				</view>
-				<text>信用医疗服务平台（建设中）</text>
+				<text>{{item.name}} {{item.underConstruction ? '（建设中）' : ''}}</text>
 				<view class="icon-circle-arrow-right">
 
 				</view>
 			</view>
-			<view class="item" @tap="navToHospital(1)">
-				<view class="city">
-					长沙县
-				</view>
-				<text>信用医疗服务平台（建设中）</text>
-				<view class="icon-circle-arrow-right">
-
-				</view>
-			</view>
-			<view class="item" @tap="showTips">
-				<view class="city">
-					望城区
-				</view>
-				<text>信用医疗服务平台（建设中）</text>
-				<view class="icon-circle-arrow-right">
-
-				</view>
-			</view>
-			<view class="item" @tap="showTips">
-				<view class="city">
-					浏阳市
-				</view>
-				<text>信用医疗服务平台（建设中）</text>
-				<view class="icon-circle-arrow-right">
-
-				</view>
-			</view>
-			<view class="item" @tap="showTips">
-				<view class="city">
-					宁乡市
-				</view>
-				<text>信用医疗服务平台（建设中）</text>
-				<view class="icon-circle-arrow-right">
-
-				</view>
-			</view>
+			
+			
 		</view>
 		<view class="home-foot">
 			<text>主办单位：长沙市发展和改革委员会</text>
@@ -77,8 +43,12 @@
 </template>
 <script>
 	import {
-		logout
+		logout,
+		
 	} from '@/api/login';
+	import {
+		getRegionList,
+	} from '@/api/hospital/index.js';
 	import mSearch from '@/components/rf-search/rf-search';
 	import banner from '@/static/images/banner.png'
 	import notice from '@/static/images/notice.png'
@@ -87,7 +57,9 @@
 			return {
 				banner,
 				notice,
-				text1: '欢迎体验ZRAdmin移动版'
+				text1: '欢迎体验ZRAdmin移动版',
+				keyword: '',
+				hospitalList: []
 			};
 		},
 		components: {
@@ -97,11 +69,23 @@
 			this.initData();
 
 		},
+		created() {
+			this.getHospitalList()
+		},
 		methods: {
 			// 初始化数据
 			initData() {
 				this.user = uni.getStorageSync('user');
-
+				
+			},
+			getHospitalList() {
+				getRegionList().then((res) => {
+					
+					this.hospitalList = res.data
+					console.log(this.hospitalList)
+				}).catch((err) => {
+					
+				})
 			},
 			handleDotChange() {},
 			// 通用跳转
@@ -112,9 +96,13 @@
 					route
 				});
 			},
-			navToHospital(id) {
+			navToHospital(item) {
+				if(item.underConstruction) {
+					this.showTips()
+					return;
+				}
 				uni.navigateTo({
-					url: "list?id=" + id,
+					url: "list?id=" + item.id,
 				});
 			},
 			showTips() {
