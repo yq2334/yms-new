@@ -25,7 +25,7 @@
 								{{userInfo.name}} 
 							</text>
 						</view>
-						<view class="portrait-indent">
+						<view class="portrait-indent" @tap="handleCredit">
 							我的信用
 							<text class="icon icon-arrow"></text>
 						</view>
@@ -165,7 +165,7 @@
 					</view>
 					<view class="tp">
 						<img class="bank" src="../../static/images/wallet.png" alt="">
-						<view class="check" @click="handleBuilding()">
+						<view class="check" @click="handleCreditBank()">
 							<text>查看</text>
 							<text class="icon icon-arrow-r"></text>
 							
@@ -244,8 +244,11 @@
 			handleBuilding() {
 				this.$modal.showToast('模块建设中~')
 			},
-			handleFeedback() {
-				this.$tab.navigateTo('/pages/feedback/index')
+			handleCreditBank() {
+				this.$tab.navigateTo('/pages/credit/bank')
+			},
+			handleCredit() {
+				this.$tab.navigateTo('/pages/credit/index')
 			},
 			handleToLoglog() {
 				this.$tab.navigateTo('/pages/monitor/logininfo')

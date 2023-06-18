@@ -8,7 +8,7 @@
 					<text class="fs">建设银行</text>
 				</view>
 				<view class="rt">
-					<u-button type="primary" size="mini" text="切换"></u-button>
+					<u-button type="primary" size="mini" text="即将上线"></u-button>
 
 				</view>
 			</view>
@@ -20,7 +20,7 @@
 					<text class="fs">待去医院自助机激活</text>
 				</view>
 				<view class="rt">
-					<u-button type="primary" size="mini" text="教程"></u-button>
+					<u-button type="primary" size="mini" text="即将上线"></u-button>
 				</view>
 			</view>
 		</view>
@@ -36,12 +36,12 @@
 					<view class="dec">
 						<view class="lt">
 							总额度：
-							<text class="fs">2000.00</text>
+							<text class="fs">即将上线</text>
 							（元）
 						</view>
 						<view class="rt">
 							可用额度：
-							<text class="fs">2000.00</text>（元）
+							<text class="fs">即将上线</text>（元）
 						</view>
 					</view>
 				</view>
@@ -52,12 +52,12 @@
 					<view class="dec">
 						<view class="lt">
 							总额度：
-							<text class="fs">2000.00</text>
+							<text class="fs">即将上线</text>
 							（元）
 						</view>
 						<view class="rt">
 							可用额度：
-							<text class="fs">2000.00</text>（元）
+							<text class="fs">即将上线</text>（元）
 						</view>
 					</view>
 				</view>
@@ -68,12 +68,12 @@
 					<view class="dec">
 						<view class="lt">
 							总额度：
-							<text class="fs">2000.00</text>
+							<text class="fs">即将上线</text>
 							（元）
 						</view>
 						<view class="rt">
 							可用额度：
-							<text class="fs">2000.00</text>（元）
+							<text class="fs">即将上线</text>（元）
 						</view>
 					</view>
 				</view>
@@ -103,15 +103,15 @@
 			</view>
 			<view class="content">
 				<view class="fx pd">
-					<view class="fs center">
+					<view class="fs center" @tap="handleBuilding">
 						<u--image :src="'../../static/images/mzgh.png'" width="80rpx" height="80rpx"></u--image>
 						门诊挂号
 					</view>
-					<view class="fs center">
+					<view class="fs center"  @tap="handleBuilding">
 						<u--image :src="'../../static/images/mzjf.png'" width="80rpx" height="80rpx"></u--image>
 						门诊缴费
 					</view>
-					<view class="fs center">
+					<view class="fs center"  @tap="handleBuilding">
 						<u--image :src="'../../static/images/zy.png'" width="80rpx" height="80rpx"></u--image>
 						住院免押金
 					</view>
@@ -135,6 +135,9 @@
 				uni.navigateTo({
 					url: route
 				})
+			},
+			handleBuilding() {
+				this.$modal.showToast('模块建设中~')
 			},
 		}
 	}
