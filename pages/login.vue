@@ -253,7 +253,7 @@ export default {
 			//this.$tab.reLaunch('/pages/index')
 			this.$store.dispatch('GetInfo').then(res => {
 				debugger
-				if (!res.data.IsBindWeixin) {
+				if (!res.data.isBindWeixin) {
 					this.getWeiXinCode()
 				} else if (!res.data.isBindIdCard) {
 					uni.navigateTo({
