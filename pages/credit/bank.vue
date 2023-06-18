@@ -34,18 +34,34 @@
 						img: '../../static/images/bank/jsyh.png'
 					},
 					{
+						name: '交通银行',
+						status: 0,
+						img: '../../static/images/bank/jtyh.png'
+					},
+					{
+						name: '长沙银行',
+						status: 0,
+						img: '../../static/images/bank/csyh.png'
+					},
+					
+					{
 						name: '中国银行',
 						status: 1,
 						img: '../../static/images/bank/zgyh.png'
 					},
 					{
-						name: '交通银行',
+						name: '招商银行',
 						status: 1,
-						img: '../../static/images/bank/jtyh.png'
+						img: '../../static/images/bank/zsyh.png'
+					},
+					{
+						name: '民生银行',
+						status: 1,
+						img: '../../static/images/bank/msyh.png'
 					},
 					{
 						name: '农业银行',
-						status: 0,
+						status: 1,
 						img: '../../static/images/bank/nyyh.png'
 					}
 				]

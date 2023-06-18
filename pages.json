@@ -477,7 +477,7 @@
 			//   "text": "消息"
 			// },
 			{
-				"pagePath": "pages/setting/index",
+				"pagePath": "pages/mine/setting/index",
 				"iconPath": "static/images/tabbar/tab-set.png",
 				"selectedIconPath": "static/images/tabbar/tab-set-active.png",
 				"text": "设置"
