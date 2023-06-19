@@ -1,7 +1,7 @@
 <template>
 	<view class="hospital-home">
-		<view class="select-hosp">
-			<text class="name">长沙县星沙医院</text>
+		<view class="select-hosp" @tap="handleSelect">
+			<text class="name">{{name}}</text>
 			<view class="sel">
 				选择
 			</view>
@@ -58,29 +58,27 @@
 	export default {
 		data() {
 			return {
-
+				id: '',
+				name: ''
 			}
 		},
 		onLoad(option) {
 			console.log(option.id)
 			this.id = option.id
-			// uni.setNavigationBarTitle({
-			// 	title:'长沙县星沙医院'
-			// })
+			this.name = option.name
+			uni.setNavigationBarTitle({
+				title: option.name
+			})
 		},
 		created() {
-			this.getHospitalList()
+			// this.getHospitalList()
 		},
 		methods: {
-			getHospitalList() {
-				selectHospital({
-					id: this.id
-				}).then((res) => {
-					
+			// getHospitalList() {
 				
-				}).catch((err) => {
-					
-				})
+			// },
+			handleSelect() {
+				this.$tab.navigateTo("/pages/hospital/index?id=" + this.id);
 			},
 			navTo(route) {
 				if (!route) return;
@@ -95,6 +93,7 @@
 
 <style lang="scss" scoped>
 	.hospital-home {
+		padding-top: 20rpx;
 		.select-hosp {
 			display: flex;
 			align-items: center;

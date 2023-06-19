@@ -189,6 +189,10 @@ export default {
             url: "/pages/mine/auth/identy",
           });
         } else {
+			if(res.data.isSelectDefaultHospital) {
+				this.$tab.reLaunch('/pages/index?name=' + res.data.defaultHospitalName)
+				return;
+			}
           // this.$tab.reLaunch('/pages/index')
           this.$tab.navigateTo("/pages/hospital/index");
         }
@@ -302,6 +306,10 @@ export default {
             url: "/pages/mine/auth/identy",
           });
         } else {
+			if(res.data.isSelectDefaultHospital) {
+				this.$tab.reLaunch('/pages/index?name=' + res.data.defaultHospitalName)
+				return;
+			}
           this.$tab.navigateTo("/pages/hospital/index");
         }
       });

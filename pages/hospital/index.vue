@@ -25,10 +25,10 @@
 		</view>
 		<view class="home-list">
 			<view class="item" @tap="navToHospital(item)" v-for="(item, index) in hospitalList" :key="item.id">
-				<view class="city">
+				<!-- <view class="city">
 					{{item.contry}}
-				</view>
-				<text>{{item.name}} {{item.underConstruction ? '（建设中）' : ''}}</text>
+				</view> -->
+				<text>{{item.contry}}{{item.name}} {{item.underConstruction ? '（建设中）' : ''}}</text>
 				<view class="icon-circle-arrow-right">
 
 				</view>

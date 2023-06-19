@@ -1,7 +1,7 @@
 <template>
 	<view class="hospital">
 		<view class="hospital-list">
-			<view class="item" @tap="navToHospital(item)" v-for="(item, index) in hospitalList" :key="item.id">
+			<view class="item" @tap="handleSelectHospital(item)" v-for="(item, index) in hospitalList" :key="item.id">
 
 				<text>{{item.name}}{{item.underConstruction ? '（建设中）' : ''}}</text>
 				<view class="icon-circle-arrow-right">
@@ -36,6 +36,7 @@
 <script>
 	import {
 		getHospitalById,
+		selectHospital
 	} from '@/api/hospital/index.js';
 	export default {
 		data() {
@@ -84,12 +85,24 @@
 					route
 				});
 			},
-			navToHospital(item) {
+			handleSelectHospital(item) {
 				if(item.underConstruction) {
 					this.showTips()
 					return;
 				}
-				this.$tab.reLaunch('/pages/index?id='+ item.id)
+				selectHospital({
+					id: item.id
+				}).then((res) => {
+					this.$tab.reLaunch('/pages/index?id='+ item.id + '&name=' + item.name)
+				
+				}).catch((err) => {
+					
+				})
+			},
+			
+			navToHospital(item) {
+				
+				
 				// uni.navigateTo({
 				// 	url: "index?id=" + item.id,
 				// });
