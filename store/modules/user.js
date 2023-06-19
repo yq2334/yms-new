@@ -85,8 +85,8 @@ const user = {
         getInfo().then(res => {
           const data = res.data
           const user = res.data
-          const avatar = (user == null || user.avatar == "" || user.avatar == null) ? require(
-            "@/static/images/profile.jpg") : user.avatar
+          const avatar = (user == null || user.headimgUrl == "" || user.headimgUrl == null) ? require(
+            "@/static/images/profile.jpg") : user.headimgUrl
           const username = (user == null || user.userName == "" || user.userName == null) ? "" : user.userName
           if (data.roles && data.roles.length > 0) {
             commit('SET_ROLES', data.roles)

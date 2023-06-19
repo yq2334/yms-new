@@ -17,7 +17,7 @@
 					<view class="user-info-box">
 						<view class="portrait-box" @tap="navTo(userInfo ? '/pages/user/userinfo/userinfo' : 'login')">
 							<!-- <image class="portrait" src="../../static/images/avatar.png"></image> -->
-							<u--image :showLoading="true" :src="userInfo.avatar" width="100upx" height="100upx" mode="widthFix"
+							<u--image :showLoading="true" :src="userInfo.headimgUrl" width="100upx" height="100upx" mode="widthFix"
 								shape="circle">
 								<view slot="error" style="font-size: 24rpx;">加载失败</view>
 							</u--image>
@@ -217,7 +217,7 @@
 				this.$tab.navigateTo('/pages/mine/info/edit')
 			},
 			handleToSetting() {
-				this.$tab.navigateTo('/pages/mine/setting/index')
+				this.$tab.switchTab('/pages/mine/setting/index')
 			},
 			handleToLogin() {
 				this.$tab.reLaunch('/pages/login')
