@@ -3,12 +3,12 @@
 		<view class="example">
 			<uni-forms ref="form" border :model="user" labelWidth="160px" :rules="rules">
 				<uni-forms-item label="证件类型" name="idType" required>
-					<uni-data-select v-model="user.idType" :localdata="cardType" @change="change" :clear="false">
+					<uni-data-select v-model="user.idType" :localdata="cardType" @change="change" :clear="false" disabled >
 					</uni-data-select>
 				</uni-forms-item>
 				<uni-forms-item label="证件号" name="idNo" required>
 					<uni-easyinput :inputBorder="false" :clearable="false" v-model="user.idNo"
-						:placeholderClass="'placeholder-input'" placeholder="请输入身份证号" />
+						:placeholderClass="'placeholder-input'" placeholder="请输入身份证号" disabled   />
 				</uni-forms-item>
 				<uni-forms-item label="民族" name="nationality" required>
 					<uni-data-select v-model="nationality" :localdata="mingzuList" @change="change" :clear="false">
@@ -57,11 +57,11 @@
 			</uni-forms>
 
 		</view>
-		<view class="tips">
+		<!-- <view class="tips">
 			说明:若您在医院未建立过档案，平台将自动为您建档默认您
 			的身份类别未“一般人员”，费用类别未“医保”,如您需要
 			修改请前往医院窗口进行更新。
-		</view>
+		</view> -->
 		<u-button type="primary" @click="submit" text="保存"></u-button>
 	</view>
 </template>

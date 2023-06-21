@@ -43,10 +43,6 @@
 			return {
 				id: '',
 				hospitalList: [
-					{
-						name: '长沙县星沙医院',
-						id: 1
-					}
 				],
 				hostingDesc: [],
 				mainDesc: ''
@@ -93,7 +89,10 @@
 				selectHospital({
 					id: item.id
 				}).then((res) => {
-					this.$tab.reLaunch('/pages/index?id='+ item.id + '&name=' + item.name)
+					this.$store.dispatch('GetInfo').then(res=>{
+						this.$tab.reLaunch('/pages/index?id='+ item.id + '&name=' + item.name)
+					})
+					// this.$tab.reLaunch('/pages/index?id='+ item.id + '&name=' + item.name)
 				
 				}).catch((err) => {
 					
