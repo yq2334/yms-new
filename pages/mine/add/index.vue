@@ -54,15 +54,15 @@
 				})
 			},
 			confirmDelete(item) {
-				
+				var 
 				uni.showModal({
 					title: '系统提示',
 					content: '确认删除',
 					cancelText: '取消',
 					confirmText: '确定',
-					success: function(res) {
+					success: (res) => {
 						if (res.confirm) {
-							deleteFamily(item)
+							this.deleteFamily(item)
 						}
 					}
 				})

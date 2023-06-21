@@ -112,7 +112,7 @@
 						<img src="../../static/images/home.png" alt="">
 						<text class="text">家庭共享</text>
 					</view>
-					<view class="action-item" @click="handleBuilding">
+					<view class="action-item" @click="handleToHelp">
 						<img src="../../static/images/help.png" alt="">
 						<text class="text">帮助</text>
 					</view>
@@ -212,6 +212,9 @@
 			},
 			handleToMyFamily() {
 				this.$tab.navigateTo('/pages/mine/add/index')
+			},
+			handleToHelp() {
+				this.$tab.navigateTo('/pages/mine/help/index')
 			},
 			handleToEditInfo() {
 				this.$tab.navigateTo('/pages/mine/info/edit')

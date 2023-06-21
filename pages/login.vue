@@ -148,7 +148,7 @@ export default {
     console.log(code);
     this.code = code;
     if (code !== null && code !== "") {
-      debugger;
+    
       this.getOpenidAndUserinfo(code);
     }
   },

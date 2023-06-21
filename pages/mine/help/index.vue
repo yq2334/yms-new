@@ -1,17 +1,32 @@
 <template>
   <view class="help-container">
-    <view v-for="(item, findex) in list" :key="findex" :title="item.title" class="list-title">
-      <view class="text-title">
-        <view :class="item.icon"></view>{{ item.title }}
-      </view>
-      <view class="childList">
-        <view v-for="(child, zindex) in item.childList" :key="zindex" class="question" hover-class="hover"
-          @click="handleText(child)">
-          <view class="text-item">{{ child.title }}</view>
-          <view class="line" v-if="zindex !== item.childList.length - 1"></view>
-        </view>
-      </view>
-    </view>
+	<view class="title">
+		遇到问题了吗？
+	</view>
+	<view class="cont">
+		可以长按下方二维码，加客服微信寻求帮助。
+	</view>
+	<view class="cont">
+		客服在线时间：工作日9：00-18：00。
+	</view>
+	<view class="qrcode">
+		<view class="top">
+			<u--image  src="" width="100upx" height="100upx" mode="widthFix"
+				shape="circle">
+				<view slot="error" style="font-size: 24rpx;">加载失败</view>
+			</u--image>
+			<text>客服微信</text>
+		</view>
+		<view class="qr-img">
+			<u--image  src="" width="100upx" height="100upx" mode="widthFix"
+				shape="circle">
+				<view slot="error" style="font-size: 24rpx;">加载失败</view>
+			</u--image>
+		</view>
+		<view class="tips">
+			扫一扫上方的二维码 加我微信
+		</view>
+	</view>
   </view>
 </template>
 
@@ -19,76 +34,57 @@
   export default {
     data() {
       return {
-        list: [{
-          icon: 'iconfont icon-help',
-          title: '其他问题',
-          childList: [{
-            title: '如何退出登录？',
-            content: '请点击[我的] - [应用设置] - [退出登录]即可退出登录',
-          }, {
-            title: '如何修改用户头像？',
-            content: '请点击[我的] - [选择头像] - [点击提交]即可更换用户头像',
-          }, {
-            title: '如何修改登录密码？',
-            content: '请点击[我的] - [应用设置] - [修改密码]即可修改登录密码',
-          }]
-        }]
+       
       }
     },
     methods: {
-      handleText(item) {
-        this.$tab.navigateTo(`/pages/common/textview/index?title=${item.title}&content=${item.content}`)
-      }
+     
     }
   }
 </script>
 
 <style lang="scss" scoped>
   page {
-    background-color: #f8f8f8;
+    background-color: #f5f5f5;
   }
 
   .help-container {
     margin-bottom: 100rpx;
     padding: 30rpx;
+	.title{
+		font-size: 30rpx;
+		color: #000;
+	}
+	.cont{
+		font-size: 30rpx;
+		color: #333;
+		margin-top: 20rpx;
+	}
+	.qrcode{
+		width: 85%;
+		background-color: #fff;
+		margin: 100rpx auto ;
+		padding: 40rpx;
+		border-radius: 12rpx;
+		.top{
+			display: flex;
+			align-items: center;
+			font-size: 30rpx;
+			text{
+				margin-left: 10rpx;
+			}
+		}
+		.qr-img{
+			height: 500rpx;
+			margin: 30rpx auto;
+		}
+		.tips{
+			color: #666;
+			font-size: 26rpx;
+			text-align: center;
+		}
+	}
   }
 
-  .list-title {
-    margin-bottom: 30rpx;
-  }
-
-  .childList {
-    background: #ffffff;
-    box-shadow: 0px 0px 10rpx rgba(193, 193, 193, 0.2);
-    border-radius: 16rpx;
-    margin-top: 10rpx;
-  }
-
-  .line {
-    width: 100%;
-    height: 1rpx;
-    background-color: #F5F5F5;
-  }
-
-  .text-title {
-    color: #303133;
-    font-size: 32rpx;
-    font-weight: bold;
-    margin-left: 10rpx;
-
-    .iconfont {
-      font-size: 16px;
-      margin-right: 10rpx;
-    }
-  }
-
-  .text-item {
-    font-size: 28rpx;
-    padding: 24rpx;
-  }
-
-  .question {
-    color: #606266;
-    font-size: 28rpx;
-  }
+  
 </style>
