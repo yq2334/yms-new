@@ -25,6 +25,13 @@ export function weiXinlogin(code, appid) {
 
 	})
 }
+// 获取appId
+export function getWxAppId() {
+	return request({
+		'url': '/CmLogin/GetWxAppId',
+		'method': 'get'
+	})
+}
 // 获取用户详细信息
 export function getInfo() {
 	return request({
