@@ -54,7 +54,7 @@
 				})
 			},
 			confirmDelete(item) {
-				var 
+				 
 				uni.showModal({
 					title: '系统提示',
 					content: '确认删除',

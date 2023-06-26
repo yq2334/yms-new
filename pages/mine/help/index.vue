@@ -11,10 +11,10 @@
 	</view>
 	<view class="qrcode">
 		<view class="top">
-			<u--image  src="" width="100upx" height="100upx" mode="widthFix"
+			<!-- <u--image  src="" width="100upx" height="100upx" mode="widthFix"
 				shape="circle">
 				<view slot="error" style="font-size: 24rpx;">加载失败</view>
-			</u--image>
+			</u--image> -->
 			<text>客服微信</text>
 		</view>
 		<view class="qr-img">

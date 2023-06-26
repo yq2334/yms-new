@@ -64,7 +64,8 @@
 		{
 			"path": "pages/mine/help/index",
 			"style": {
-				"navigationBarTitleText": "常见问题"
+				"navigationBarTitleText": "帮助",
+				"navigationStyle": "custom"
 			}
 		},
 		{
