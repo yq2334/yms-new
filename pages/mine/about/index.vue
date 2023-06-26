@@ -12,7 +12,7 @@
 				<u-cell title="版本更新"  :isLink="true" url="/pages/mine/update/index"></u-cell>
 				<u-cell title="信用医疗服务协议" :isLink="true" url="/pages/mine/auth/index"></u-cell>
 				<u-cell title="用户隐私协议" :isLink="true" url="/pages/mine/auth/service"></u-cell>
-				<u-cell title="注销账号" :isLink="true" url="/pages/mine/auth/logout"></u-cell>
+				<!-- <u-cell title="注销账号" :isLink="true" url="/pages/mine/auth/logout"></u-cell> -->
 			</u-cell-group>
 			
 		</view>

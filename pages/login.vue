@@ -2,24 +2,14 @@
   <view class="normal-login-container align-center">
     <view class="logo-content">
       <image :src="globalConfig.appInfo.logo" mode="widthFix"> </image>
-      <image
-        class="logo-title"
-        :src="'../static/images/logo-title.png'"
-        mode="widthFix"
-      >
+      <image class="logo-title" :src="'../static/images/logo-title.png'" mode="widthFix">
       </image>
       <!-- <text class="title"> {{appName}}</text> -->
     </view>
     <view class="login-form-content">
       <view class="input-item flex align-center">
         <view class="icon-phone icon"></view>
-        <input
-          v-model="loginForm.phone"
-          class="input"
-          type="text"
-          placeholder="请输入手机号"
-          maxlength="30"
-        />
+        <input v-model="loginForm.phone" class="input" type="text" placeholder="请输入手机号" maxlength="30" />
       </view>
       <!-- <view class="input-item flex align-center">
 				<view class="iconfont icon-password icon"></view>
@@ -28,61 +18,31 @@
 			</view> -->
       <u-row justify="space-between">
         <u-col span="7">
-          <view
-            class="input-item flex align-center"
-            v-if="captchaEnabled != 'off'"
-          >
+          <view class="input-item flex align-center" v-if="captchaEnabled != 'off'">
             <view class="icon-validate icon"></view>
-            <input
-              v-model="loginForm.code"
-              class="input"
-              placeholder="请输入验证码"
-              maxlength="6"
-              @keyup.enter="handleLogin"
-            />
+            <input v-model="loginForm.code" class="input" placeholder="请输入验证码" maxlength="6" @keyup.enter="handleLogin" />
           </view>
         </u-col>
         <u-col span="4">
-          <u-button
-            @tap="getCode"
-            :text="tips"
-            type="primary"
-            size="mid"
-            shape="circle"
-            :disabled="disabled1"
-          ></u-button>
+          <u-button @tap="getCode" :text="tips" type="primary" size="mid" shape="circle" :disabled="disabled1"></u-button>
         </u-col>
       </u-row>
       <view class="xieyi text-center">
         <!-- 	<u-checkbox v-model="loginForm.checked" activeColor="#1296DB" labelSize="10" labelColor="#000"
 					shape="circle" label=""></u-checkbox> -->
 
-        <uni-data-checkbox
-          v-model="checked"
-          multiple
-          :localdata="agree"
-          @change="change"
-        />
+        <uni-data-checkbox v-model="checked" multiple :localdata="agree" @change="change" />
         <!-- <text class="text-grey1">登录即代表同意</text> -->
         <text @click="handleUserAgrement" class="text-blue">《用户协议》</text>
         <text @click="handlePrivacy" class="text-blue">《隐私协议》</text>
       </view>
       <view class="action-btn">
-        <button
-          @click="handleLogin"
-          class="login-btn cu-btn block bg-blue lg round"
-        >
+        <button @click="handleLogin" class="login-btn cu-btn block bg-blue lg round">
           登录
         </button>
       </view>
-      <u-code
-        ref="uCode"
-        @change="codeChange"
-        seconds="60"
-        @start="disabled1 = true"
-        startText="发送验证码"
-        @end="disabled1 = false"
-      ></u-code>
+      <u-code ref="uCode" @change="codeChange" seconds="60" @start="disabled1 = true" startText="发送验证码"
+        @end="disabled1 = false"></u-code>
     </view>
 
     <view class="other-login">
@@ -103,7 +63,7 @@
 </template>
 
 <script>
-import { getCodeImg, sendCode, weiXinlogin } from "@/api/login";
+import { getCodeImg, sendCode, weiXinlogin, getWxAppId } from "@/api/login";
 const isWechat = () => {
   return (
     String(navigator.userAgent.toLowerCase().match(/MicroMessenger/i)) ===
@@ -114,7 +74,7 @@ const isWechat = () => {
 export default {
   data() {
     return {
-      appid: "wx2a69eb73ee498244",
+      appid: "",
       checked: [0],
       disabled1: false,
       tips: "发送验证码",
@@ -144,11 +104,12 @@ export default {
     window.addEventListener("keydown", this.keyDown);
   },
   onLoad(e) {
+    this.getWeiXinAppId()
     let code = this.getUrlCode("code");
     console.log(code);
     this.code = code;
     if (code !== null && code !== "") {
-    
+
       this.getOpenidAndUserinfo(code);
     }
   },
@@ -162,6 +123,11 @@ export default {
           ) || [, ""])[1].replace(/\+/g, "%20")
         ) || null
       );
+    },
+    getWeiXinAppId() {
+      getWxAppId().then(res => {
+        this.appid = res.data
+      })
     },
     getWeiXinCode() {
       if (isWechat()) {
@@ -189,10 +155,10 @@ export default {
             url: "/pages/mine/auth/identy",
           });
         } else {
-			if(res.data.isSelectDefaultHospital) {
-				this.$tab.reLaunch('/pages/index?name=' + res.data.defaultHospitalName)
-				return;
-			}
+          if (res.data.isSelectDefaultHospital) {
+            this.$tab.reLaunch('/pages/index?name=' + res.data.defaultHospitalName)
+            return;
+          }
           // this.$tab.reLaunch('/pages/index')
           this.$tab.navigateTo("/pages/hospital/index");
         }
@@ -306,10 +272,10 @@ export default {
             url: "/pages/mine/auth/identy",
           });
         } else {
-			if(res.data.isSelectDefaultHospital) {
-				this.$tab.reLaunch('/pages/index?name=' + res.data.defaultHospitalName)
-				return;
-			}
+          if (res.data.isSelectDefaultHospital) {
+            this.$tab.reLaunch('/pages/index?name=' + res.data.defaultHospitalName)
+            return;
+          }
           this.$tab.navigateTo("/pages/hospital/index");
         }
       });
@@ -336,7 +302,7 @@ export default {
                 this.$modal.closeLoading();
                 this.loginSuccess();
               })
-              .catch(() => {});
+              .catch(() => { });
           },
         });
       } else {
@@ -500,21 +466,12 @@ page {
   height: 16px;
 }
 
-/deep/
-  .uni-data-checklist
-  .checklist-group
-  .checklist-box.is--default.is-checked
-  .checkbox__inner {
+/deep/ .uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .checkbox__inner {
   background-color: #fff;
   border-color: #1296db;
 }
 
-/deep/
-  .uni-data-checklist
-  .checklist-group
-  .checklist-box.is--default.is-checked
-  .checkbox__inner
-  .checkbox__inner-icon {
+/deep/ .uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .checkbox__inner .checkbox__inner-icon {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -525,11 +482,7 @@ page {
   height: 10px;
 }
 
-/deep/
-  .uni-data-checklist
-  .checklist-group
-  .checklist-box.is--default.is-checked
-  .checklist-text[data-v-84d5d996] {
+/deep/ .uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .checklist-text[data-v-84d5d996] {
   color: #000;
 }
 </style>

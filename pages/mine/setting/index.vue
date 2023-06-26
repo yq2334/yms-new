@@ -50,6 +50,22 @@
           }"
         >
         </u-cell>
+        <u-cell
+          title="退出登录"
+          :border="true"
+          :isLink="true"
+          @click="handleLogout()"
+          :rightIconStyle="{
+            fontSize: '20rpx',
+            justifyContent: 'center',
+            background: '#2359D8',
+            color: '#fff',
+            borderRadius: '50%',
+            width: '32rpx',
+            height: '32rpx',
+          }"
+        >
+        </u-cell>
       </u-cell-group>
     </view>
 
@@ -93,9 +109,9 @@
         this.$modal.showToast('模块建设中~')
       },
       handleLogout() {
-        this.$modal.confirm('确定注销并退出系统吗？').then(() => {
+        this.$modal.confirm('确定退出登录吗？').then(() => {
           this.$store.dispatch('LogOut').then(() => {
-            this.$tab.reLaunch('/pages/index')
+            this.$tab.reLaunch('/pages/login')
           })
         })
       }

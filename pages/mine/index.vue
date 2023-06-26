@@ -1,8 +1,8 @@
 <template>
 	<view class="mine-container">
 		<!--顶部个人信息栏-->
-		 
-		<view class="header-section btn" :style="{'padding-top':statusBarHeight + 'px'}">
+
+		<view class="header-section btn" :style="{ 'padding-top': statusBarHeight + 'px' }">
 			<!-- <u-navbar
 			         title="我的账户"
 			         @rightClick="rightClick"
@@ -17,12 +17,12 @@
 					<view class="user-info-box">
 						<view class="portrait-box" @tap="navTo(userInfo ? '/pages/user/userinfo/userinfo' : 'login')">
 							<!-- <image class="portrait" src="../../static/images/avatar.png"></image> -->
-							<u--image :showLoading="true" :src="userInfo.headimgUrl" width="100upx" height="100upx" mode="widthFix"
-								shape="circle">
+							<u--image :showLoading="true" :src="userInfo.headimgUrl" width="100upx" height="100upx"
+								mode="widthFix" shape="circle">
 								<view slot="error" style="font-size: 24rpx;">加载失败</view>
 							</u--image>
 							<text class="username">
-								{{userInfo.name}} 
+								{{ userInfo.name }}
 							</text>
 						</view>
 						<view class="portrait-indent" @tap="handleCredit">
@@ -31,11 +31,11 @@
 						</view>
 					</view>
 					<view class="tag-wrapper">
-						<text> {{userInfo.isRealNameAuth ? '已实名' : '未实名'}} </text>
+						<text> {{ userInfo.isRealNameAuth ? '已实名' : '未实名' }} </text>
 						<text class="split"></text>
-						<text> {{userInfo.medicalInsuranceAuth == 1 ? '医保已认证' : '医保待认证' }} </text>
+						<text> {{ userInfo.medicalInsuranceAuth == 1 ? '医保已认证' : '医保待认证' }} </text>
 						<text class="split"></text>
-						<text> {{userInfo.isUseCreditMedical == 1 ? '信用申请已通过' : '信用申请未通过' }} </text>
+						<text> {{ userInfo.isUseCreditMedical == 1 ? '信用申请已通过' : '信用申请未通过' }} </text>
 					</view>
 				</view>
 				<view class="user-order">
@@ -123,7 +123,7 @@
 				</view>
 			</view>
 			<view class="mine-hos">
-				<view class="item lt">
+				<view class="item lt" @click="handleBindCard()">
 					<view class="title">
 						银联信用就医
 					</view>
@@ -140,14 +140,14 @@
 					</view>
 					<view class="tp">
 						<img class="bank" src="../../static/images/bank.png" alt="">
-						<view class="check" @click="handleBuilding()">
+						<view class="check">
 							<text>查看</text>
 							<text class="icon icon-arrow-r"></text>
-							
+
 						</view>
 					</view>
 				</view>
-				<view class="item rt">
+				<view class="item rt" @click="handleCreditBank()">
 					<view class="title">
 						专属额度授信
 					</view>
@@ -165,10 +165,10 @@
 					</view>
 					<view class="tp">
 						<img class="bank" src="../../static/images/wallet.png" alt="">
-						<view class="check" @click="handleCreditBank()">
+						<view class="check">
 							<text>查看</text>
 							<text class="icon icon-arrow-r"></text>
-							
+
 						</view>
 					</view>
 				</view>
@@ -178,421 +178,486 @@
 </template>
 
 <script>
-	import {
-		mapGetters
-	} from 'vuex';
-	import storage from '@/utils/storage'
+import {
+	mapGetters
+} from 'vuex';
+import storage from '@/utils/storage'
+import {
+	getBankCardUrl
+} from "@/api/jpay/index"
 
-	export default {
-		data() {
-			return {
-				name: this.$store.state.user.name
-			}
+export default {
+	data() {
+		return {
+			name: this.$store.state.user.name,
+			bindCardUrl: '',
+		}
+	},
+	computed: {
+		avatar() {
+			return this.$store.state.user.avatar
 		},
-		computed: {
-			avatar() {
-				return this.$store.state.user.avatar
-			},
-			windowHeight() {
-				return uni.getSystemInfoSync().windowHeight - 50
-			},
-			statusBarHeight() {
-				return uni.getSystemInfoSync().statusBarHeight
-			},
-			userInfo() {
-				return this.$store.getters.userInfo
-			},
+		windowHeight() {
+			return uni.getSystemInfoSync().windowHeight - 50
 		},
-		onLoad() {
-			console.log(uni.getSystemInfoSync())
+		statusBarHeight() {
+			return uni.getSystemInfoSync().statusBarHeight
 		},
-		methods: {
-			handleToInfo() {
-				this.$tab.navigateTo('/pages/mine/info/index')
-			},
-			handleToMyFamily() {
-				this.$tab.navigateTo('/pages/mine/add/index')
-			},
-			handleToHelp() {
-				this.$tab.navigateTo('/pages/mine/help/index')
-			},
-			handleToEditInfo() {
-				this.$tab.navigateTo('/pages/mine/info/edit')
-			},
-			handleToSetting() {
-				this.$tab.switchTab('/pages/mine/setting/index')
-			},
-			handleToLogin() {
-				this.$tab.reLaunch('/pages/login')
-			},
-			handleToAvatar() {
-				this.$tab.navigateTo('/pages/mine/avatar/index')
-			},
-			handleLogout() {
-				this.$modal.confirm('确定注销并退出系统吗？').then(() => {
-					this.$store.dispatch('LogOut').then(() => {
-						this.$tab.reLaunch('/pages/index')
-					})
+		userInfo() {
+			return this.$store.getters.userInfo
+		},
+	},
+	onLoad() {
+		console.log(uni.getSystemInfoSync())
+		this.handleGetBankCardUrl()
+	},
+	onShow() {
+		this.handleGetInfo()
+	},
+	methods: {
+		handleToInfo() {
+			this.$tab.navigateTo('/pages/mine/info/index')
+		},
+		handleToMyFamily() {
+			this.$tab.navigateTo('/pages/mine/add/index')
+		},
+		handleToHelp() {
+			this.$tab.navigateTo('/pages/mine/help/index')
+		},
+		handleToEditInfo() {
+			this.$tab.navigateTo('/pages/mine/info/edit')
+		},
+		handleToSetting() {
+			this.$tab.switchTab('/pages/mine/setting/index')
+		},
+		handleToLogin() {
+			this.$tab.reLaunch('/pages/login')
+		},
+		handleToAvatar() {
+			this.$tab.navigateTo('/pages/mine/avatar/index')
+		},
+		handleLogout() {
+			this.$modal.confirm('确定注销并退出系统吗？').then(() => {
+				this.$store.dispatch('LogOut').then(() => {
+					this.$tab.reLaunch('/pages/index')
 				})
-			},
-			handleHelp() {
-				this.$tab.navigateTo('/pages/mine/help/index')
-			},
-			handleAbout() {
-				this.$tab.navigateTo('/pages/mine/about/index')
-			},
-			handleJiaoLiuQun() {
-				this.$modal.showToast('客服QQ：249045216')
-			},
-			handleBuilding() {
-				this.$modal.showToast('模块建设中~')
-			},
-			handleCreditBank() {
-				this.$tab.navigateTo('/pages/credit/bank')
-			},
-			handleCredit() {
-				this.$tab.navigateTo('/pages/credit/index')
-			},
-			handleToLoglog() {
-				this.$tab.navigateTo('/pages/monitor/logininfo')
-			},
-			handleToChangelog() {
-				this.$tab.navigateTo('/pages/changelog/changelog')
+			})
+		},
+		handleHelp() {
+			this.$tab.navigateTo('/pages/mine/help/index')
+		},
+		handleAbout() {
+			this.$tab.navigateTo('/pages/mine/about/index')
+		},
+		handleJiaoLiuQun() {
+			this.$modal.showToast('客服QQ：249045216')
+		},
+		handleBuilding() {
+			this.$modal.showToast('模块建设中~')
+		},
+		handleCreditBank() {
+			this.$tab.navigateTo('/pages/credit/bank')
+		},
+		handleCredit() {
+			this.$tab.navigateTo('/pages/credit/index')
+		},
+		handleToLoglog() {
+			this.$tab.navigateTo('/pages/monitor/logininfo')
+		},
+		handleToChangelog() {
+			this.$tab.navigateTo('/pages/changelog/changelog')
+		},
+		handleBindCard() {
+			window.location.href = this.bindCardUrl
+		},
+		handleGetInfo() {
+			this.$store.dispatch("GetInfo").then((res) => {
+				if (!res.data.isBindWeixin) {
+					uni.navigateTo({
+						url: "/pages/login",
+					});
+				} else if (!res.data.isBindIdCard) {
+					uni.navigateTo({
+						url: "/pages/mine/auth/identy",
+					});
+				} else {
+					if (res.data.isSelectDefaultHospital) {
+						this.$tab.reLaunch('/pages/index?name=' + res.data.defaultHospitalName)
+						return;
+					}
+					this.$tab.navigateTo("/pages/hospital/index");
+				}
+			});
+
+		},
+		handleGetBankCardUrl() {
+			if(!this.userInfo.isBindIdCard){
+				this.$modal.showToast('未绑定身份信息')
+				return
 			}
+			getBankCardUrl().then(response => {
+				let isBind = response.data.isBind
+				let burl = response.data.url
+				this.bindCardUrl = burl
+				if (!isBind) {
+					this.$modal.confirm('请先绑定银联信用就医').then((confirm) => {
+						if (confirm) {
+							window.location.href = burl
+						}
+					})
+				}
+			})
 		}
 	}
+}
 </script>
 
 <style lang="scss">
-	/* #ifdef H5 */
-	uni-page-head {
-		display: none !important;
-	}
+/* #ifdef H5 */
+uni-page-head {
+	display: none !important;
+}
 
-	/* #endif */
-	page {
-		// background-color: #f5f6f7;
-		font-size: 27rpx;
-	}
+/* #endif */
+page {
+	// background-color: #f5f6f7;
+	font-size: 27rpx;
+}
 
-	.mine-container {
-		width: 100%;
-		height: 100%;
+.mine-container {
+	width: 100%;
+	height: 100%;
 
 
-		.header-section {
-			// padding: 50px 15px 45px 15px;
-			// background-color: #3c96f3;
-			color: white;
+	.header-section {
+		// padding: 50px 15px 45px 15px;
+		// background-color: #3c96f3;
+		color: white;
 
-			.login-tip {
+		.login-tip {
+			font-size: 18px;
+			margin-left: 10px;
+		}
+
+		.cu-avatar {
+			border: 2px solid #eaeaea;
+
+			.icon {
+				font-size: 40px;
+			}
+		}
+
+		.user-info {
+			margin-left: 30rpx;
+			margin-right: 40rpx;
+
+			.u_title {
 				font-size: 18px;
-				margin-left: 10px;
+				line-height: 30px;
 			}
 
-			.cu-avatar {
-				border: 2px solid #eaeaea;
+			.u_content {
+				width: 160px;
+			}
+		}
+	}
+
+	.user-section {
+		height: 500upx;
+		// padding: 100upx 30upx 0;
+		position: relative;
+
+
+		.bg {
+			position: absolute;
+			left: 0;
+			top: 0;
+			// width: 100vw;
+			height: 355rpx;
+			// opacity: 0.84;
+			width: 100%;
+		}
+
+		.user-wrapper {
+			position: absolute;
+			width: 100%;
+			left: 0;
+			top: 0;
+			background: url(@/static/images/user-bg.png) no-repeat;
+			background-size: 100% 100%;
+			height: 255rpx;
+			z-index: 9;
+			padding-top: 80upx;
+		}
+
+		.user-info-box {
+			padding: 0 120upx;
+			margin-bottom: 20upx;
+			display: flex;
+			align-items: center;
+			position: relative;
+			z-index: 1;
+			justify-content: space-between;
+
+			.portrait-box {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+
+				.portrait {
+					width: 100upx;
+					height: 100upx;
+					border: 5upx solid #fff;
+					border-radius: 50%;
+				}
+
+				.username {
+					font-size: 26upx;
+					color: #fff;
+					margin-left: 20upx;
+				}
+
+				button {
+					background-color: transparent;
+					font-size: 26upx;
+					color: #333;
+					border: none;
+				}
+
+				button::after {
+					border: none;
+				}
+			}
+
+			.portrait-indent {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: #2359D8;
+				font-size: 27rpx;
+				height: 38rpx;
+				background: #FFFFFF;
+				border-radius: 7rpx;
+				padding: 0 12rpx;
+
+				.icon-arrow {
+					display: block;
+					width: 17rpx;
+					height: 17rpx;
+					background: url(../../static/images/arrow-1.png) no-repeat;
+					background-size: 100% 100%;
+					margin-left: 15rpx;
+				}
+			}
+
+		}
+
+		.tag-wrapper {
+			padding: 0 120upx;
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
+			color: #FFFFFF;
+			font-size: 27upx;
+
+			.split {
+				width: 1upx;
+				height: 33upx;
+				background: #FFFFFF;
+				display: block;
+			}
+		}
+
+		.user-order {
+			padding: 50upx 40upx;
+			background-color: #fff;
+			width: 93%;
+			margin: 0 auto;
+			position: absolute;
+			top: 0;
+			transform: translateX(-50%);
+			left: 50%;
+			height: 500rpx;
+			padding-top: 280upx;
+
+			.title {
+				display: block;
+				color: #040404;
+				font-size: 27upx;
+			}
+
+			.order-list {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+
+				.item {
+					text-align: center;
+					font-size: 20upx;
+					color: #040404;
+
+					.img-wrapper {
+						width: 57rpx;
+						height: 57rpx;
+						margin: 30rpx auto;
+
+						img {
+							max-width: 100%;
+							height: inherit;
+							object-fit: contain;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.content-section {
+		position: relative;
+
+
+		.mine-pannel {
+			margin: 30rpx 30rpx;
+			background-color: white;
+			border-radius: 8rpx;
+			padding-bottom: 20rpx;
+
+			&-title {
+				font-size: 27rpx;
+				color: #040404;
+				padding: 30upx 40upx 0 40upx;
+
+			}
+		}
+
+		.mine-actions {
+			margin-top: 40rpx;
+
+			padding: 0 40rpx 0 80rpx;
+			border-radius: 8px;
+			background-color: white;
+			flex-wrap: wrap;
+			position: relative;
+
+			&::after {
+				content: '';
+				position: absolute;
+				width: 100%;
+				height: 1rpx;
+				background-color: #D4D4D4;
+				left: 0;
+				top: 50%;
+				transform: translateY(-50%);
+			}
+
+			.action-item {
+				display: flex;
+				align-items: center;
+				padding: 27upx 0;
+
+				img {
+					width: 59rpx;
+					height: 59rpx;
+				}
 
 				.icon {
-					font-size: 40px;
-				}
-			}
-
-			.user-info {
-				margin-left: 30rpx;
-				margin-right: 40rpx;
-
-				.u_title {
-					font-size: 18px;
-					line-height: 30px;
+					font-size: 28px;
 				}
 
-				.u_content {
-					width: 160px;
-				}
-			}
-		}
-
-		.user-section {
-			height: 500upx;
-			// padding: 100upx 30upx 0;
-			position: relative;
-
-
-			.bg {
-				position: absolute;
-				left: 0;
-				top: 0;
-				// width: 100vw;
-				height: 355rpx;
-				// opacity: 0.84;
-				width: 100%;
-			}
-
-			.user-wrapper {
-				position: absolute;
-				width: 100%;
-				left: 0;
-				top: 0;
-				background: url(@/static/images/user-bg.png) no-repeat;
-				background-size: 100% 100%;
-				height: 255rpx;
-				z-index: 9;
-				padding-top: 80upx;
-			}
-
-			.user-info-box {
-				padding: 0 120upx;
-				margin-bottom: 20upx;
-				display: flex;
-				align-items: center;
-				position: relative;
-				z-index: 1;
-				justify-content: space-between;
-
-				.portrait-box {
-					display: flex;
-					align-items: center;
-					justify-content: space-between;
-
-					.portrait {
-						width: 100upx;
-						height: 100upx;
-						border: 5upx solid #fff;
-						border-radius: 50%;
-					}
-
-					.username {
-						font-size: 26upx;
-						color: #fff;
-						margin-left: 20upx;
-					}
-
-					button {
-						background-color: transparent;
-						font-size: 26upx;
-						color: #333;
-						border: none;
-					}
-
-					button::after {
-						border: none;
-					}
-				}
-
-				.portrait-indent {
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					color: #2359D8;
-					font-size: 27rpx;
-					height: 38rpx;
-					background: #FFFFFF;
-					border-radius: 7rpx;
-					padding: 0 12rpx;
-
-					.icon-arrow {
-						display: block;
-						width: 17rpx;
-						height: 17rpx;
-						background: url(../../static/images/arrow-1.png) no-repeat;
-						background-size: 100% 100%;
-						margin-left: 15rpx;
-					}
-				}
-
-			}
-
-			.tag-wrapper {
-				padding: 0 120upx;
-				display: flex;
-				justify-content: space-around;
-				align-items: center;
-				color: #FFFFFF;
-				font-size: 27upx;
-
-				.split {
-					width: 1upx;
-					height: 33upx;
-					background: #FFFFFF;
+				.text {
 					display: block;
-				}
-			}
-
-			.user-order {
-				padding: 50upx 40upx;
-				background-color: #fff;
-				width: 93%;
-				margin: 0 auto;
-				position: absolute;
-				top: 0;
-				transform: translateX(-50%);
-				left: 50%;
-				height: 500rpx;
-				padding-top: 280upx;
-
-				.title {
-					display: block;
-					color: #040404;
+					font-size: 13px;
+					margin: 0 20rpx;
+					color: #525252;
 					font-size: 27upx;
 				}
+			}
+		}
 
-				.order-list {
+		.mine-hos {
+			display: flex;
+			justify-content: space-between;
+			margin: 30rpx 30rpx;
+
+			.item {
+				background: #FFFFFF;
+				border-radius: 7rpx;
+				padding: 20rpx;
+				width: 48%;
+
+				.title {
+					height: 39rpx;
+					background: #FFFFFF;
+					border: 1rpx solid #2359D8;
+					border-radius: 7rpx;
+					width: 201rpx;
+					text-align: center;
+					line-height: 39rpx;
+					margin: 0 auto;
+					color: #000000;
+					margin-bottom: 30rpx;
+				}
+
+				.tip {
+					padding-left: 40rpx;
+					position: relative;
+					color: #2359D8;
+					font-size: 20rpx;
+					margin-bottom: 22rpx;
+
+					.icon-li {
+						display: inline-block;
+						background: url(@/static/images/confirm.png) no-repeat;
+						background-size: 100% 100%;
+						width: 29rpx;
+						height: 29rpx;
+						position: absolute;
+						left: 0;
+						top: 50%;
+						transform: translateY(-50%);
+
+					}
+				}
+
+				.tip1 {
+					color: #656565;
+				}
+
+				.tp {
+					position: relative;
 					display: flex;
 					justify-content: space-between;
 					align-items: center;
 
-					.item {
-						text-align: center;
-						font-size: 20upx;
-						color: #040404;
-
-						.img-wrapper {
-							width: 57rpx;
-							height: 57rpx;
-							margin: 30rpx auto;
-
-							img {
-								max-width: 100%;
-								height: inherit;
-								object-fit: contain;
-							}
-						}
-					}
-				}
-			}
-		}
-
-		.content-section {
-			position: relative;
-			
-			
-			.mine-pannel {
-				margin: 30rpx 30rpx;
-				background-color: white;
-				border-radius: 8rpx;
-				padding-bottom: 20rpx;
-				&-title {
-					font-size: 27rpx;
-					color: #040404;
-					padding: 30upx 40upx 0 40upx;
-					
-				}
-			}
-
-			.mine-actions {
-				margin-top: 40rpx;
-				
-				padding: 0 40rpx 0 80rpx;
-				border-radius: 8px;
-				background-color: white;
-				flex-wrap: wrap;
-				position: relative;
-				&::after{
-					content: '';
-					position: absolute;
-					width: 100%;
-					height: 1rpx;
-					background-color: #D4D4D4;
-					left: 0;
-					top: 50%;
-					transform: translateY(-50%);
-				}
-				.action-item {
-					display: flex;
-					align-items: center;  
-					padding: 27upx 0;
-					
-					img{
-						width: 59rpx;
-						height: 59rpx;
-					}
-					.icon {
-						font-size: 28px;
+					img {
+						margin-left: -40rpx;
 					}
 
-					.text {
-						display: block;
-						font-size: 13px;
-						margin: 0 20rpx; 
-						color: #525252;
-						font-size: 27upx;
+					.bank {
+						width: 117rpx;
 					}
-				}
-			}
-			.mine-hos{
-				display: flex;
-				justify-content: space-between;
-				margin: 30rpx 30rpx;
-				.item{
-					background: #FFFFFF;
-					border-radius: 7rpx;
-					padding: 20rpx;
-					width: 48%;
-					.title{
-						height: 39rpx;
-						background: #FFFFFF;
-						border: 1rpx solid #2359D8;
-						border-radius: 7rpx;
-						width: 201rpx;
-						text-align: center;
-						line-height: 39rpx;
-						margin: 0 auto;
-						color: #000000;
-						margin-bottom: 30rpx;
+
+					.wallet {
+						width: 100rpx;
 					}
-					.tip{
-						padding-left: 40rpx;
-						position: relative;
-						color: #2359D8;
-						font-size: 20rpx;
-						margin-bottom: 22rpx;
-						.icon-li{
-							display: inline-block;
-							background: url(@/static/images/confirm.png) no-repeat;
-							background-size: 100% 100%;
-							width: 29rpx;
-							height: 29rpx;
-							position: absolute;
-							left: 0;
-							top: 50%;
-							transform: translateY(-50%);
-							
-						}
-					}
-					.tip1{
-						color: #656565;
-					}
-					.tp{
-						position: relative;
+
+					.check {
 						display: flex;
-						justify-content: space-between;
 						align-items: center;
-						img{
-							margin-left: -40rpx;
-						}
-						.bank{
-							width: 117rpx;
-						}
-						.wallet{
-							width: 100rpx;
-						}
-						.check{
-							display: flex;
-							align-items: center;
-							color: #010101;
-							font-size: 20rpx;
-							.icon-arrow-r{
-								display: inline-block;
-								background: url(../../static/images/check.png) no-repeat;
-								background-size: 100% 100%;
-								width: 34rpx;
-								height: 34rpx;
-							}
+						color: #010101;
+						font-size: 20rpx;
+
+						.icon-arrow-r {
+							display: inline-block;
+							background: url(../../static/images/check.png) no-repeat;
+							background-size: 100% 100%;
+							width: 34rpx;
+							height: 34rpx;
 						}
 					}
 				}
 			}
 		}
 	}
+}
 </style>
