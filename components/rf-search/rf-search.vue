@@ -99,6 +99,7 @@ export default {
 		focus() {
 			this.active = true;
 			// HM修改 增加获取焦点判断
+			this.$emit('focus');
 			if (this.inputVal) {
 				this.isDelShow = true;
 			}

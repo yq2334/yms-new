@@ -1,8 +1,8 @@
 <template>
 	<view class="home">
 		<view class="search-box">
-			<mSearch class="mSearch-input-box" :mode="1" button="inside" :placeholder="'搜索平台'" @search="doSearch(false)"
-				@confirm="doSearch(false)" v-model="keyword"></mSearch>
+			<mSearch class="mSearch-input-box" :mode="1" button="inside" :show="false" :placeholder="'搜索平台'" 
+				@focus="doSearch" v-model="keyword"></mSearch>
 		</view>
 		<view class="swiper">
 			<swiper @change="handleDotChange" autoplay="true">
@@ -91,10 +91,10 @@
 			// 通用跳转
 			navTo(route) {
 				if (!route) return;
-
-				this.$mRouter.push({
-					route
-				});
+				uni.navigateTo({
+					url:route
+				})
+				
 			},
 			navToHospital(item) {
 				if(item.underConstruction) {
@@ -107,6 +107,10 @@
 			},
 			showTips() {
 				this.$modal.showToast('模块建设中~')
+			},
+			doSearch() {
+				console.log('focus')
+				this.navTo('search')
 			}
 
 		}

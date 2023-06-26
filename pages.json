@@ -453,6 +453,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/hospital/search",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#BFBFBF",

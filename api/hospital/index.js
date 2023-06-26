@@ -23,3 +23,11 @@ export function selectHospital(params) {
 	 data: params,
   })
 }
+
+export function getAllHospital() {
+  return request({
+    'url': '/CmHospital/GetAllHospital',
+    'method': 'get'
+	
+  })
+}
