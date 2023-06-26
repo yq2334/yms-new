@@ -6,7 +6,7 @@
 			</mSearch>
 		</view>
 		<view class="search-list">
-			<view class="item" v-for="(item,index) in filterList" :key="index">
+			<view class="item" v-for="(item,index) in filterList" :key="index" @tap="handleSelectHospital(item)">
 				<u-avatar size="54" :src="'../../static/images/hospital2.png'"></u-avatar>
 				<view class="dec">
 					<view class="name">
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-	import {getAllHospital} from '@/api/hospital/index.js'
+	import {getAllHospital, selectHospital} from '@/api/hospital/index.js'
 	import mSearch from '@/components/rf-search/rf-search';
 	
 	export default {
@@ -56,6 +56,26 @@
 				this.filterList = this.list.filter((item) => {
 					return item.name.includes(e)
 				})
+			},
+			handleSelectHospital(item) {
+				if(item.underConstruction) {
+					this.showTips()
+					return;
+				}
+				selectHospital({
+					id: item.id
+				}).then((res) => {
+					this.$store.dispatch('GetInfo').then(res=>{
+						this.$tab.reLaunch('/pages/index?id='+ item.id + '&name=' + item.name)
+					})
+					// this.$tab.reLaunch('/pages/index?id='+ item.id + '&name=' + item.name)
+				
+				}).catch((err) => {
+					
+				})
+			},
+			showTips() {
+				this.$modal.showToast('模块建设中~')
 			}
 		}
 	}

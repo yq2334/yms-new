@@ -457,7 +457,8 @@
             "path" : "pages/hospital/search",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "搜索医院",
+				"navigationStyle": "custom",
                 "enablePullDownRefresh": false
             }
             
