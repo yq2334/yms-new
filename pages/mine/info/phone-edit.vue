@@ -7,7 +7,7 @@
 				<!-- 注意，如果需要兼容微信小程序，最好通过setRules方法设置rules规则 -->
 				<u--form labelPosition="left" :model="form" ref="uForm" :rules="rules">
 					<u-form-item labelWidth="0" prop="mobile" borderBottom ref="item1">
-						<u--input v-model="form.mobile" :placeholder="`原手机号：${userInfo.phone}`">
+						<u--input v-model="form.mobile" :placeholder="`原手机号：${userInfo.phone},请输入新手机号`">
 						</u--input>
 					</u-form-item>
 					<u-form-item label="" prop="code" labelWidth="0" borderBottom>

@@ -275,7 +275,8 @@
 			},
 			change(index) {
 				console.log(this.mingzu[index])
-				this.user.nationality = this.mingzuList[index].text
+				// this.user.nationality = this.mingzuList[index].text
+				this.user.nationality =index
 			},
 			submit(ref) {
 				this.$refs.form.validate().then(res => {

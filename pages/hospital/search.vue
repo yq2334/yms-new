@@ -7,7 +7,7 @@
 		</view>
 		<view class="search-list">
 			<view class="item" v-for="(item,index) in filterList" :key="index" @tap="handleSelectHospital(item)">
-				<u-avatar size="54" :src="'../../static/images/hospital2.png'"></u-avatar>
+				<!-- <u-avatar size="54" :src="'../../static/images/hospital2.png'"></u-avatar> -->
 				<view class="dec">
 					<view class="name">
 						{{item.name}}  
@@ -31,7 +31,7 @@
 	export default {
 		data() {
 			return {
-				keyword: '陈',
+				keyword: '',
 				list: [],
 				filterList: []
 			}

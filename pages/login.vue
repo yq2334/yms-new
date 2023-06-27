@@ -82,8 +82,8 @@ export default {
       captchaEnabled: true,
       globalConfig: getApp().globalData.config,
       loginForm: {
-        phone: "17378205782",
-        code: "123",
+        phone: "",
+        code: "",
       },
       agree: [
         {

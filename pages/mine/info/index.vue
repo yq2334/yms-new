@@ -4,7 +4,7 @@
 		<u-cell-group>
 			<u-cell title="头像" :isLink="true"  url="/pages/mine/info/edit">
 				<view class="" slot="value">
-					<u--image :showLoading="true" :src="userInfo.avatar" width="63rpx" height="63rpx" mode="widthFix"
+					<u--image :showLoading="true" :src="userInfo.headimgUrl" width="63rpx" height="63rpx" mode="widthFix"
 						shape="circle">
 						<view slot="error" style="font-size: 24rpx;">加载失败</view>
 					</u--image>

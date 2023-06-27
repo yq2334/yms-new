@@ -66,6 +66,10 @@ export default {
 		console.log(option.id)
 		this.id = option.id
 		this.name = this.$store.getters.userInfo.defaultHospitalName
+		let token=this.$store.getters.token
+		if(!token){
+			this.$tab.navigateTo('/pages/login')
+		}
 		uni.setNavigationBarTitle({
 			title: this.name
 		})

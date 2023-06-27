@@ -97,7 +97,7 @@
 					if (code == 200) {
 						uni.hideLoading();
 						uni.$u.toast('绑定身份证成功！')
-						this.$tab.reLaunch('/pages/index')
+						this.$tab.reLaunch('/pages/hospital/index')
 					}
 
 				}).catch(() => {

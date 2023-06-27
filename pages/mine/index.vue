@@ -124,7 +124,7 @@
 			</view>
 			<view class="mine-hos">
 				<view class="item lt" @click="handleBindCard()">
-					<view class="title">
+					<view class="title" style="background: #d6e8f2;">
 						银联信用就医
 					</view>
 					<view class="tip">
@@ -135,10 +135,14 @@
 						<text class="icon icon-li"></text>
 						<text>信用卡在线提额</text>
 					</view>
+					<view class="tip">
+						<text class="icon icon-li"></text>
+						<text>适用家庭信用共享</text>
+					</view>
 					<view class="tip tip1">
 						<text>目前由建设银行提供此服务</text>
 					</view>
-					<view class="tp">
+					<view class="tp" style="bottom: -7px;">
 						<img class="bank" src="../../static/images/bank.png" alt="">
 						<view class="check">
 							<text>查看</text>
@@ -148,7 +152,7 @@
 					</view>
 				</view>
 				<view class="item rt" @click="handleCreditBank()">
-					<view class="title">
+					<view class="title" style="background: #f2e5d6;">
 						专属额度授信
 					</view>
 					<view class="tip">
@@ -163,7 +167,7 @@
 						<text class="icon icon-li"></text>
 						<text>支持门急诊、住院场景</text>
 					</view>
-					<view class="tp">
+					<view class="tp" style="bottom: -20px;">
 						<img class="bank" src="../../static/images/wallet.png" alt="">
 						<view class="check">
 							<text>查看</text>
@@ -280,13 +284,14 @@ export default {
 					uni.navigateTo({
 						url: "/pages/mine/auth/identy",
 					});
-				} else {
-					if (res.data.isSelectDefaultHospital) {
-						this.$tab.reLaunch('/pages/index?name=' + res.data.defaultHospitalName)
-						return;
-					}
-					this.$tab.navigateTo("/pages/hospital/index");
 				}
+				//  else {
+				// 	if (res.data.isSelectDefaultHospital) {
+				// 		this.$tab.reLaunch('/pages/index?name=' + res.data.defaultHospitalName)
+				// 		return;
+				// 	}
+				// 	this.$tab.navigateTo("/pages/hospital/index");
+				// }
 			});
 
 		},
@@ -587,8 +592,8 @@ page {
 
 				.title {
 					height: 39rpx;
-					background: #FFFFFF;
-					border: 1rpx solid #2359D8;
+					// background: #FFFFFF;
+					// border: 1rpx solid #2359D8;
 					border-radius: 7rpx;
 					width: 201rpx;
 					text-align: center;

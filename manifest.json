@@ -63,17 +63,17 @@
         "devServer" : {
             "port" : 8887,
             "https" : false,
-            "disableHostCheck": true,
-			"proxy": {
-				"/Cm": {
-					"target": "http://1.13.92.138:8828",
-					"changeOrigin": true, //是否跨域
-					"secure": false, // 设置支持https协议的代理
-					"pathRewrite": {
-						"^/Cm": "" //这里一定要留空，不然有问题
-					}
-				}
-			}
+            "disableHostCheck" : true,
+            "proxy" : {
+                "/Cm" : {
+                    "target" : "http://1.13.92.138:8828",
+                    "changeOrigin" : true, //是否跨域
+                    "secure" : false, // 设置支持https协议的代理
+                    "pathRewrite" : {
+                        "^/Cm" : "" //这里一定要留空，不然有问题
+                    }
+                }
+            }
         },
         "title" : "信用就医",
         "router" : {

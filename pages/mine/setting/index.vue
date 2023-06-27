@@ -97,7 +97,7 @@
 	  	this.$tab.navigateTo('/pages/mine/auth/service')
 	  },
 	  handleJiaoLiuQun() {
-	  	this.$modal.showToast('模块建设中~')
+      this.$tab.navigateTo('/pages/mine/help/index')
 	  },
 	  handleBuilding() {
 	  	this.$modal.showToast('模块建设中~')
