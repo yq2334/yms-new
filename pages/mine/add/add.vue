@@ -23,7 +23,7 @@
 		<u-action-sheet :show="showRelative" :actions="actions" title="请选择与本人关系" @close="showRelative = false"
 			@select="relativeSelect">
 		</u-action-sheet>
-		</u--form>
+		<!-- </u--form> -->
 		<u-button @tap="submit" type="primary" color="#388CEB" size="large" text="确认添加">
 		</u-button>
 		<u-popup :show="showPop" mode="bottom" >
@@ -78,17 +78,18 @@
 					text: '已阅读并同意以上条款',
 					value: 0
 				}, ],
-				actions: [{
-						name: '本人',
-					},
-					{
-						name: '妻子',
-					},
+				actions: [
 					{
 						name: '父母',
 					},
 					{
+						name: '夫妻',
+					},
+					{
 						name: '子女',
+					},
+					{
+						name: '其他',
 					},
 				],
 				rules: {

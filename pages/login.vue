@@ -132,10 +132,9 @@ export default {
 
       // 获取主域名和路径部分
       var mainDomain = parser.protocol + '//' + parser.host;
-      var path = parser.pathname
 
       // 拼接主域名和路径部分
-      var result = mainDomain + path+'#/'
+      var result = mainDomain+'/h5/#'
       return result
     },
     getWeiXinAppId() {
@@ -152,7 +151,7 @@ export default {
             "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" +
             this.appid +
             "&redirect_uri=" +
-            encodeURIComponent("http://yl.frp.apeskill.com/h5/#/pages/login") +
+            encodeURIComponent(this.baseUrl+"/pages/login") +
             "&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";
           // redirect_uri是授权成功后，跳转的url地址，微信会帮我们跳转到该链接，并且通过？的形式拼接code，这里需要用encodeURIComponent对链接进行处理。
           // 如果配置参数一一对应，那么此时已经通过回调地址刷新页面后，你就会再地址栏中看到code了。
@@ -177,7 +176,7 @@ export default {
           this.$tab.navigateTo("/pages/hospital/index");
         }
       }).catch((err)=>{
-        window.location.href=this.baseUrl+'pages/login'
+        window.location.href=this.baseUrl+'/pages/login'
       });
       // uni.request({
       // 	url: 'http://127.0.0.1/api/wxLogin?code=' + code + '&state=state&appid=' + appid,

@@ -8,17 +8,15 @@ export function getVersionUpdates() {
 }
 
 // 发送新手机号验证码
-
-
 export function sendNewCode(data) {
   return request({
     'url': '/CmSettings/SendNewCode',
-	// header: {
-	// 	"Content-Type": "application/x-www-form-urlencoded"
-	// },
+    // header: {
+    // 	"Content-Type": "application/x-www-form-urlencoded"
+    // },
     method: 'post',
     timeout: 20000,
-	data: data,
+    data: data,
   })
 }
 
@@ -28,7 +26,7 @@ export function verifyNewPhone(data) {
     'url': '/CmSettings/VerifyNewPhone',
     method: 'post',
     timeout: 20000,
-	data: data,
+    data: data,
   })
 }
 
@@ -46,7 +44,7 @@ export function updatePersonalInfo(data) {
     'url': '/CmSettings/UpdatePersonalInfo',
     method: 'post',
     timeout: 20000,
-	data: data,
+    data: data,
   })
 }
 
@@ -64,7 +62,15 @@ export function addFamilyMember(data) {
     'url': '/CmSettings/AddFamilyMember',
     method: 'post',
     timeout: 20000,
-	data: data,
+    data: data,
+  })
+}
+
+export function deleteFamilyMember(id) {
+  return request({
+    'url': '/CmSettings/DeleteFamilyMember?id='+id,
+    method: 'post',
+    timeout: 20000,
   })
 }
 
@@ -74,7 +80,7 @@ export function openCm() {
     'url': '/CmSettings/OpenCm',
     method: 'post',
     timeout: 20000,
-	
+
   })
 }
 
