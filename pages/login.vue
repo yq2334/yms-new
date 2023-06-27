@@ -85,6 +85,7 @@ export default {
         phone: "",
         code: "",
       },
+      baseUrl:'',
       agree: [
         {
           text: "已阅读并同意",
@@ -106,7 +107,7 @@ export default {
   onLoad(e) {
     this.getWeiXinAppId()
     let code = this.getUrlCode("code");
-    console.log(code);
+    this.baseUrl=this.getUrlPath( location.href)
     this.code = code;
     if (code !== null && code !== "") {
 
@@ -123,6 +124,19 @@ export default {
           ) || [, ""])[1].replace(/\+/g, "%20")
         ) || null
       );
+    },
+    getUrlPath(url){
+      // 解析 URL
+      var parser = document.createElement('a');
+      parser.href = url
+
+      // 获取主域名和路径部分
+      var mainDomain = parser.protocol + '//' + parser.host;
+      var path = parser.pathname
+
+      // 拼接主域名和路径部分
+      var result = mainDomain + path+'#/'
+      return result
     },
     getWeiXinAppId() {
       getWxAppId().then(res => {
@@ -162,6 +176,8 @@ export default {
           // this.$tab.reLaunch('/pages/index')
           this.$tab.navigateTo("/pages/hospital/index");
         }
+      }).catch((err)=>{
+        window.location.href=this.baseUrl+'pages/login'
       });
       // uni.request({
       // 	url: 'http://127.0.0.1/api/wxLogin?code=' + code + '&state=state&appid=' + appid,
