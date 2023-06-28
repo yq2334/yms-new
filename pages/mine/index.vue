@@ -53,7 +53,7 @@
 								<img src="../../static/images/renmingbi.png" alt="">
 							</view>
 
-							<text> 缴费订单 </text>
+							<text> 门急诊缴费订单 </text>
 						</view>
 						<view class="item" @click="handleBuilding">
 							<view class="img-wrapper">

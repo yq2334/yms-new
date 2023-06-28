@@ -9,7 +9,7 @@
 		<view class="hospital-content">
 			<view class="hospital-wrapper">
 				<view class="name">
-					门诊
+					门急诊
 				</view>
 				<view class="list">
 					<view class="item" @tap="navTo('reserve')">

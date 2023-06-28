@@ -74,6 +74,13 @@ export function deleteFamilyMember(id) {
   })
 }
 
+// 获取信用服务状态
+export function getCmStatus() {
+  return request({
+    'url': '/CmSettings/GetCmStatus',
+    'method': 'get'
+  })
+}
 // 开启信用服务
 export function openCm() {
   return request({

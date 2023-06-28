@@ -17,7 +17,7 @@
 				<view class="lt">
 					<text class="icon icon-sxzt"></text>
 					<text>授信状态：</text>
-					<text class="fs">待去医院自助机激活</text>
+					<text class="fs" style="font-size: 11px;">待去已开通信用就医医院激活</text>
 				</view>
 				<view class="rt">
 					<u-button type="primary" size="mini" text="即将上线"></u-button>

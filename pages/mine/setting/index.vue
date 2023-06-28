@@ -35,7 +35,7 @@
         >
         </u-cell>
         <u-cell
-          title="开通关闭信用服务"
+          title="信用服务设置"
           :border="true"
           :isLink="true"
           @click="handleService()"
