@@ -63,7 +63,7 @@
 		<view class="tab-list">
 			<view class="item" v-for="(item,index) in 2" :key="index">
 				<view class="title">
-					<text>门诊</text>     <text>2023-5-1</text>
+					<text>住院</text>    
 				</view>
 				<view class="info">
 					<view class="lft">
@@ -85,10 +85,10 @@
 					<view class="lft">
 						<u--image  src="../../static/images/medbox.png" width="48rpx" height="46rpx" ></u--image>
 						<view class="name">
-							就诊科室：内分泌科
+							病区：xxx-病区
 						</view>
 					</view>
-					<view class="rtf">
+					<view class="rtf" @click="navTo('/pages/order/detail4')">
 						<u-button type="primary" :plain="true" :hairline="true" shape="circle" text="查看详情"></u-button>
 					</view>
 				</view>
@@ -149,6 +149,13 @@
 				console.log(e)
 				this.query = e.value[0].label
 				this.showPicker = false
+			},
+			navTo(route) {
+				if (!route) return;
+			
+				uni.navigateTo({
+					url: route
+				})
 			},
 		},
 	}

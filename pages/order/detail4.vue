@@ -51,7 +51,7 @@
 				<u-cell :border="false" size="mini" title="检查费" value="￥80.00元 "></u-cell>
 
 			</u-cell-group>
-			<u-button @tap="navTo('pay-order')" type="primary" color="#388CEB" size="large" text="查看详情">
+			<u-button @tap="navTo('/pages/order/detail3')" type="primary" color="#388CEB" size="large" text="查看详情">
 			</u-button>
 		</view>
 	</view>
@@ -65,7 +65,14 @@
 			}
 		},
 		methods: {
-
+// 通用跳转
+			navTo(route) {
+				if (!route) return;
+			
+				uni.navigateTo({
+					url: route
+				})
+			},
 		}
 	}
 </script>

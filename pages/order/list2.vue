@@ -153,7 +153,7 @@
 
 			</view>
 		</view>
-		<u-button @tap="navTo('pay-order')" type="primary" color="#388CEB" size="large" text="查看详情">
+		<u-button @click="navTo('/pages/order/detail2')" type="primary" color="#388CEB" size="large" text="查看详情">
 		</u-button>
 	</view>
 </template>

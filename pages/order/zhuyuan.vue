@@ -109,7 +109,7 @@
 							</view>
 						</view>
 					</view>
-					<view class="rtf">
+					<view class="rtf" @click="navTo('/pages/order/list2')">
 						<u-button type="primary" :plain="true" :hairline="true" shape="circle" text="查看详情"></u-button>
 					</view>
 				</view>
@@ -202,7 +202,14 @@
 				this.date2 = e.value
 
 				this.showDatePicker2 = false
-			}
+			},
+			navTo(route) {
+				if (!route) return;
+			
+				uni.navigateTo({
+					url: route
+				})
+			},
 		},
 	}
 </script>

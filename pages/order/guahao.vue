@@ -154,19 +154,19 @@
 				],
 				list: [{
 						name: '全部',
-						key: 1
-					},
-					{
-						name: '已支付',
 						key: 2
 					},
 					{
+						name: '已支付',
+						key: 1
+					},
+					{
 						name: '已取消',
-						key: 3
+						key: -1
 					},
 					{
 						name: '未支付',
-						key: 4
+						key: 0
 					}
 				],
 				columns: [
@@ -194,8 +194,8 @@
 				endDate: '',
 				pageNum: 1,
 				pageSize: 20,
-				recordList: []
-				
+				recordList: [],
+				initList: []
 			};
 		},
 		computed: {
@@ -239,6 +239,7 @@
 					sortType: this.active
 
 				}).then((res) => {
+					this.initList = res.data.result
 					this.recordList = res.data.result
 				})
 			},
@@ -252,8 +253,13 @@
 				console.log(family)
 				this.familyName = family.name
 			},
-			changeQury(item) {
-				console.log('item', item);
+			changeQury(tab) {
+				console.log('item', tab);
+				if(tab.key == 2) {
+					this.recordList = this.initList;
+					return;
+				}
+				this.recordList = this.initList.filter((item) => item.payStatus == tab.key)
 			},
 			changeHandler(e) {
 				const {
