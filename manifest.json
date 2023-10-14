@@ -61,12 +61,12 @@
         "publicPath" : "/h5/",
         "template" : "static/index.html",
         "devServer" : {
-            "port" : 8887,
+            "port" : 8888,
             "https" : false,
             "disableHostCheck" : true,
             "proxy" : {
                 "/Cm" : {
-                    "target" : "http://1.13.92.138:8828",
+                    "target" : "http://ylapi.apeskill.com",
                     "changeOrigin" : true, //是否跨域
                     "secure" : false, // 设置支持https协议的代理
                     "pathRewrite" : {

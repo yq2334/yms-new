@@ -280,6 +280,8 @@ export default {
       // 设置用户信息
       //this.$tab.reLaunch('/pages/index')
       this.$store.dispatch("GetInfo").then((res) => {
+		  // this.$tab.navigateTo("/pages/hospital/index");
+		  // return;
         if (!res.data.isBindWeixin) {
           this.getWeiXinCode();
         } else if (!res.data.isBindIdCard) {

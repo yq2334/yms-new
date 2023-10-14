@@ -16,8 +16,8 @@
 			</view>
 			<view class="right">
 				<scroll-view scroll-y="true" class="scrollBox">
-					<view @tap="navToDoctor(item)" :class="keshi == item.id ? 'active' : ''" class="item" v-for="(item,index) in keshiList"
-						:key="item.id">
+					<view @tap="navToDoctor(item)" :class="keshi == item.id ? 'active' : ''" class="item"
+						v-for="(item,index) in keshiList" :key="item.id">
 						<text class="icon icon-selected"></text>
 						<text>{{item.name}}</text>
 					</view>
@@ -29,110 +29,51 @@
 
 <script>
 	import mSearch from '@/components/rf-search/rf-search';
+	import {
+		getDepartment,
+	} from '@/api/hospital/index.js';
 	export default {
 		data() {
 			return {
 				keyword: '搜索',
 				menzhen: 1,
 				keshi: 1,
-				menzhenList: [{
-						name: '内科',
-						id: 1
-					},
-					{
-						name: '内科',
-						id: 2
-					},
-					{
-						name: '外科',
-						id: 3
-					},
-					{
-						name: '呼吸/咳嗽/哮喘/肺结节肺癌门诊',
-						id: 4
-					},
-					{
-						name: '内科',
-						id: 5
-					},
-					{
-						name: '内科',
-						id: 6
-					},
-					{
-						name: '外科',
-						id: 7
-					},
-					{
-						name: '呼吸/咳嗽/哮喘/肺结节肺癌门诊',
-						id: 8
-					},
-					{
-						name: '内科',
-						id: 9
-					},
-					{
-						name: '内科',
-						id: 10
-					},
-					{
-						name: '外科',
-						id: 11
-					},
-					{
-						name: '呼吸/咳嗽/哮喘/肺结节肺癌门诊',
-						id: 12
-					},
-					{
-						name: '内科',
-						id: 13
-					},
-					{
-						name: '内科',
-						id: 14
-					},
-					{
-						name: '外科',
-						id: 15
-					},
-					{
-						name: '呼吸/咳嗽/哮喘/肺结节肺癌门诊',
-						id: 16
-					}
-				],
-				keshiList: [{
-						name: '风湿免疫科  ',
-						id: 1
-					},
-					{
-						name: ' 消化内科 ',
-						id: 2
-					},
-					{
-						name: ' 血液内科',
-						id: 3
-					}
-				]
+				dataList: [],
+				menzhenList: [],
+				keshiList: []
 			}
 		},
 		components: {
 			mSearch
 		},
+		onLoad() {
+			this.getDepartmentList()
+		},
 		methods: {
+			getDepartmentList() {
+				getDepartment().then((res) => {
+					this.dataList = res.data
+					this.menzhenList = res.data.filter((item) => item.parentId == -1)
+					this.keshiList = res.data.filter((item) => this.menzhenList[0].id == item.parentId)
+				}).catch((err) => {
+
+				})
+			},
 			changeMenzhen(item) {
 				this.menzhen = item.id
+				this.keshiList = this.dataList.filter((menzhen) => item.id == menzhen.parentId)
 			},
 			// 通用跳转
 			navTo(route) {
 				if (!route) return;
-			
+
 				this.$mRouter.push({
 					route
 				});
 			},
-			navToDoctor(item){
+			navToDoctor(item) {
 				uni.navigateTo({
-					url:'reserve-doctor?id='+item.id
+					url: 'reserve-doctor?id=' + item.id + "&name=" + item.name
 				})
 			}
 		}

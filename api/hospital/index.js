@@ -31,3 +31,70 @@ export function getAllHospital() {
 	
   })
 }
+
+
+
+export function getDepartment() {
+  return request({
+    'url': '/CmHospital/GetDepartment',
+    'method': 'get'
+	
+  })
+}
+
+export function getDoctor(params) {
+  return request({
+    'url': '/CmHospital/GetDoctor',
+    'method': 'get',
+	 data: params,
+  })
+}
+
+
+
+export function getDoctorScheduleTime(params) {
+  return request({
+    'url': '/CmHospital/GetDoctorScheduleTime',
+    'method': 'get',
+	 data: params,
+  })
+}
+
+
+export function postAppointmentOrder(data) {
+  return request({
+    'url': '/CmHospital/AppointmentOrder',
+    'method': 'post',
+	 timeout: 20000,
+	 data: data,
+  })
+}
+
+export function getAppointmentRecordDetail(params) {
+  return request({
+    'url': '/CmHospital/GetAppointmentRecordDetail',
+    'method': 'get',
+	 data: params,
+  })
+}
+
+
+
+export function postAppointmentPay(data) {
+  return request({
+    'url': '/CmHospital/AppointmentPay',
+    'method': 'post',
+	 timeout: 20000,
+	 data: data,
+  })
+}
+
+
+// /Cm/CmHospital/GetAppointmentRecordList
+export function getAppointmentRecordList(params) {
+  return request({
+    'url': '/CmHospital/GetAppointmentRecordList',
+    'method': 'get',
+	 data: params,
+  })
+}

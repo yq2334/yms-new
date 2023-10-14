@@ -37,6 +37,9 @@ const request = config => {
     config.data = delEmptyQueryNodes(config.data)
   }
   console.log( config.header)
+  uni.showLoading({
+  	title:'加载中...'
+  })
   return new Promise((resolve, reject) => {
     uni.request({
         method: config.method || 'GET',
@@ -46,6 +49,7 @@ const request = config => {
         header: config.header,
         dataType: 'json'
       }).then(response => {
+		  uni.hideLoading()
         let [error, res] = response
         if (error) {
           toast('后端接口连接异常')

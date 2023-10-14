@@ -12,13 +12,13 @@
 					门急诊
 				</view>
 				<view class="list">
-					<view class="item" @tap="navTo('reserve')">
+					<view class="item" @tap="navTo('/pages/hospital/reserve')">
 						<view class="img">
 							<img src="../static/images/yuyueguahao.png" alt="">
 						</view>
 						<text class="tit">预约挂号</text>
 					</view>
-					<view class="item">
+					<view class="item" @tap="navTo('/pages/order/guahao')">
 						<view class="img">
 							<img src="../static/images/guahaojilu.png" alt="">
 						</view>

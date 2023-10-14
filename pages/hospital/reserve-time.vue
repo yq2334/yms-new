@@ -2,30 +2,32 @@
 	<view class="reserve-time">
 		<view class="doctor-pannel">
 			<view class="doctor">
-				<img src="../../static/images/doctor.png" alt="">
+				<image v-if="doctor.imgUrl" :src="item.imgUrl" mode=""></image>
+				<image v-else src="/static/images/doctor.png" mode=""></image>
+				
 				<view class="des">
 					<view class="name">
-						<text class="fs1">陈鹏 </text>
-						<text class="fs2">名老专家</text>
+						<text class="fs1">{{doctor.name}} </text>
+						<text class="fs2">{{doctor.levelName}}</text>
 					</view>
 					<view class="fs2">
-						擅长：擅长各种疑难杂症问题的整治
+						擅长：{{doctor.introduction}}
 					</view>
 				</view>
 			</view>
 			<view class="">
 				<u-cell-group>
-					<u-cell title="就诊科室" value="风湿免疫科" :titleStyle="titleStyle"></u-cell>
-					<u-cell title="挂号日期" value="2023-05-01" :titleStyle="titleStyle"></u-cell>
+					<u-cell title="就诊科室" :value="doctor.departmentName" :titleStyle="titleStyle"></u-cell>
+					<u-cell title="挂号日期" :value="doctor.registerDate" :titleStyle="titleStyle"></u-cell>
 					<u-cell title="挂号类型" value="普通号" :titleStyle="titleStyle"></u-cell>
-					<u-cell title="挂号费" value="元" :titleStyle="titleStyle"></u-cell>
+					<u-cell title="挂号费" :value="`${params.registerFee}元`" :titleStyle="titleStyle"></u-cell>
 				</u-cell-group>
 			</view>
 		</view>
 		<view class="time-pannel">
 			<u-collapse accordion>
-				<u-collapse-item title="08:00——08:30" v-for="(item,index) in 4" :key="index">
-					<text slot="value" class="u-page__item__title__slot-title">余号<text class="fs2">1个</text> </text>
+				<u-collapse-item :title="`${item.startTime}-${item.endTime}`" v-for="(item,index) in doctor.appointmentScheduleTimeList" :key="index">
+					<text slot="value" class="u-page__item__title__slot-title">余号<text class="fs2">{{item.remainCount}}个</text> </text>
 					<text slot="right-icon">
 						<img class="arrow-down" src="../../static/images/arrow-down.png" alt="">
 					</text>
@@ -35,14 +37,14 @@
 						</view>
 						<view class="patient-list">
 							<view class="item" :class="userId == item.id ? 'active' : ''"
-								v-for="(item,index) in patients" :key="index" @tap="changeUser(item)">
+								v-for="(item,index) in doctor.familyList" :key="index" @tap="changeUser(item)">
 								{{item.name}}
 							</view>
-							<view class="item add">
+							<view class="item add" @click="navTo('/pages/mine/add/add')">
 								+
 							</view>
 						</view>
-						<u-button @tap="navTo('submit')" type="primary" color="#388CEB" size="large" text="确认挂号">
+						<u-button @tap="handlePostAppointmentOrder(doctor, item)" type="primary" color="#388CEB" size="large" text="确认挂号">
 						</u-button>
 					</text>
 				</u-collapse-item>
@@ -53,14 +55,25 @@
 </template>
 
 <script>
+	import {
+		mapGetters
+	} from 'vuex';
+	import {
+		getDoctor,
+		getDoctorScheduleTime,
+		postAppointmentOrder,
+		getAppointmentRecordDetail
+	} from '@/api/hospital/index.js';
 	export default {
 		data() {
 			return {
+				params: {},
 				titleStyle: {
 					'color': '#7F8081',
 					'fontsize': '27rpx'
 				},
-				userId: 1,
+				doctor: {},
+				userId: 11,
 				patients: [{
 						name: '陈鹏',
 						id: 1
@@ -73,17 +86,65 @@
 			}
 		},
 		onLoad(option) {
-			console.log(option.id)
-
+			console.log(option)
+			this.params = option
+			this.getDoctorScheduleTimeData()
+			// doctorId: this.doctorId,
+			// registerDate: this.registerDate,
+			// noon: this.noon,
+			// scheduleId: this.scheduleId
 		},
 		methods: {
+			getDoctorScheduleTimeData() {
+				getDoctorScheduleTime(this.params).then((res) => {
+					this.doctor = res.data
+				}).catch((err) => {
+					uni.navigateBack()
+				})
+			},
 			changeUser(item) {
 				this.userId = item.id
+			},
+			handlePostAppointmentOrder(doctor,appoint ) {
+				postAppointmentOrder({
+						familyId: this.userId,
+					  scheduleId: appoint.scheduleId,
+					  timeId: appoint.id,
+					  departmentId: doctor.departmentId,
+					  doctorId:doctor.id,
+					  registerDate: doctor.registerDate,
+					  noon: appoint.noon,
+					  startTime: appoint.startTime,
+					  endTime: appoint.endTime,
+					  registerFee: this.params.registerFee
+				}).then((res) => {
+					
+					this.getAppointmentDetail(res.data.recordId)
+				}).catch((err) => {
+					
+				})
+			},
+			getAppointmentDetail(id) {
+				getAppointmentRecordDetail({recordId: id}).then((res) => {
+					if(res.data.status == 0 && res.data.payStatus == 0) {
+						uni.navigateTo({
+							url:'/pages/hospital/submit?recordId='+id
+						})
+						return;
+					}
+					if(res.data.status == 1) {
+						uni.navigateTo({
+							url:'/pages/hospital/reserve-success?recordId='+id
+						})
+						return;
+					}
+				}).catch((err) => {
+					
+				})
 			},
 			// 通用跳转
 			navTo(route) {
 				if (!route) return;
-
 				uni.navigateTo({
 					url:route
 				})
@@ -103,7 +164,7 @@
 			align-items: center;
 			padding: 25rpx;
 
-			img {
+			image {
 				width: 119rpx;
 				height: 119rpx;
 				border-radius: 50%;

@@ -25,14 +25,14 @@
 				就诊信息
 			</view>
 			<u-cell-group :border="false">
-				<u-cell :border="false" size="mini" title="就诊人" value="202301010101010101    "></u-cell>
-				<u-cell :border="false" size="mini" title="就诊时段" value="2023010101202020101010101"></u-cell>
-				<u-cell :border="false" size="mini" title="医院名称" value="2023-05-23"></u-cell>
-				<u-cell :border="false" size="mini" title="就诊科室" value=" 外科门诊  ">
+				<u-cell :border="false" size="mini" title="就诊人" :value="detail.patName"></u-cell>
+				<u-cell :border="false" size="mini" title="就诊时段" :value="`${detail.clinicDate}${detail.schedulePeriod}`"></u-cell>
+				<u-cell :border="false" size="mini" title="医院名称" :value="detail.hospitalName"></u-cell>
+				<u-cell :border="false" size="mini" title="就诊科室" :value="detail.deptName">
 				</u-cell>
-				<u-cell :border="false" size="mini" title="医生姓名" value="陈鹏 "></u-cell>
-				<u-cell :border="false" size="mini" title="医生职称" value="医生xxx[临床检验20.00]"></u-cell>
-				
+				<u-cell :border="false" size="mini" title="医生姓名" :value="detail.doctorName"></u-cell>
+				<u-cell :border="false" size="mini" title="医生职称" :value="detail.clinicLabel"></u-cell>
+
 			</u-cell-group>
 		</view>
 		<view class="reserve-pannel">
@@ -40,30 +40,54 @@
 				缴费详情
 			</view>
 			<u-cell-group :border="false">
-				<u-cell :border="false" size="mini" title="交易金额" value="202301010101010101    "></u-cell>
-				<u-cell :border="false" size="mini" title="医院名称" value="2023010101202020101010101"></u-cell>
-				<u-cell :border="false" size="mini" title="医院单号" value="2023-05-23"></u-cell>
+				<u-cell :border="false" size="mini" title="交易金额" :value="detail.clinicFee"></u-cell>
+				<u-cell :border="false" size="mini" title="医院名称" :value="detail.hospitalName"></u-cell>
+				<u-cell :border="false" size="mini" title="医院单号" :value="detail.hospOrderId"></u-cell>
 				<u-cell :border="false" size="mini" title="平台单号" value="2023010101202020101010101">
 				</u-cell>
-				<u-cell :border="false" size="mini" title="医生姓名" value="￥80.00元 "></u-cell>
-				<u-cell :border="false" size="mini" title="医生职称" value="已确认 已支付"></u-cell>
-				<u-cell :border="false" size="mini" title="支付状态" value="￥80.00元 "></u-cell>
-				<u-cell :border="false" size="mini" title="支付时间" value="已确认 已支付"></u-cell>
-				
+				<u-cell :border="false" size="mini" title="医生姓名" :value="detail.doctorName"></u-cell>
+				<u-cell :border="false" size="mini" title="医生职称" :value="detail.clinicLabel"></u-cell>
+				<u-cell :border="false" size="mini" title="支付状态" :value="detail.payStatus == 0 ? '未支付' : '已支付'"></u-cell>
+				<u-cell :border="false" size="mini" title="支付时间" :value="detail.billDate"></u-cell>
+
 			</u-cell-group>
 		</view>
 	</view>
 </template>
 
 <script>
+	import {
+		getAppointmentRecordDetail
+	} from '@/api/hospital/index.js';
 	export default {
 		data() {
 			return {
-
+				recordId: '',
+				detail: {}
 			}
 		},
+		onLoad(options) {
+			this.recordId = options.recordId;
+			this.getAppointmentDetail()
+		},
 		methods: {
+			getAppointmentDetail() {
+				getAppointmentRecordDetail({
+					recordId: this.recordId
+				}).then((res) => {
+					this.detail = res.data
+				}).catch((err) => {
 
+				})
+			},
+			// 通用跳转
+			navTo(route) {
+				if (!route) return;
+
+				uni.navigateTo({
+					url: route
+				})
+			},
 		}
 	}
 </script>
@@ -91,11 +115,13 @@
 				font-size: 20rpx;
 			}
 		}
+
 		.reserve-pannel {
 			background: #FFFFFF;
 			border-radius: 7rpx;
 			margin: 30rpx 10rpx;
 			padding: 25rpx 0;
+
 			.title {
 				font-size: 33rpx;
 				font-family: Adobe Heiti Std;
@@ -106,7 +132,7 @@
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
-		
+
 				.fs1 {
 					font-size: 27rpx;
 					font-family: Adobe Heiti Std;
@@ -114,19 +140,23 @@
 					color: #000000;
 				}
 			}
-			ul{
+
+			ul {
 				padding-left: 15rpx;
-				li{
+
+				li {
 					list-style: none;
 					font-size: 20rpx;
 					color: #000000;
 					line-height: 41.33rpx;
 				}
 			}
+
 			.list {
 				padding: 13rpx 18rpx;
 			}
-			.bt{
+
+			.bt {
 				font-size: 27rpx;
 				font-family: Adobe Heiti Std;
 				font-weight: normal;
@@ -137,18 +167,19 @@
 			}
 		}
 	}
+
 	.u-cell-group {
 		margin-top: 10rpx;
 	}
-	
+
 	/deep/ .u-cell__title-text {
 		font-size: 20rpx;
 		font-family: Adobe Heiti Std;
 		font-weight: normal;
 		color: #7F8081;
-	
+
 	}
-	
+
 	/deep/ .u-cell__value {
 		font-size: 20rpx;
 		font-family: Adobe Heiti Std;
@@ -156,7 +187,7 @@
 		color: #030303;
 		flex: 2;
 	}
-	
+
 	/deep/ .u-cell__body {
 		padding: 0 30rpx;
 	}
