@@ -5,6 +5,7 @@ const getters = {
   roles: state => state.user.roles,
   permissions: state => state.user.permissions,
   userId: state => state.user.userInfo.userId,
-  userInfo: state => state.user.userInfo
+  userInfo: state => state.user.userInfo,
+  sysConfig: state => state.user.sysConfig,
 }
 export default getters

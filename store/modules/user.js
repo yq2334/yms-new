@@ -7,6 +7,7 @@ import {
   getInfo,
   miniLogin
 } from '@/api/login'
+import {getSystemConfig} from  '@/api/setting/index.js'
 import {
   getToken,
   setToken,
@@ -21,6 +22,7 @@ const user = {
     roles: storage.get(constant.roles),
     permissions: storage.get(constant.permissions),
     userInfo: storage.get(constant.userInfo),
+	sysConfig:  storage.get(constant.sysConfig),
   },
 
   mutations: {
@@ -46,7 +48,11 @@ const user = {
     SET_USERINFO: (state, value) => {
       state.userInfo = value
       storage.set(constant.userInfo, value)
-    }
+    },
+	SET_SYSCONFIG: (state, value) => {
+	  state.sysConfig = value
+	  storage.set(constant.sysConfig, value)
+	}
   },
 
   actions: {
@@ -105,7 +111,20 @@ const user = {
         })
       })
     },
-
+	GetSysConfig({
+      commit,
+      state
+    }) {
+      return new Promise((resolve, reject) => {
+        getSystemConfig().then(res => {
+          const data = res.data
+          commit('SET_SYSCONFIG', data) //新加
+          resolve(res)
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
     // 退出系统
     LogOut({
       commit,

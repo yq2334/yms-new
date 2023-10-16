@@ -27,11 +27,11 @@ const request = config => {
   }
   
   // get请求映射params参数，uniapp如果是GET请求会自动在url后面添加参数
-  // if (config.params) {
-  //   let url = config.url + '?' + tansParams(config.params)
-  //   url = url.slice(0, -1)
-  //   config.url = url
-  // }
+  if (config.params) {
+    let url = config.url + '?' + tansParams(config.params)
+    url = url.slice(0, -1)
+    config.url = url
+  }
   // 移除underfunded、null参数
   if (config.method.toLowerCase() === 'get') {
     config.data = delEmptyQueryNodes(config.data)

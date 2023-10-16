@@ -47,7 +47,7 @@
 				<text>{{query}}</text>
 				<u-icon name="arrow-down-fill"></u-icon>
 			</view>
-			<u-picker :show="showPicker"  ref="uPicker" :columns="hospitalList" :keyName="'name'"
+			<u-picker :show="showPicker" ref="uPicker" :columns="hospitalList" :keyName="'name'"
 				:closeOnClickOverlay="true" @change="changeHandler" @confirm="confirm"
 				@cancel="showPicker = false"></u-picker>
 		</view>
@@ -83,13 +83,12 @@
 					<view class="lft">
 						<u--image v-if="item.status == 1 " src="../../static/images/success.png" width="88rpx"
 							height="88rpx"></u--image>
-						<u--image v-else src="../../static/images/fail.png" width="88rpx"
-							height="88rpx"></u--image>
+						<u--image v-else src="../../static/images/fail.png" width="88rpx" height="88rpx"></u--image>
 						<view class="dec">
 							<view class="fs3">
 								<span v-if="item.status == 0">未挂号</span>
 								<span v-if="item.status == 1">挂号成功</span>
-								<span v-if="item.status == -2">挂号失败</span> 
+								<span v-if="item.status == -2">挂号失败</span>
 								<span v-if="item.status == -1">取消挂号</span>
 								<!-- 0未挂号 1挂号成功 -1取消挂号 -2挂号失败 -->
 							</view>
@@ -103,7 +102,7 @@
 								<span v-if="item.payStatus == 1">已支付</span>
 								<span v-if="item.payStatus == 0">未支付</span>
 								<span v-if="item.payStatus == -1">已退费</span>
-								
+
 							</view>
 						</view>
 					</view>
@@ -120,6 +119,7 @@
 					</view>
 				</view>
 			</view>
+			<u-loadmore :status="status" @loadmore="loadmore" />
 		</view>
 	</view>
 </template>
@@ -193,13 +193,15 @@
 				startDate: '',
 				endDate: '',
 				pageNum: 1,
-				pageSize: 20,
+				pageSize: 5,
 				recordList: [],
-				initList: []
+				initList: [],
+				record: {},
+				status: 'loadmore',
 			};
 		},
 		computed: {
-			...mapGetters(['userInfo'])
+			...mapGetters(['userInfo', 'sysConfig'])
 		},
 		async onLoad() {
 			await this.getAllHospitalList()
@@ -207,24 +209,43 @@
 			this.startDate = uni.$u.timeFormat(this.date1, 'yyyy-mm-dd')
 			this.endDate = uni.$u.timeFormat(this.date2, 'yyyy-mm-dd')
 			this.getRecordList()
+			console.log(this.sysConfig)
+		},
+		onReachBottom() {
+			console.log('我滚动到底部了~')
+			if(this.pageNum >= this.record.totalPage) {
+				this.status = 'nomore';
+				return;
+			}else{
+				this.status = "loading"
+			}
+			this.pageNum ++;
+			this.getRecordList()
+			// console.log('我滚动到底部了~')
 		},
 		methods: {
 			async getAllHospitalList() {
-				await getAllHospital().then((res) => {
-					this.hospitalList.push(res.data)
-					let hospital = res.data.find((item) => item.name == this.userInfo.defaultHospitalName)
-					this.hospitalId = hospital.id
-					console.log(hospital)
-				}).catch((err) => {
+				this.hospitalList.push(this.sysConfig.hospitalList)
+				this.hospitalId = this.sysConfig.currentHospital.id
+				this.query = this.sysConfig.currentHospital.name
+				// await getAllHospital().then((res) => {
+				// 	this.hospitalList.push(res.data)
+				// 	let hospital = res.data.find((item) => item.name == this.userInfo.defaultHospitalName)
+				// 	this.hospitalId = hospital.id
+				// 	console.log(hospital)
+				// }).catch((err) => {
 
-				})
+				// })
 			},
 			async getFamilyList() {
-				 await getFamilyShareList().then(response => {
-					this.familyList = response.data
-					this.familyName = this.familyList[0].name
-					this.familyId = this.familyList[0].id
-				})
+				// await getFamilyShareList().then(response => {
+				// 	this.familyList = response.data
+				// 	this.familyName = this.familyList[0].name
+				// 	this.familyId = this.familyList[0].id
+				// })
+					this.familyList = this.sysConfig.familyList
+					this.familyName = this.sysConfig.currentFamily.name
+					this.familyId = this.sysConfig.currentFamily.id
 			},
 			getRecordList() {
 				getAppointmentRecordList({
@@ -234,14 +255,34 @@
 					endDate: this.endDate,
 					pageNum: this.pageNum,
 					pageSize: this.pageSize,
-					totalNum: 100,
-					sort: '',
-					sortType: this.active
+					
 
 				}).then((res) => {
+					if(res.data.pageIndex == 1) {
+						this.recordList = res.data.result
+					}else{
+						this.recordList = this.recordList.concat(res.data.result)
+					}
+					if(this.pageNum >= res.data.totalPage) {
+						this.status = 'nomore';
+					}else{
+						this.status = 'loadmore';
+					}
 					this.initList = res.data.result
-					this.recordList = res.data.result
+					// this.recordList = res.data.result
+					
+					this.record = res.data
 				})
+			},
+			loadmore() {
+				if(this.pageNum >= this.record.totalPage) {
+					this.status = 'nomore';
+					return;
+				}else{
+					this.status = "loading"
+				}
+				this.pageNum ++;
+				this.getRecordList()
 			},
 			changeTab(item) {
 				this.active = item.key
@@ -252,10 +293,12 @@
 				let family = this.familyList.find((item) => item.id == id)
 				console.log(family)
 				this.familyName = family.name
+				this.pageNum = 1
+				this.getRecordList()
 			},
 			changeQury(tab) {
 				console.log('item', tab);
-				if(tab.key == 2) {
+				if (tab.key == 2) {
 					this.recordList = this.initList;
 					return;
 				}
@@ -275,6 +318,8 @@
 				this.query = e.value[0].name
 				this.hospitalId = e.value[0].id
 				this.showPicker = false
+				this.pageNum = 1
+				
 				this.getRecordList()
 			},
 			selectDate1(e) {
@@ -282,7 +327,7 @@
 				this.date1 = e.value
 				this.startDate = uni.$u.timeFormat(e.value, 'yyyy-mm-dd')
 				this.showDatePicker1 = false
-				
+
 			},
 			selectDate2(e) {
 				console.log(e.value)
@@ -432,7 +477,7 @@
 
 	.u-list {
 		margin: 15rpx 15rpx;
-
+		padding-bottom: 20rpx;
 		.item {
 			background: #FFFFFF;
 			margin-bottom: 40rpx;

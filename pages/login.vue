@@ -82,7 +82,7 @@ export default {
       captchaEnabled: true,
       globalConfig: getApp().globalData.config,
       loginForm: {
-        phone: "",
+        phone: "18670805883",
         code: "",
       },
       baseUrl:'',

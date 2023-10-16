@@ -68,6 +68,7 @@
 			}
 		},
 		onLoad(option) {
+			
 			console.log(option.id)
 			this.id = option.id
 			this.name = this.$store.getters.userInfo.defaultHospitalName
@@ -78,6 +79,7 @@
 			uni.setNavigationBarTitle({
 				title: this.name
 			})
+			this.$store.dispatch('GetSysConfig')
 		},
 		created() {
 			// this.getHospitalList()

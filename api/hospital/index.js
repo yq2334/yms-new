@@ -98,3 +98,24 @@ export function getAppointmentRecordList(params) {
 	 data: params,
   })
 }
+
+
+///Cm/CmHospital/GetBillRecordList
+
+export function getBillRecordList(data) {
+  return request({
+    'url': '/CmHospital/GetBillRecordList',
+   'method': 'post',
+    timeout: 20000,
+    params: data,
+  })
+}
+
+///Cm/CmHospital/GetBillRecordDetail
+export function getBillRecordDetail(params) {
+  return request({
+    'url': '/CmHospital/GetBillRecordDetail',
+    'method': 'get',
+	 data: params,
+  })
+}
