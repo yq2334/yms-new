@@ -64,6 +64,7 @@
 		data() {
 			return {
 				id: '',
+				doctorId: '',
 				name: '',
 				list: [{
 					time: '2023-05-01（星期一）上午',
@@ -78,13 +79,18 @@
 		onLoad(option) {
 			console.log(option.id)
 			this.id = option.id
+			if(option.doctorId) {
+				this.doctorId = option.doctorId
+			}
+			  
 			this.name = option.name
 			this.getDoctorList()
 		},
 		methods: {
 			getDoctorList() {
 				getDoctor({
-					departmentId: this.id
+					departmentId: this.id,
+					doctorId: this.doctorId
 				}).then((res) => {
 					this.list = res.data
 				}).catch((err) => {

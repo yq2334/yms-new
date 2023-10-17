@@ -119,3 +119,12 @@ export function getBillRecordDetail(params) {
 	 data: params,
   })
 }
+
+//CmHospital/GetAllDoctor
+export function getAllDoctor() {
+  return request({
+    'url': '/CmHospital/GetAllDoctor',
+    'method': 'get',
+	
+  })
+}

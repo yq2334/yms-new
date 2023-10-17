@@ -1,8 +1,9 @@
 <template>
 	<view class="reserve">
 		<view class="reserve-search">
-			<mSearch class="mSearch-input-box" :mode="1" button="inside" :placeholder="'搜索'" @search="doSearch(false)"
-				@confirm="doSearch(false)" v-model="keyword"></mSearch>
+			
+				<mSearch class="mSearch-input-box" :mode="1" button="inside" :show="false" :placeholder="'搜索医生'"
+					@focus="doSearch" v-model="keyword"></mSearch>
 		</view>
 		<view class="reserve-wrapper">
 			<view class="left">
@@ -74,6 +75,12 @@
 			navToDoctor(item) {
 				uni.navigateTo({
 					url: 'reserve-doctor?id=' + item.id + "&name=" + item.name
+				})
+			},
+			doSearch() {
+				console.log('focus')
+				uni.navigateTo({
+					url:'/pages/search/index'
 				})
 			}
 		}

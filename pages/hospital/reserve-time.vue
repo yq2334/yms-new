@@ -126,10 +126,17 @@
 			},
 			getAppointmentDetail(id) {
 				getAppointmentRecordDetail({recordId: id}).then((res) => {
-					if(res.data.status == 0 && res.data.payStatus == 0) {
-						uni.navigateTo({
-							url:'/pages/hospital/submit?recordId='+id
-						})
+					if(res.data.status == 1) {
+						if(res.data.payStatus == 0) {
+							uni.navigateTo({
+								url:'/pages/hospital/submit?recordId='+id
+							})
+						}else{
+							uni.navigateTo({
+								url:'/pages/hospital/reserve-success?recordId='+id
+							})
+						}
+						
 						return;
 					}
 					if(res.data.status == 1) {
