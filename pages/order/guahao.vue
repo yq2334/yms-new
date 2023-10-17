@@ -78,7 +78,7 @@
 			</u-row>
 		</view>
 		<view class="u-list">
-			<view class="item" v-for="(item,index) in recordList" :key="index">
+			<view class="item" v-for="(item,index) in recordList" :key="index" @click="getAppointmentDetail(item.id)">
 				<view class="info">
 					<view class="lft">
 						<u--image v-if="item.status == 1 " src="../../static/images/success.png" width="88rpx"
@@ -130,7 +130,8 @@
 	} from 'vuex';
 	import {
 		getAllHospital,
-		getAppointmentRecordList
+		getAppointmentRecordList,
+		getAppointmentRecordDetail
 	} from '@/api/hospital/index.js'
 	import {
 		getFamilyShareList,
@@ -334,7 +335,25 @@
 				this.date2 = e.value
 				this.endDate = uni.$u.timeFormat(e.value, 'yyyy-mm-dd')
 				this.showDatePicker2 = false
-			}
+			},
+			getAppointmentDetail(id) {
+				getAppointmentRecordDetail({recordId: id}).then((res) => {
+					if(res.data.status == 0 && res.data.payStatus == 0) {
+						uni.navigateTo({
+							url:'/pages/hospital/submit?recordId='+id
+						})
+						return;
+					}
+					if(res.data.status == 1) {
+						uni.navigateTo({
+							url:'/pages/hospital/reserve-success?recordId='+id
+						})
+						return;
+					}
+				}).catch((err) => {
+					
+				})
+			},
 		},
 	}
 </script>
