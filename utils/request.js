@@ -56,8 +56,9 @@ const request = config => {
           reject('后端接口连接异常')
           return
         }
-        const code = res.data.code 
 		
+        const code = res.data.code  
+		console.log(code)
         const msg = res.data.msg || res.msg || errorCode[code] || errorCode['default']
         if (code === 401) {
           showConfirm('登录状态已过期，您可以继续留在该页面，或者重新登录?').then(res => {
@@ -76,7 +77,11 @@ const request = config => {
           reject('500')
         } else if (code !== 200) {
           toast(msg)
-          reject(code)
+		  // setTimeout(() => {
+			   
+		  // }, 1000)
+		  reject(res.data)
+          // reject(code)
         }
         resolve(res.data)
       })

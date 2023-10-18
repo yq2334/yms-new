@@ -94,7 +94,15 @@
 				}).then((res) => {
 					this.list = res.data
 				}).catch((err) => {
-					uni.navigateBack()
+					console.log(err)
+					uni.showToast({
+						title: err.msg,
+						icon:'error'
+					})
+					setTimeout(() => {
+						uni.navigateBack()
+					}, 1000)
+					// uni.navigateBack()
 				})
 			},
 			

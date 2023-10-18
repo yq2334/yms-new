@@ -121,7 +121,13 @@
 					
 					this.getAppointmentDetail(res.data.recordId)
 				}).catch((err) => {
+					console.log(err)
+					uni.showToast({
+						title: err.msg,
+						icon:'error'
+					})
 					
+					// uni.navigateBack()
 				})
 			},
 			getAppointmentDetail(id) {

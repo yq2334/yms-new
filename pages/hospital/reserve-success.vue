@@ -2,7 +2,7 @@
 	<view class="reserve-success">
 		<view class="reserve-nav">
 			<view class="keshi">
-				预约挂号成功
+				预约挂号{{detail.status == 1 ? '成功' : '失败'}} 
 			</view>
 			<view class="hosp">
 				流水号: 就诊日生成
@@ -51,6 +51,11 @@
 				<u-cell :border="false" size="mini" title="支付时间" :value="detail.billDate"></u-cell>
 
 			</u-cell-group>
+		</view>
+		<view class="btn">
+			<u-button @tap="navTo('/pages/order/guahao')" type="primary" color="#388CEB" size="large" text="返回预约挂号列表">
+			</u-button>
+			
 		</view>
 	</view>
 </template>

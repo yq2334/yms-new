@@ -261,15 +261,17 @@
 				}).then((res) => {
 					if(res.data.pageIndex == 1) {
 						this.recordList = res.data.result
+						this.initList = res.data.result
 					}else{
 						this.recordList = this.recordList.concat(res.data.result)
+						this.initList = this.initList.concat(res.data.result)
 					}
 					if(this.pageNum >= res.data.totalPage) {
 						this.status = 'nomore';
 					}else{
 						this.status = 'loadmore';
 					}
-					this.initList = res.data.result
+					
 					// this.recordList = res.data.result
 					
 					this.record = res.data
@@ -298,9 +300,13 @@
 				this.getRecordList()
 			},
 			changeQury(tab) {
-				console.log('item', tab);
+				console.log('item', this.initList);
 				if (tab.key == 2) {
 					this.recordList = this.initList;
+					return;
+				}
+				if (tab.key == -1) {
+					this.recordList = this.initList.filter((item) => item.status == tab.key)
 					return;
 				}
 				this.recordList = this.initList.filter((item) => item.payStatus == tab.key)
