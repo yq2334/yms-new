@@ -1,7 +1,7 @@
 <template>
 	<view class="detail-table">
 		<view class="table">
-			<u-row justify="space-between" customStyle="margin-bottom: 10px" class="table-title">
+			<u-row justify="space-between" customStyle="margin-bottom: 10px" class="table-title" >
 				<u-col span="3">
 					<text>姓名</text>
 				</u-col>
@@ -16,18 +16,18 @@
 				</u-col>
 			</u-row>
 			<u-row justify="space-between" customStyle="margin-bottom: 10px" class="table-body"
-				v-for="(item,index) in 4" :key="index">
+				v-for="(item,index) in list" :key="index">
 				<u-col span="3">
-					<text>62床 王小虎</text>
+					<text>{{item.bedNo}}床 {{item.name}}</text>
 				</u-col>
 
 				<u-col span="3" textAlign="center">
-					<text>00.00</text>
+					<text>{{item.cost}}</text>
 				</u-col>
 				<u-col span="3" textAlign="center">
-					<text>2023-05-01</text>
+					<text>{{item.billDate}}</text>
 				</u-col>
-				<u-col span="3" textAlign="center" @click="navTo('/pages/order/detail1')">
+				<u-col span="3" textAlign="center" @click="navToDetail(item)">
 					<u-button type="primary" text="详情" size="mini"></u-button>
 				</u-col>
 			</u-row>
@@ -36,18 +36,32 @@
 </template>
 
 <script>
+	import {getInpCostDailyItemList} from '@/api/hospital/index.js'
 	export default {
 		data() {
 			return {
-
+				id: '',
+				list: []
 			}
 		},
+		onLoad(option) {
+			this.id = option.id
+			this.getList()
+		},
 		methods: {
-			navTo(route) {
-				if (!route) return;
-
+			getList() {
+				getInpCostDailyItemList({
+					admisId: this.id
+				}).then((res) => {
+					this.list = res.data	
+				}).catch((err) => {
+					
+				})
+			},
+			navToDetail(item) {
+				
 				uni.navigateTo({
-					url: route
+					url: '/pages/order/detail1?billId='+item.billId
 				})
 			},
 		}

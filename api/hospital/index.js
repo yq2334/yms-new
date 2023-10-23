@@ -128,3 +128,67 @@ export function getAllDoctor() {
 	
   })
 }
+
+export function getInpCostDailyFacilityList(params) {
+  return request({
+    'url': '/CmHospitalInp/GetInpCostDailyFacilityList',
+    'method': 'get',
+	 data: params,
+  })
+}
+
+
+
+export function getInpCostDailyItemTotal(params) {
+  return request({
+    'url': '/CmHospitalInp/GetInpCostDailyItemTotal',
+    'method': 'get',
+	 data: params,
+  })
+}
+
+
+
+export function getInpCostDailyItemList(params) {
+  return request({
+    'url': '/CmHospitalInp/GetInpCostDailyItemList',
+    'method': 'get',
+	 data: params,
+  })
+}
+
+export function getInpCostDailyItemDetail(params) {
+  return request({
+    'url': '/CmHospitalInp/GetInpCostDailyItemDetail',
+    'method': 'get',
+	 data: params,
+  })
+}
+
+export function getInpAdmisList(params) {
+  return request({
+    'url': '/CmHospitalInp/GetInpAdmisList',
+    'method': 'get',
+	 data: params,
+  })
+}
+
+
+
+export function getInpAdmisListDetail(params) {
+  return request({
+    'url': '/CmHospitalInp/GetInpAdmisListDetail',
+    'method': 'get',
+	 data: params,
+  })
+}
+
+
+
+export function getInpAdmisListDetailMore(params) {
+  return request({
+    'url': '/CmHospitalInp/GetInpAdmisListDetailMore',
+    'method': 'get',
+	 data: params,
+  })
+}

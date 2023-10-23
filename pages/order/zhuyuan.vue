@@ -8,7 +8,7 @@
 						<!-- <u--image :src="'../../static/images/avatar.png'" width="85rpx" height="85rpx"></u--image> -->
 					</u-col>
 					<u-col span="12">
-						<text>就诊人 陈鹏</text>
+						<text>就诊人 {{familyName}}</text>
 					</u-col>
 				</u-row>
 			</view>
@@ -17,36 +17,25 @@
 				<text class="icon icon-change"></text>
 			</view>
 		</view>
-		<u-transition :show="showChangeUser">
-			<view class="change-user">
-				<u-radio-group v-model="value" @change="changeUser">
-					<view class="radio-item">
-						<view class="left">
-							<view class="circle">
-								陈鹏
-							</view>
-							<text>陈鹏</text>
-							<view class="tag">
-								本人
-							</view>
+	<u-transition :show="showChangeUser">
+		<view class="change-user">
+			<u-radio-group v-model="familyId" @change="changeUser">
+				<view class="radio-item" v-for="(item,index) in familyList" :key="index">
+					<view class="left">
+						<view class="circle">
+							{{item.name}}
 						</view>
-						<u-radio shape="square" name="陈鹏" label=""></u-radio>
-					</view>
-					<view class="radio-item">
-						<view class="left">
-							<view class="circle">
-								陈**
-							</view>
-							<text>陈**</text>
-							<view class="tag">
-								父母
-							</view>
+						<text>{{item.name}}</text>
+						<view class="tag">
+							{{item.relation}}
 						</view>
-						<u-radio shape="square" name="陈**" label=""></u-radio>
 					</view>
-				</u-radio-group>
-			</view>
-		</u-transition>
+					<u-radio shape="square" :name="item.id" label=""></u-radio>
+				</view>
+	
+			</u-radio-group>
+		</view>
+	</u-transition>
 
 		<view class="tab">
 			<view class="item" :class="active == item.key ? 'active' : ''" v-for="(item,index) in tabList"
@@ -63,8 +52,9 @@
 				<text>{{query}}</text>
 				<u-icon name="arrow-down-fill"></u-icon>
 			</view>
-			<u-picker :show="showPicker" ref="uPicker" :columns="columns" :keyName="'label'" :closeOnClickOverlay="true"
-				@change="changeHandler" @confirm="confirm" @cancel="showPicker = false"></u-picker>
+		<u-picker :show="showPicker" ref="uPicker" :columns="hospitalList" :keyName="'name'"
+			:closeOnClickOverlay="true" @change="changeHandler" @confirm="confirm"
+			@cancel="showPicker = false"></u-picker>
 		</view>
 		<view class="u-datepicker">
 			<u-row justify="space-between">
@@ -85,7 +75,7 @@
 					</u-datetime-picker>
 				</u-col>
 				<u-col span="1">
-					<view class="serach">
+					<view class="serach" @click="getRecordList">
 						<u-icon size="30" color="#4670B3" name="search"></u-icon>
 					</view>
 				</u-col>
@@ -93,33 +83,48 @@
 			</u-row>
 		</view>
 		<view class="u-list">
-			<view class="item" v-for="(item,index) in 2" :key="index">
+			<view class="item" v-for="(item,index) in recordList" :key="index">
 				<view class="title">
-					<text>住院日期——出院日期</text>
+					<text>{{item.admissDate | date('yyyy-mm-dd')}}-{{item.disDate | date('yyyy-mm-dd')}}</text>
 				</view>
 				<view class="info">
 					<view class="lft">
 						<u--image src="../../static/images/hospital2.png" width="88rpx" height="88rpx"></u--image>
+						
+						
 						<view class="dec">
 							<view class="name">
-								陈鹏
+								{{item.patName}}
 							</view>
 							<view class="fs1">
-								某某某医院
+								{{item.hospitalName}}
 							</view>
 						</view>
 					</view>
-					<view class="rtf" @click="navTo('/pages/order/list2')">
+					<view class="rtf" @click="navToDetail(item.id)">
 						<u-button type="primary" :plain="true" :hairline="true" shape="circle" text="查看详情"></u-button>
 					</view>
 				</view>
 
 			</view>
+			<u-loadmore :status="status" @loadmore="loadmore" />
 		</view>
 	</view>
 </template>
 
 <script>
+	import {
+		mapGetters
+	} from 'vuex';
+	import {
+		getAllHospital,
+		getInpCostDailyFacilityList,
+		getAppointmentRecordDetail
+	} from '@/api/hospital/index.js'
+	import {
+		getFamilyShareList,
+
+	} from '@/api/setting/index.js'
 	export default {
 		data() {
 			return {
@@ -127,6 +132,7 @@
 				showPicker: false,
 				value: '陈**',
 				active: '1',
+				timeType: 1,
 				tabList: [{
 						name: '在院记录',
 						key: '1'
@@ -163,19 +169,133 @@
 				query: '长沙县星沙医院1',
 				showDatePicker1: false,
 				showDatePicker2: false,
-				date1: Number(new Date()),
-				date2: Number(new Date()),
+				date1: Number(new Date().setDate(new Date().getDate() - 1)),
+				date2: Number(new Date().setDate(new Date().getDate() + 1)),
+				hospitalList: [],
+				hospitalId: "",
+				familyId: '',
+				familyName: '',
+				familyList: [],
+				startDate: '',
+				endDate: '',
+				pageNum: 1,
+				pageSize: 5,
+				recordList: [],
+				initList: [],
+				record: {},
+				status: 'loadmore',
+				
+				
+				
 			};
 		},
+		computed: {
+			...mapGetters(['userInfo', 'sysConfig'])
+		},
+		async onLoad() {
+			await this.getAllHospitalList()
+			await this.getFamilyList()
+			this.startDate = uni.$u.timeFormat(this.date1, 'yyyy-mm-dd')
+			this.endDate = uni.$u.timeFormat(this.date2, 'yyyy-mm-dd')
+			this.getRecordList()
+			console.log(this.sysConfig)
+		},
+		onReachBottom() {
+			console.log('我滚动到底部了~')
+			if(this.pageNum >= this.record.totalPage) {
+				this.status = 'nomore';
+				return;
+			}else{
+				this.status = "loading"
+			}
+			this.pageNum ++;
+			this.getRecordList()
+			// console.log('我滚动到底部了~')
+		},
 		methods: {
+			async getAllHospitalList() {
+				this.hospitalList.push(this.sysConfig.hospitalList)
+				this.hospitalId = this.sysConfig.currentHospital.id
+				this.query = this.sysConfig.currentHospital.name
+				// await getAllHospital().then((res) => {
+				// 	this.hospitalList.push(res.data)
+				// 	let hospital = res.data.find((item) => item.name == this.userInfo.defaultHospitalName)
+				// 	this.hospitalId = hospital.id
+				// 	console.log(hospital)
+				// }).catch((err) => {
+
+				// })
+			},
+			async getFamilyList() {
+				// await getFamilyShareList().then(response => {
+				// 	this.familyList = response.data
+				// 	this.familyName = this.familyList[0].name
+				// 	this.familyId = this.familyList[0].id
+				// })
+					this.familyList = this.sysConfig.familyList
+					this.familyName = this.sysConfig.currentFamily.name
+					this.familyId = this.sysConfig.currentFamily.id
+			},
+			getRecordList() {
+				getInpCostDailyFacilityList({
+					historyType: this.active,
+					TimeType: 1,
+					familyId: this.familyId,
+					hospitalId: this.hospitalId,
+					startDate: this.startDate,
+					endDate: this.endDate,
+					pageNum: this.pageNum,
+					pageSize: this.pageSize,
+					
+
+				}).then((res) => {
+					if(res.data.pageIndex == 1) {
+						this.recordList = res.data.result
+						this.initList = res.data.result
+					}else{
+						this.recordList = this.recordList.concat(res.data.result)
+						this.initList = this.initList.concat(res.data.result)
+					}
+					if(this.pageNum >= res.data.totalPage) {
+						this.status = 'nomore';
+					}else{
+						this.status = 'loadmore';
+					}
+					
+					// this.recordList = res.data.result
+					
+					this.record = res.data
+				})
+			},
+			loadmore() {
+				if(this.pageNum >= this.record.totalPage) {
+					this.status = 'nomore';
+					return;
+				}else{
+					this.status = "loading"
+				}
+				this.pageNum ++;
+				this.getRecordList()
+			},
 			changeTab(item) {
 				this.active = item.key
+				this.pageNum = 1;
+				this.getRecordList()
 			},
-			changeUser(name) {
-				console.log(name)
+			changeUser(id) {
+				console.log(id)
+				this.familyId = id
+				let family = this.familyList.find((item) => item.id == id)
+				console.log(family)
+				this.familyName = family.name
+				this.pageNum = 1
+				this.getRecordList()
 			},
-			changeQury(item) {
-				console.log('item', item);
+			changeQury(tab) {
+				console.log(tab)
+				this.timeType = tab.key
+				this.pageNum = 1;
+				this.getRecordList()
 			},
 			changeHandler(e) {
 				const {
@@ -188,26 +308,29 @@
 			},
 			confirm(e) {
 				console.log(e)
-				this.query = e.value[0].label
+				this.query = e.value[0].name
+				this.hospitalId = e.value[0].id
 				this.showPicker = false
+				this.pageNum = 1
+				
+				this.getRecordList()
 			},
 			selectDate1(e) {
-				console.log(e.value)
+				console.log(uni.$u.timeFormat(e.value, 'yyyy-mm-dd'))
 				this.date1 = e.value
-
+				this.startDate = uni.$u.timeFormat(e.value, 'yyyy-mm-dd')
 				this.showDatePicker1 = false
+
 			},
 			selectDate2(e) {
 				console.log(e.value)
 				this.date2 = e.value
-
+				this.endDate = uni.$u.timeFormat(e.value, 'yyyy-mm-dd')
 				this.showDatePicker2 = false
 			},
-			navTo(route) {
-				if (!route) return;
-			
+			navToDetail(id) {
 				uni.navigateTo({
-					url: route
+					url:'/pages/order/list2?id='+id
 				})
 			},
 		},

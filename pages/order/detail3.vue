@@ -6,8 +6,8 @@
 		</view>
 		<view class="detail-pannel">
 			<u-collapse accordion>
-				<u-collapse-item title="西药" v-for="(item,index) in 4" :key="index">
-					<text slot="value" class="u-page__item__title__slot-title ">小计：100.00元 </text>
+				<u-collapse-item :title="index" v-for="(item,index) in detail" :key="index">
+					<text slot="value" class="u-page__item__title__slot-title ">小计：{{item.total}}元 </text>
 					<text slot="right-icon">
 						<img class="arrow-down" src="../../static/images/arrow-down.png" alt="">
 					</text>
@@ -27,19 +27,19 @@
 									<text>总价 </text>
 								</u-col>
 							</u-row>
-							<u-row justify="space-between" customStyle="margin-bottom: 10px" class="table-body" v-for="(item,index) in 4" :key="index">
+							<u-row justify="space-between" customStyle="margin-bottom: 10px" class="table-body" v-for="(obj,index) in item.list" :key="index">
 								<u-col span="3">
-									<text>xxx</text>
+									<text>{{obj.itemName}}</text>
 								</u-col>
 								
 								<u-col span="3" textAlign="center">
-									<text>1</text>
+									<text>{{obj.itemAmount}}{{obj.itemSpec}}</text>
 								</u-col>
 								<u-col span="3" textAlign="center">
-									<text>20</text>
+									<text>{{obj.itemPrice}}</text>
 								</u-col>
 								<u-col span="3" textAlign="center">
-									<text>20</text>
+									<text>{{obj.itemCost}}</text>
 								</u-col>
 							</u-row>
 						</view>
@@ -52,14 +52,49 @@
 </template>
 
 <script>
+	import {getInpAdmisListDetailMore} from '@/api/hospital/index.js'
 	export default {
 		data() {
 			return {
+				id: '',
+				list: [],
+				detail: {}
 				
 			}
 		},
+		onLoad(option) {
+			this.id = option.billId
+			this.getDetail()
+		},
 		methods: {
-			
+			getDetail() {
+				getInpAdmisListDetailMore({
+					billId: this.id
+				}).then((res) => {
+					this.list = res.data
+					let obj = {}
+					res.data.forEach((item, index) => {
+						console.log(item)
+						if(!obj[item.itemClass]) {
+								obj[item.itemClass] = {
+									total: 0,
+									list: []
+								}
+						}
+						
+						obj[item.itemClass]['list'].push(item) 
+						obj[item.itemClass]['total']+=item.itemCost
+						console.log(obj)
+						this.detail = obj
+					} )
+				})
+			},
+			// 通用跳转
+			navToDetail() {
+				uni.navigateTo({
+					url: '/pages/order/detail3'
+				})
+			},
 		}
 	}
 </script>

@@ -4,11 +4,12 @@
 			<view class="left">
 				<u-row>
 					<u-col span="3">
-						<u-avatar :src="'../../static/images/avatar.png'"></u-avatar>
+						<u-avatar v-if="detail.headImg" :src="detail.headImg"></u-avatar>
+						<u-avatar v-else :src="'../../static/images/avatar.png'"></u-avatar>
 						<!-- <u--image :src="'../../static/images/avatar.png'" width="85rpx" height="85rpx"></u--image> -->
 					</u-col>
 					<u-col span="12">
-						<text>陈鹏 | 43001xxxxxxxxxxxxxxx </text>
+						<text>{{detail.patName}} | {{detail.patIdNo}} </text>
 					</u-col>
 				</u-row>
 			</view>
@@ -17,19 +18,22 @@
 		<view class="payOrder-pannel">
 			<view class="title">
 				<text>费用类别</text>
-				<text class="fs1">已支付</text>
+				
+				<text class="fs1" v-if="detail.payStatus == 1">已支付</text>
+				<text class="fs1" v-if="detail.payStatus == 0">未支付</text>
+				<text class="fs1" v-if="detail.payStatus == -1">已退费</text>
 			</view>
 			<u-cell-group :border="false">
-				<u-cell :border="false" size="mini" title="住院日期      " value="202301010101010101    "></u-cell>
-				<u-cell :border="false" size="mini" title="住院天数" value="2023010101202020101010101"></u-cell>
-				<u-cell :border="false" size="mini" title="就诊医院" value="2023-05-23"></u-cell>
-				<u-cell :border="false" size="mini" title="住院号" value="12345">
+				<u-cell :border="false" size="mini" title="住院日期      " :value="`${detail.admisDate}-${detail.disDate}`"></u-cell>
+				<u-cell :border="false" size="mini" title="住院天数" :value="detail.days"></u-cell>
+				<u-cell :border="false" size="mini" title="就诊医院" :value="detail.hospitalName"></u-cell>
+				<u-cell :border="false" size="mini" title="住院号" :value="detail.visitNo">
 				</u-cell>
-				<u-cell :border="false" size="mini" title="缴费总额" value="￥80.00元 "></u-cell>
-				<u-cell :border="false" size="mini" title="医保支付" value="已确认 已支付"></u-cell>
-				<u-cell :border="false" size="mini" title="医保个账支付" value="￥80.00元 ">
+				<u-cell :border="false" size="mini" title="缴费总额" :value="`￥${detail.billTotalCost}`"></u-cell>
+				<u-cell :border="false" size="mini" title="医保支付" :value="`￥${detail.billMedPay}`"></u-cell>
+				<u-cell :border="false" size="mini" title="医保个账支付" :value="`￥${detail.billSelfPay}` ">
 				</u-cell>
-				<u-cell :border="false" size="mini" title="个人支付" value="￥80.00元 ">
+				<u-cell :border="false" size="mini" title="个人支付" :value="`￥${detail.billTotalCost - detail.billMedPay - detail.billSelfPay}`">
 				</u-cell>
 			</u-cell-group>
 			<view class="bt">
@@ -43,34 +47,42 @@
 				<text class="fs1">金额（元）</text>
 			</view>
 			<u-cell-group :border="false">
-				<u-cell :border="false" size="mini" title="西药      " value="202301010101010101    "></u-cell>
-				<u-cell :border="false" size="mini" title=" 中成药 " value="2023010101202020101010101"></u-cell>
-				<u-cell :border="false" size="mini" title="中草药 " value="2023-05-23"></u-cell>
-				<u-cell :border="false" size="mini" title="治疗费 " value="12345">
-				</u-cell>
-				<u-cell :border="false" size="mini" title="检查费" value="￥80.00元 "></u-cell>
+				<u-cell v-for="(item, index) in detail.costTypeList" :key="index" :border="false" size="mini" :title="item.name " :value="item.cost"></u-cell>
+				
 
 			</u-cell-group>
-			<u-button @tap="navTo('/pages/order/detail3')" type="primary" color="#388CEB" size="large" text="查看详情">
+			<u-button @tap="navToDetail()" type="primary" color="#388CEB" size="large" text="查看详情">
 			</u-button>
 		</view>
 	</view>
 </template>
 
 <script>
+	import {getInpAdmisListDetail} from '@/api/hospital/index.js'
 	export default {
 		data() {
 			return {
-
+				id: '',
+				list: [],
+				detail: {}
 			}
 		},
+		onLoad(option) {
+			this.id = option.id
+			this.getList()
+		},
 		methods: {
-// 通用跳转
-			navTo(route) {
-				if (!route) return;
-			
+			getList() {
+				getInpAdmisListDetail({
+					billId: this.id
+				}).then((res) => {
+					this.detail = res.data
+				})
+			},
+			// 通用跳转
+			navToDetail() {
 				uni.navigateTo({
-					url: route
+					url: '/pages/order/detail3?billId='+ this.id
 				})
 			},
 		}
@@ -191,7 +203,7 @@
 	/deep/ .u-cell__body {
 		padding: 0 30rpx;
 	}
-	
+
 	/deep/ .u-button--large {
 		margin-top: 50rpx;
 		height: 67rpx;

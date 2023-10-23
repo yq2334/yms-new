@@ -1,15 +1,15 @@
 <template>
 	<view class="fee-detail">
-		<view class="wrapper">
+		<view class="wrapper" v-for="(item, index) in list" :key="index">
 			<view class="title">
-				护理
+				{{item.itemClass}}
 			</view>
 			<u-row justify="center" customStyle="margin-bottom: 10px">
 				<u-col span="4">
 					<text>名称： </text>
 				</u-col>
 				<u-col span="4">
-					I级护理（xxxx）
+					{{item.itemName}}
 
 				</u-col>
 			</u-row>
@@ -18,7 +18,7 @@
 					<text>规格： </text>
 				</u-col>
 				<u-col span="4">
-					规格：/ 
+					{{item.itemSpec}}
 			
 				</u-col>
 			</u-row>
@@ -27,7 +27,7 @@
 					<text> 数量/单位： </text>
 				</u-col>
 				<u-col span="4">
-					数量/单位：1/项
+					{{item.itemAmount}}/{{item.itemPrice}}
 				</u-col>
 			</u-row>
 			<u-row justify="center" customStyle="margin-bottom: 10px">
@@ -35,61 +35,35 @@
 					<text> 计价金额： </text>
 				</u-col>
 				<u-col span="4">
-					100.00
+					{{item.itemCost}}
 				</u-col>
 			</u-row>
 		</view>
-		<view class="wrapper">
-			<view class="title">
-				化验
-			</view>
-			<u-row justify="center" customStyle="margin-bottom: 10px">
-				<u-col span="4">
-					<text>名称： </text>
-				</u-col>
-				<u-col span="4">
-					I级护理（xxxx）
 		
-				</u-col>
-			</u-row>
-			<u-row justify="center" customStyle="margin-bottom: 10px">
-				<u-col span="4">
-					<text>规格： </text>
-				</u-col>
-				<u-col span="4">
-					规格：/ 
-			
-				</u-col>
-			</u-row>
-			<u-row justify="center" customStyle="margin-bottom: 10px">
-				<u-col span="4">
-					<text> 数量/单位： </text>
-				</u-col>
-				<u-col span="4">
-					数量/单位：1/项
-				</u-col>
-			</u-row>
-			<u-row justify="center" customStyle="margin-bottom: 10px">
-				<u-col span="4">
-					<text> 计价金额： </text>
-				</u-col>
-				<u-col span="4">
-					100.00
-				</u-col>
-			</u-row>
-		</view>
 	</view>
 </template>
 
 <script>
+	import {getInpCostDailyItemDetail} from '@/api/hospital/index.js'
 	export default {
 		data() {
 			return {
-
+				billId: '',
+				list: []
 			}
 		},
+		onLoad(option) {
+			this.billId = option.billId
+			this.getDetail()
+		},
 		methods: {
-
+			getDetail() {
+				getInpCostDailyItemDetail({
+					billId: this.billId
+				}).then((res) => {
+					this.list = res.data
+				})
+			}
 		}
 	}
 </script>

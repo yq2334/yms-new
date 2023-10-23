@@ -8,7 +8,7 @@
 						<!-- <u--image :src="'../../static/images/avatar.png'" width="85rpx" height="85rpx"></u--image> -->
 					</u-col>
 					<u-col span="12">
-						<text>就诊人 陈鹏</text>
+						<text>就诊人 {{familyName}}</text>
 					</u-col>
 				</u-row>
 			</view>
@@ -19,42 +19,30 @@
 		</view>
 		<u-transition :show="showChangeUser">
 			<view class="change-user">
-				<u-radio-group v-model="value" @change="changeUser">
-					<view class="radio-item">
+				<u-radio-group v-model="familyId" @change="changeUser">
+					<view class="radio-item" v-for="(item,index) in familyList" :key="index">
 						<view class="left">
 							<view class="circle">
-								陈鹏
+								{{item.name}}
 							</view>
-							<text>陈鹏</text>
+							<text>{{item.name}}</text>
 							<view class="tag">
-								本人
+								{{item.relation}}
 							</view>
 						</view>
-						<u-radio shape="square" name="陈鹏" label=""></u-radio>
+						<u-radio shape="square" :name="item.id" label=""></u-radio>
 					</view>
-					<view class="radio-item">
-						<view class="left">
-							<view class="circle">
-								陈**
-							</view>
-							<text>陈**</text>
-							<view class="tag">
-								父母
-							</view>
-						</view>
-						<u-radio shape="square" name="陈**" label=""></u-radio>
-					</view>
+
 				</u-radio-group>
 			</view>
 		</u-transition>
 
-
 		<view class="u-datepicker">
 			<u-row justify="space-between">
-				<u-col span="2">
+				<!-- <u-col span="2">
 					<text>选择日期</text>
-				</u-col>
-				<u-col span="4">
+				</u-col> -->
+				<u-col span="5">
 					<view class="date-picker" @click="showDatePicker1 = true">
 						<text>{{date1 | date('yyyy-mm-dd')}}</text>
 						<u-icon size="30" color="#333333" name="calendar"></u-icon>
@@ -62,7 +50,7 @@
 					<u-datetime-picker :show="showDatePicker1" v-model="date1" mode="date" @confirm="selectDate1">
 					</u-datetime-picker>
 				</u-col>
-				<u-col span="4">
+				<u-col span="5">
 					<view class="date-picker" @click="showDatePicker2 = true">
 						<text>{{date2 | date('yyyy-mm-dd')}}</text>
 						<u-icon size="30" color="#333333" name="calendar"></u-icon>
@@ -71,94 +59,46 @@
 					</u-datetime-picker>
 				</u-col>
 
-
+				<u-col span="1">
+					<view class="serach" @click="getRecordList">
+						<u-icon size="30" color="#4670B3" name="search"></u-icon>
+					</view>
+				</u-col>
 			</u-row>
 		</view>
 		<view class="u-list">
-			<view class="item">
+			<view class="item" v-for="(item,index) in recordList" :key="index">
 				<u-row>
 					<u-col span="3">
-						<text>材料费 </text>
+						<text>{{item.name}} </text>
 					</u-col>
 					<u-col span="3">
-						<text>168.00 </text>
+						<text>{{item.cost}} </text>
 					</u-col>
 				</u-row>
 
 			</view>
-			<view class="item">
-				<u-row>
-					<u-col span="3">
-						<text>床位费 </text>
-					</u-col>
-					<u-col span="3">
-						<text>168.00 </text>
-					</u-col>
-				</u-row>
-
-			</view>
-			<view class="item">
-				<u-row>
-					<u-col span="3">
-						<text>护理费 </text>
-					</u-col>
-					<u-col span="3">
-						<text>168.00 </text>
-					</u-col>
-				</u-row>
-
-			</view>
-			<view class="item">
-				<u-row>
-					<u-col span="3">
-						<text>化验费 </text>
-					</u-col>
-					<u-col span="3">
-						<text>168.00 </text>
-					</u-col>
-				</u-row>
-
-			</view>
-			<view class="item">
-				<u-row>
-					<u-col span="3">
-						<text>检查费 </text>
-					</u-col>
-					<u-col span="3">
-						<text>168.00 </text>
-					</u-col>
-				</u-row>
-
-			</view>
-			<view class="item">
-				<u-row>
-					<u-col span="3">
-						<text>麻醉费 </text>
-					</u-col>
-					<u-col span="3">
-						<text>168.00 </text>
-					</u-col>
-				</u-row>
-
-			</view>
-			<view class="item">
-				<u-row>
-					<u-col span="3">
-						<text>其他费 </text>
-					</u-col>
-					<u-col span="3">
-						<text>168.00 </text>
-					</u-col>
-				</u-row>
-
-			</view>
+			
 		</view>
-		<u-button @click="navTo('/pages/order/detail2')" type="primary" color="#388CEB" size="large" text="查看详情">
+		<u-button @click="navToDetail()" type="primary" color="#388CEB" size="large" text="查看详情">
 		</u-button>
 	</view>
 </template>
 
+
 <script>
+	import {
+		mapGetters
+	} from 'vuex';
+	import {
+
+		getInpCostDailyFacilityList,
+		getInpCostDailyItemTotal
+	} from '@/api/hospital/index.js'
+	import {
+		getFamilyShareList,
+
+	} from '@/api/setting/index.js'
 	export default {
 		data() {
 			return {
@@ -166,6 +106,7 @@
 				showPicker: false,
 				value: '陈**',
 				active: '1',
+				timeType: 1,
 				tabList: [{
 						name: '在院记录',
 						key: '1'
@@ -175,47 +116,92 @@
 						key: '2'
 					}
 				],
-				list: [{
-						name: '近半年',
-						key: 1
-					},
-					{
-						name: '近一年',
-						key: 2
-					},
-					{
-						name: '自定义查询',
-						key: 3
-					}
-				],
-				columns: [
-					[{
-						label: '长沙县星沙医院1',
-						// 其他属性值
-						id: 1
-						// ...
-					}, {
-						label: '长沙县星沙医院2',
-						id: 2
-					}]
-				],
-				query: '长沙县星沙医院1',
+
 				showDatePicker1: false,
 				showDatePicker2: false,
-				date1: Number(new Date()),
-				date2: Number(new Date()),
+				date1: Number(new Date().setDate(new Date().getDate() - 1)),
+				date2: Number(new Date().setDate(new Date().getDate() + 1)),
+
+				familyId: '',
+				familyName: '',
+				familyList: [],
+				startDate: '',
+				endDate: '',
+				pageNum: 1,
+				pageSize: 5,
+				recordList: [],
+				initList: [],
+				record: {},
+				status: 'loadmore',
+
+
+
 			};
 		},
+		computed: {
+			...mapGetters(['userInfo', 'sysConfig'])
+		},
+		async onLoad(option) {
+			this.id = option.id;
+			await this.getFamilyList()
+			this.startDate = uni.$u.timeFormat(this.date1, 'yyyy-mm-dd')
+			this.endDate = uni.$u.timeFormat(this.date2, 'yyyy-mm-dd')
+			this.getRecordList()
+			console.log(this.sysConfig)
+		},
+		onReachBottom() {
+			console.log('我滚动到底部了~')
+			if (this.pageNum >= this.record.totalPage) {
+				this.status = 'nomore';
+				return;
+			} else {
+				this.status = "loading"
+			}
+			this.pageNum++;
+			this.getRecordList()
+			// console.log('我滚动到底部了~')
+		},
 		methods: {
-			changeTab(item) {
-				this.active = item.key
+
+			async getFamilyList() {
+
+				this.familyList = this.sysConfig.familyList
+				this.familyName = this.sysConfig.currentFamily.name
+				this.familyId = this.sysConfig.currentFamily.id
 			},
-			changeUser(name) {
-				console.log(name)
+			getRecordList() {
+				getInpCostDailyItemTotal({
+					admisId: this.id,
+					familyId: this.familyId,
+					startDate: this.startDate,
+					endDate: this.endDate,
+				}).then((res) => {
+					this.recordList = res.data
+					this.initList = res.data
+					this.record = res.data
+				})
 			},
-			changeQury(item) {
-				console.log('item', item);
+			loadmore() {
+				if (this.pageNum >= this.record.totalPage) {
+					this.status = 'nomore';
+					return;
+				} else {
+					this.status = "loading"
+				}
+				this.pageNum++;
+				this.getRecordList()
 			},
+
+			changeUser(id) {
+				console.log(id)
+				this.familyId = id
+				let family = this.familyList.find((item) => item.id == id)
+				console.log(family)
+				this.familyName = family.name
+				this.pageNum = 1
+				this.getRecordList()
+			},
+
 			changeHandler(e) {
 				const {
 					columnIndex,
@@ -225,29 +211,23 @@
 				} = e
 				console.log(e)
 			},
-			confirm(e) {
-				console.log(e)
-				this.query = e.value[0].label
-				this.showPicker = false
-			},
-			selectDate1(e) {
-				console.log(e.value)
-				this.date1 = e.value
 
+			selectDate1(e) {
+				console.log(uni.$u.timeFormat(e.value, 'yyyy-mm-dd'))
+				this.date1 = e.value
+				this.startDate = uni.$u.timeFormat(e.value, 'yyyy-mm-dd')
 				this.showDatePicker1 = false
+
 			},
 			selectDate2(e) {
 				console.log(e.value)
 				this.date2 = e.value
-
+				this.endDate = uni.$u.timeFormat(e.value, 'yyyy-mm-dd')
 				this.showDatePicker2 = false
 			},
-			// 通用跳转
-			navTo(route) {
-				if (!route) return;
-			
+			navToDetail() {
 				uni.navigateTo({
-					url: route
+					url: '/pages/order/detail2?id=' + this.id
 				})
 			},
 		},
@@ -396,12 +376,14 @@
 
 	.u-list {
 		margin: 30rpx 15rpx;
+
 		.item {
 			background: #FFFFFF;
 			color: #000000;
 			font-size: 20rpx;
 			height: 45rpx;
 			line-height: 45rpx;
+
 			&:nth-child(odd) {
 				background-color: #B8D7FF;
 			}
