@@ -1,18 +1,138 @@
 import request from '@/utils/request'
-
+import {
+	getToken
+} from '@/utils/auth';
+import globalConfig from '@/config'
 // 登录方法
-export function login(phone, code) {
-	const data = {
-		phone,
-		code,
-	}
+export function login(data) {
 	return request({
-		'url': '/CmLogin/login',
+		'url': '/api_Login.ashx',
+		headers: {
+			isToken: false
+		},
+		// header: {
+		// 	"Content-Type": "application/x-www-form-urlencoded"
+		// },
+		
+		'method': 'post',
+		params: data,
+		loading: "正在登录...."
+	})
+}
+export function register(data) {
+	return request({
+		'url': '/api_register.ashx',
 		headers: {
 			isToken: false
 		},
 		'method': 'post',
-		'data': data
+		header: {
+			"Content-Type": "application/x-www-form-urlencoded"
+		},
+		params: Object.assign({
+			fid: globalConfig.api.fid,
+			fkey: globalConfig.api.fkey,
+			apiname: 'yhh.register',
+			
+		}, data),
+		loading: "正在注册...."
+	})
+}
+export function logout(data) {
+	return request({
+		'url': '/api_logout.ashx',
+		'method': 'post',
+		header: {
+			"Content-Type": "application/x-www-form-urlencoded"
+		},
+		params: Object.assign({
+			fid: globalConfig.api.fid,
+			fkey: globalConfig.api.fkey,
+			apiname: 'yhh.logout',
+			token: getToken()
+		}, data),
+		loading: "正在退出...."
+	})
+}
+export function loginClose(data) {
+	return request({
+		'url': '/api_Login_Close.ashx',
+		'method': 'post',
+		header: {
+			'Content-Type': 'application/x-www-form-urlencoded'
+		},
+		data: Object.assign({
+			fid: globalConfig.api.fid,
+			fkey: globalConfig.api.fkey,
+			apiname: 'yhh.Login_Close',
+			token: getToken()
+		}, data),
+		loading: "正在注销...."
+	})
+}
+export function setPwd(data) {
+	return request({
+		'url': '/api_setpwd.ashx',
+		'method': 'post',
+		header: {
+			"Content-Type": "application/x-www-form-urlencoded"
+		},
+		params: Object.assign({
+			fid: globalConfig.api.fid,
+			fkey: globalConfig.api.fkey,
+			apiname: 'yhh.setpwd',
+			token: getToken()
+		}, data),
+		loading: "正在修改...."
+	})
+}
+export function findPwd(data) {
+	return request({
+		'url': '/api_find_pwd.ashx',
+		'method': 'post',
+		header: {
+			"Content-Type": "application/x-www-form-urlencoded"
+		},
+		params: Object.assign({
+			fid: globalConfig.api.fid,
+			fkey: globalConfig.api.fkey,
+			apiname: 'yhh.find_pwd',
+		}, data),
+		loading: "正在提交...."
+	})
+}
+export function mobileLogin(data) {
+	return request({
+		'url': '/api_Login_code.ashx',
+		'method': 'post',
+		header: {
+			"Content-Type": "application/x-www-form-urlencoded"
+		},
+		params: Object.assign({
+			fid: globalConfig.api.fid,
+			fkey: globalConfig.api.fkey,
+			apiname: 'yhh.Login_code',
+		}, data),
+		loading: "正在提交...."
+	})
+}
+export function getVerifyCode(data) {
+	return request({
+		'url': '/api_yzcode.ashx',
+		'method': 'post',
+		headers: {
+			isToken: false
+		},
+		header: {
+			"Content-Type": "application/x-www-form-urlencoded"
+		},
+		params: Object.assign({
+			fid: globalConfig.api.fid,
+			fkey: globalConfig.api.fkey,
+			apiname: 'yhh.yzcode',
+		
+		}, data),
+		loading: "正在发送...."
 	})
 }
 export function weiXinlogin(code, appid) {
@@ -41,12 +161,7 @@ export function getInfo() {
 }
 
 // 退出方法
-export function logout() {
-	return request({
-		'url': '/logout',
-		'method': 'post'
-	})
-}
+
 
 // 发送验证码
 export function sendCode(data) {

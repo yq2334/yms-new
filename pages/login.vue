@@ -1,505 +1,381 @@
 <template>
-  <view class="normal-login-container align-center">
-    <view class="logo-content">
-      <image :src="globalConfig.appInfo.logo" mode="widthFix"> </image>
-      <image class="logo-title" :src="'../static/images/logo-title.png'" mode="widthFix">
-      </image>
-      <!-- <text class="title"> {{appName}}</text> -->
-    </view>
-    <view class="login-form-content">
-      <view class="input-item flex align-center">
-        <view class="icon-phone icon"></view>
-        <input v-model="loginForm.phone" class="input" type="text" placeholder="请输入手机号" maxlength="30" />
-      </view>
-      <!-- <view class="input-item flex align-center">
-				<view class="iconfont icon-password icon"></view>
-				<input v-model="loginForm.password" type="password" class="input" placeholder="请输入密码" maxlength="20"
-					@keyup.enter="handleLogin" />
-			</view> -->
-      <u-row justify="space-between">
-        <u-col span="7">
-          <view class="input-item flex align-center" v-if="captchaEnabled != 'off'">
-            <view class="icon-validate icon"></view>
-            <input v-model="loginForm.code" class="input" placeholder="请输入验证码" maxlength="6" @keyup.enter="handleLogin" />
-          </view>
-        </u-col>
-        <u-col span="4">
-          <u-button @tap="getCode" :text="tips" type="primary" size="mid" shape="circle" :disabled="disabled1"></u-button>
-        </u-col>
-      </u-row>
-      <view class="xieyi text-center">
-        <!-- 	<u-checkbox v-model="loginForm.checked" activeColor="#1296DB" labelSize="10" labelColor="#000"
-					shape="circle" label=""></u-checkbox> -->
+	<view class="login-container">
+		<view class="login-title">
+			<u--image class="logo" :showLoading="true"  src="/static/images/logo.jpg" width="250rpx"
+				height="250rpx"></u--image>
+		</view>
+		<!-- <view class="login-sub-title">翼秘书伙伴</view> -->
+	
+		<view class="login-item">
+			<u-input v-model="userInfo.userName" placeholder="请输入帐号" fontSize="20" color="#181818" border="bottom"
+				clearable>
+				<u--image :showLoading="true" slot="prefix" src="/static/images/user.png" width="18px"
+					height="18px"></u--image>
+			</u-input>
+		</view>
+		<view class="login-item">
+			<u-input v-model="userInfo.password" type="password" placeholder="请输入密码" fontSize="20" color="#181818"
+				border="bottom" clearable>
+				<u--image :showLoading="true" slot="prefix" src="/static/images/password.png" width="18px"
+					height="18px"></u--image>
+			</u-input>
+		</view>
+		<!-- 	<view class="login-item login-code">
+			<u--input v-model="userInfo.verificationCode" placeholder="请输入验证码" prefixIcon="scan" shape="circle"
+				border="bottom" clearable prefixIconStyle="font-size: 22px;color: #909399"></u--input>
+			<image class="img" @click="getVierificationCode" :src="codeSrc"></image>
+		</view> -->
+		<view class="flex align-center justify-between margin-top">
+			<view class="remember">
+				<u-checkbox-group v-model="checkedRemenber" @change="checkboxChange">
+					<u-checkbox activeColor="#FA8E1C" label="记住我" name="记住我"></u-checkbox>
+				</u-checkbox-group>
+			</view>
+			<view class="tips">
+				还没有账号？<text @click="navTo('/pages/register')">立即注册</text>
+			</view>
+		</view>
+		<view class="login-btn">
+			<u-button @click="login"  :loading="loading"
+				:loadingText="loading?'登录中..':''" :customStyle="{'border-radius': '10rpx'}" size="large" type="primary"
+				text="登录">
+			</u-button>
+		</view>
+		<view class="login-mobile">
+			<text @click="navTo('/packageC/pages/auth/mobile-login')">手机快捷登录</text> <text class="split"></text> <span
+				@click="navTo('/packageC/pages/auth/find-password')">忘记密码？</span>
+		</view>
+		<view class="xieyi text-center">
 
-        <uni-data-checkbox v-model="checked" multiple :localdata="agree" @change="change" />
-        <!-- <text class="text-grey1">登录即代表同意</text> -->
-        <text @click="handleUserAgrement" class="text-blue">《用户协议》</text>
-        <text @click="handlePrivacy" class="text-blue">《隐私协议》</text>
-      </view>
-      <view class="action-btn">
-        <button @click="handleLogin" class="login-btn cu-btn block bg-blue lg round">
-          登录
-        </button>
-      </view>
-      <u-code ref="uCode" @change="codeChange" seconds="60" @start="disabled1 = true" startText="发送验证码"
-        @end="disabled1 = false"></u-code>
-    </view>
+			<uni-data-checkbox v-model="checked" multiple :localdata="agree" />
+			<!-- <text class="text-grey1">登录即代表同意</text> -->
+			<text @click="handleUserAgrement" class="text-orange">《移动应用端合作伙伴注册协议》</text>
+			<text @click="handlePrivacy" class="text-orange">《隐私协议》</text>
+		</view>
+		<!-- <view style="margin-top: -20rpx;">
+			<vol-alert type="primary">
+				<view>演示帐号：admin666 密码：123456</view>
+				<view>本地帐号：admin &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;密码：123456</view>
+			</vol-alert>
+		</view> -->
+		<!-- <u-divider text="其他方式登陆"></u-divider>
+		<view class="login-other">
+			<view class="login-other-item"></view>
+			<view>
+				<image @click="wechatLogin" class="img" :key="index" v-for="(src,index) in icons" :src="src"></image>
 
-    <view class="other-login">
-      <!-- #ifdef MP-WEIXIN -->
-      <!-- <button type="default" open-type="getUserInfo" @getuserinfo="weChatLogin" class="wxLoginBtn">
-        <view class="loginType">
-          <view class="item">
-            <view class="icon">
-              <u-icon size="60" name="weixin-fill" color="rgb(83,194,64)"></u-icon>
-            </view>
-            微信
-          </view>
-        </view>
-      </button> -->
-      <!-- #endif -->
-    </view>
-  </view>
+			</view>
+			<view class="login-other-item"></view>
+		</view> -->
+	</view>
 </template>
 
 <script>
-import { getCodeImg, sendCode, weiXinlogin, getWxAppId } from "@/api/login";
-const isWechat = () => {
-  return (
-    String(navigator.userAgent.toLowerCase().match(/MicroMessenger/i)) ===
-    "micromessenger"
-  );
-};
+	import {
+		getVierificationCode,
+		login
+	} from '@/api/login.js'
+	export default {
+		data() {
+			return {
+				loading: false,
+				codeSrc: "",
+				userInfo: {
 
-export default {
-  data() {
-    return {
-      appid: "",
-      checked: [0],
-      disabled1: false,
-      tips: "发送验证码",
-      codeUrl: "",
-      captchaEnabled: true,
-      globalConfig: getApp().globalData.config,
-      loginForm: {
-        phone: "18670805883",
-        code: "",
-      },
-      baseUrl:'',
-      agree: [
-        {
-          text: "已阅读并同意",
-          value: 0,
-        },
-      ],
-      code: "",
-    };
-  },
-  computed: {
-    appName() {
-      return uni.getSystemInfoSync().appName;
-    },
-  },
-  created() {
-    // 绑定监听事件
-    window.addEventListener("keydown", this.keyDown);
-  },
-  onLoad(e) {
-    this.getWeiXinAppId()
-    let code = this.getUrlCode("code");
-    this.baseUrl=this.getUrlPath( location.href)
-    this.code = code;
-    if (code !== null && code !== "") {
+					userName: "", //test1
+					password: "", //888888
+					UUID: "",
+					verificationCode: ""
+				},
+				icons: [],
+				checked: [],
+				checkedRemenber: [],
+				agree: [{
+					text: "我已阅读并同意",
+					value: 0,
+				}, ],
+			}
+		},
+		methods: {
+			login() {
+				// uni.switchTab({
+				// 	url: "/pages/home/home"
+				// })
+				// return;
+				console.log(this.checked)
+				if(!this.checked.length) {
+					this.$toast("请先勾选用户协议!");
+					return;
+				}
+				if (this.base.isEmpty(this.userInfo.userName))
+					return this.$toast("请输入用户名");
+				if (this.base.isEmpty(this.userInfo.password))
+					return this.$toast("请输入密码");
+				// if (this.base.isEmpty(this.userInfo.verificationCode))
+				// 	return this.$toast("请输入验证码");
+				this.userInfo.userName = this.userInfo.userName.trim();
+				this.userInfo.password = this.userInfo.password.trim();
+				this.userInfo.verificationCode = this.userInfo.verificationCode.trim();
+				this.loading = true;
+				login({
+					fid: this.globalConfig.api.fid,
+					fkey: this.globalConfig.api.fkey,
+					apiname: 'yhh.login',
+					uesid: this.userInfo.userName,
+					uespwd: this.userInfo.password,
+				}).then((result) => {
+					if (result.code != '00') {
+						this.loading = false;
+						// this.getVierificationCode();
+						return this.$toast(result.msg);
+					}
+					if(this.checkedRemenber.length > 0) {
+						uni.setStorageSync('userName', this.userInfo.userName)
+						uni.setStorageSync('password', this.userInfo.password)
+					}
+					this.loading = false;
+					this.$toast("登录成功,正在跳转!");
+					// this.$store.commit("SET_USERINFO", result.data);
+					this.$store.commit("SET_TOKEN", result.token);
 
-      this.getOpenidAndUserinfo(code);
-    }
-  },
+					uni.switchTab({
+						url: "/pages/home/home"
+					})
+				});
 
-  methods: {
-    getUrlCode(name) {
-      return (
-        decodeURIComponent(
-          (new RegExp("[?|&]" + name + "=" + "([^&;]+?)(&|#|;|$)").exec(
-            location.href
-          ) || [, ""])[1].replace(/\+/g, "%20")
-        ) || null
-      );
-    },
-    getUrlPath(url){
-      // 解析 URL
-      var parser = document.createElement('a');
-      parser.href = url
+			},
+			checkboxChange(n) {
+				console.log('change', n);
+				// if(n.length > 0) {
+				// 	uni.setStorageSync('userName', this.userInfo.userName)
+				// 	uni.setStorageSync('password', this.userInfo.password)
+				// }
+			},
+			getVierificationCode() {
+				getVierificationCode().then(x => {
+					this.codeSrc = "data:image/png;base64," + x.img;
+					this.userInfo.UUID = x.uuid;
+				});
 
-      // 获取主域名和路径部分
-      var mainDomain = parser.protocol + '//' + parser.host;
-
-      // 拼接主域名和路径部分
-      var result = mainDomain+'/h5/#'
-      return result
-    },
-    getWeiXinAppId() {
-      getWxAppId().then(res => {
-        this.appid = res.data
-      })
-    },
-    getWeiXinCode() {
-      if (isWechat()) {
-        // 截取地址中的code，如果没有code就去微信授权，如果已经获取到code了就直接把code传给后台获取openId
-        let code = this.getUrlCode("code");
-        if (code === null || code === "") {
-          window.location.href =
-            "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" +
-            this.appid +
-            "&redirect_uri=" +
-            encodeURIComponent(this.baseUrl+"/pages/login") +
-            "&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";
-          // redirect_uri是授权成功后，跳转的url地址，微信会帮我们跳转到该链接，并且通过？的形式拼接code，这里需要用encodeURIComponent对链接进行处理。
-          // 如果配置参数一一对应，那么此时已经通过回调地址刷新页面后，你就会再地址栏中看到code了。
-          // http://127.0.0.1/pages/views/profile/login/login?code=001BWV4J1lRzz00H4J1J1vRE4J1BWV4q&state=1
-        }
-      }
-    },
-    getOpenidAndUserinfo(code) {
-      weiXinlogin(code, this.appid).then((res) => {
-        // 登录成功，可以将用户信息和token保存到缓存中
-
-        if (!res.data.isBindIdCard) {
-          uni.navigateTo({
-            url: "/pages/mine/auth/identy",
-          });
-        } else {
-          if (res.data.isSelectDefaultHospital) {
-            this.$tab.reLaunch('/pages/index?name=' + res.data.defaultHospitalName)
-            return;
-          }
-          // this.$tab.reLaunch('/pages/index')
-          this.$tab.navigateTo("/pages/hospital/index");
-        }
-      }).catch((err)=>{
-        window.location.href=this.baseUrl+'/pages/login'
-      });
-      // uni.request({
-      // 	url: 'http://127.0.0.1/api/wxLogin?code=' + code + '&state=state&appid=' + appid,
-      // 	success: (res) => {
-      // 		console.log('通过code获取openid和accessToken', res)
-      // 		if (res.data.code === 200) {
-      // 			// 登录成功，可以将用户信息和token保存到缓存中
-      // 			uni.setStorageSync('userInfo', res.data.result.userInfo)
-      // 			uni.setStorageSync('token', res.data.result.token)
-      // 		}
-      // 	}
-      // })
-    },
-    change(e) {
-      console.log("e:", e);
-    },
-    // 隐私协议
-    handlePrivacy() {
-      let site = this.globalConfig.appInfo.agreements[0];
-      this.$tab.navigateTo(
-        `/pages/common/webview/index?title=${site.title}&url=${site.url}`
-      );
-    },
-    // 用户协议
-    handleUserAgrement() {
-      let site = this.globalConfig.appInfo.agreements[1];
-      this.$tab.navigateTo(
-        `/pages/common/webview/index?title=${site.title}&url=${site.url}`
-      );
-    },
-    codeChange(text) {
-      this.tips = text;
-    },
-    getCode() {
-      if (this.$refs.uCode.canGetCode) {
-        // 模拟向后端请求验证码
-        uni.showLoading({
-          title: "正在获取验证码",
-        });
-        sendCode({
-          phone: this.loginForm.phone,
-        }).then((res) => {
-          const { code, data } = res;
-          if (code == 200) {
-            uni.hideLoading();
-            // 这里此提示会被this.start()方法中的提示覆盖
-            uni.$u.toast("验证码已发送");
-            // 通知验证码组件内部开始倒计时
-            this.$refs.uCode.start();
-          }
-        });
-      } else {
-        uni.$u.toast("倒计时结束后再发送");
-      }
-    },
-    // 获取图形验证码
-    // getCode() {
-    // 	getCodeImg().then(res => {
-    // 		this.captchaEnabled = res.data.captchaOff
-    // 		if (this.captchaEnabled != 'off') {
-    // 			this.codeUrl = 'data:image/gif;base64,' + res.data.img
-    // 			this.loginForm.uuid = res.data.uuid
-    // 		}
-    // 	})
-    // },
-    // 登录方法
-    async handleLogin() {
-      if (this.checked.length == 0) {
-        this.$modal.msgError("请勾选用户协议");
-        return;
-      }
-      // if(isWechat()) {
-      // this.getWeiXinCode()
-      // return;
-      // }
-      if (this.loginForm.phone === "") {
-        this.$modal.msgError("请输入您的手机号");
-      } else if (this.loginForm.code === "") {
-        this.$modal.msgError("请输入验证码");
-      } else {
-        this.$modal.loading("登录中，请耐心等待...");
-        this.pwdLogin();
-      }
-    },
-    // 密码登录
-    async pwdLogin() {
-      this.$store
-        .dispatch("Login", this.loginForm)
-        .then(() => {
-          this.$modal.closeLoading();
-          this.loginSuccess();
-        })
-        .catch(() => {
-          if (this.captchaEnabled) {
-            this.getCode();
-          }
-        });
-    },
-    // 登录成功后，处理函数
-    loginSuccess(result) {
-      // 设置用户信息
-      //this.$tab.reLaunch('/pages/index')
-      this.$store.dispatch("GetInfo").then((res) => {
-		  // this.$tab.navigateTo("/pages/hospital/index");
-		  // return;
-        if (!res.data.isBindWeixin) {
-          this.getWeiXinCode();
-        } else if (!res.data.isBindIdCard) {
-          uni.navigateTo({
-            url: "/pages/mine/auth/identy",
-          });
-        } else {
-          if (res.data.isSelectDefaultHospital) {
-            this.$tab.reLaunch('/pages/index?name=' + res.data.defaultHospitalName)
-            return;
-          }
-          this.$tab.navigateTo("/pages/hospital/index");
-        }
-      });
-    },
-    weChatLogin(e) {
-      this.$modal.msgError("后端请自行实现");
-      return;
-      if (e.detail) {
-        uni.showLoading({
-          title: "登录中....",
-          mask: true,
-        });
-        var userInfo = e.detail.userInfo;
-        uni.login({
-          provider: "weixin",
-          success: (loginRes) => {
-            // console.log(loginRes, userInfo);
-            this.$store
-              .dispatch("MiniLogin", {
-                code: loginRes.code,
-                ...userInfo,
-              })
-              .then(() => {
-                this.$modal.closeLoading();
-                this.loginSuccess();
-              })
-              .catch(() => { });
-          },
-        });
-      } else {
-        this.$modal.msgError("登录失败");
-      }
-    },
-    // 点击回车键登录
-    keyDown(e) {
-      // 回车则执行登录方法 enter键的ASCII是13
-      if (e.keyCode === 13) {
-        this.handleLogin(); // 定义的登录方法
-      }
-    },
-  },
-
-  destroyed() {
-    // 销毁事件
-    window.removeEventListener("keydown", this.keyDown, false);
-  },
-};
+			},
+			handlePrivacy() {
+				let site = this.globalConfig.appInfo.agreements[0];
+				this.$tab.navigateTo(
+					`/pages/common/webview/index?title=${site.title}&url=${site.url}`
+				);
+			},
+			// 用户协议
+			handleUserAgrement() {
+				let site = this.globalConfig.appInfo.agreements[1];
+				this.$tab.navigateTo(
+					`/pages/common/webview/index?title=${site.title}&url=${site.url}`
+				);
+			},
+			wechatLogin() {},
+			navTo(url) {
+				uni.navigateTo({
+					url: url
+				})
+			}
+		},
+		onShow() {
+			let _userName = uni.getStorageSync('userName')
+			let _password = uni.getStorageSync('password')
+			console.log(_userName, _password)
+			if(_userName) {
+				this.userInfo.userName = _userName
+				this.checkedRemenber = ['记住我']
+			}
+			if(_password) {
+				this.userInfo.password = _password
+				this.checkedRemenber = ['记住我']
+			}
+		}
+	}
 </script>
-
 <style lang="scss" scoped>
-page {
-  background-color: #ffffff;
-}
+	.login-container {
+		height: auto;
 
-.normal-login-container {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  flex-direction: column;
+		.login-title {
+			text-align: center;
+			font-size: 70rpx;
+			line-height: 85rpx;
+			color: #303030;
+			margin-bottom: 86rpx;
+			padding-top: 120rpx;
+			display: flex;
+			justify-content: center;
+		}
 
-  .logo-content {
-    width: 100%;
-    font-size: 21px;
-    text-align: center;
-    padding-top: 50rpx;
+		.login-sub-title {
+			padding-left: 20rpx;
+			font-size: 70rpx;
+			text-align: center;
+			color: #FA8E1C;
+			line-height: 85rpx;
+			font-weight: bold;
+			;
+			margin-bottom: 100rpx;
+		}
 
-    image {
-      border-radius: 4px;
-      width: 416rpx;
-      height: 302.67rpx;
-      vertical-align: middle;
-    }
+		padding: 80rpx 60rpx 0 60rpx;
 
-    .title {
-      margin-left: 10px;
-    }
+		.login-item {
 
-    .logo-title {
-      width: 497.33rpx;
-      margin-top: 32rpx;
-    }
-  }
+			// padding: 12rpx 0;
+			// border-bottom: 1px solid #eee;
+			// margin-bottom: 20rpx;
+			/deep/ .u-input__content__prefix-icon {
+				margin-right: 18rpx;
+			}
 
-  .login-form-content {
-    text-align: center;
-    margin: 20px auto;
-    margin-top: 5%;
-    width: 80%;
+			/deep/ .u-icon {
+				// width: 80rpx;
+			}
 
-    .input-item {
-      margin: 15px auto;
-      background-color: transparent;
-      height: 45px;
-      border-radius: 20px;
-      border: 1rpx solid #94c9ff;
+			/deep/ .u-input {
+				font-size: 36rpx !important;
+				padding: 45rpx 18rpx !important;
+			}
 
-      .icon {
-        font-size: 38rpx;
-        margin-left: 10px;
-        color: #999;
-      }
+			/deep/ .input-placeholder {
+				font-size: 36rpx;
+				color: #C7CBD2;
+			}
+		}
 
-      .input {
-        width: 100%;
-        font-size: 14px;
-        line-height: 20px;
-        text-align: left;
-        padding-left: 15px;
-      }
-    }
+		.tips {
+			// margin-top: 36rpx;
+			color: #181818;
+			font-size: 27rpx;
 
-    .icon-phone {
-      background: url(@/static/images/phone.png) no-repeat;
-      background-size: 100% 100%;
-      width: 42rpx;
-      height: 54rpx;
-    }
+			text {
+				color: #FA8E1C;
+			}
+		}
 
-    .icon-validate {
-      background: url(@/static/images/validate.png) no-repeat;
-      background-size: 100% 100%;
-      width: 46rpx;
-      height: 54.67rpx;
-    }
+		.login-code {
+			border-bottom: none;
+			display: flex;
 
-    .login-btn {
-      // margin-top: 40px;
-      height: 45px;
-    }
+			.img {
+				width: 120rpx;
+				height: 54rpx;
+			}
+		}
 
-    .xieyi {
-      color: #333;
-      margin-top: 58px;
-      margin-bottom: 30rpx;
-      display: flex;
-      align-items: center;
-    }
-  }
+		.login-btn {
+			padding-top: 69rpx;
 
-  .easyinput {
-    width: 100%;
-  }
-}
+			.u-button--primary {
+				background: linear-gradient(90deg, #FA8E1C, #FABF5A);
+				border-radius: 47rpx !important;
+				color: #FFFFFF;
+				font-size: 36rpx !important;
+				border: 0 !important;
+				font-weight: bold;
+				;
+			}
 
-.login-code-img {
-  height: 45px;
-}
+			margin: 50rpx 0 50rpx 0;
+		}
 
-.other-login {
-  padding-top: 115rpx;
+		.login-mobile {
+			position: relative;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: #181818;
+			font-size: 27rpx;
 
-  .wxLoginBtn {
-    background: transparent !important;
-    border: none;
-  }
+			.split {
+				width: 1rpx;
+				height: 20rpx;
+				background: #C7CBD2;
+				margin: 0 22rpx;
+			}
 
-  .wxLoginBtn::after {
-    border: none;
-  }
+			text {
+				color: #FA8E1C;
+			}
+		}
+	}
 
-  .loginType {
-    display: flex;
-    // padding: 140rpx 0;
-    justify-content: center;
+	.login-other {
+		display: flex;
 
-    .item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      color: skyblue;
-      font-size: 22rpx;
-    }
-  }
-}
+		.login-other-item {
+			flex: 1;
+			margin: 0 25rpx;
+		}
 
-/deep/ .uni-data-checklist .checklist-group .checklist-box {
-  margin-right: 0px;
-}
+		.img {
+			width: 50px;
+			height: 50px;
+			margin: 0 30rpx;
+		}
 
-/deep/ .uni-data-checklist {
-  flex: none;
-}
+		.img:first-child {
+			margin-left: 0;
+		}
+	}
 
-/deep/ .uni-data-checklist .checklist-group .checklist-box .checkbox__inner {
-  border-radius: 50%;
-  width: 16px;
-  height: 16px;
-}
+	.xieyi {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+		font-size: 28rpx;
+		margin-top: 157rpx;
+		// position: fixed;
+		// width: 100%;
+		// left: 0;
+		// bottom: 30rpx;
+	}
 
-/deep/ .uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .checkbox__inner {
-  background-color: #fff;
-  border-color: #1296db;
-}
+	/deep/ .uni-data-checklist .checklist-group .checklist-box {
+		margin-right: 0px;
+	}
 
-/deep/ .uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .checkbox__inner .checkbox__inner-icon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  background-color: #1296db;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  width: 10px;
-  height: 10px;
-}
+	/deep/ .uni-data-checklist {
+		flex: none;
+	}
 
-/deep/ .uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .checklist-text[data-v-84d5d996] {
-  color: #000;
-}
+	/deep/ .uni-data-checklist .checklist-group .checklist-box .checkbox__inner {
+		border-radius: 50%;
+		width: 16px;
+		height: 16px;
+	}
+
+	/deep/ .uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .checkbox__inner {
+		background-color: #fff;
+		border-color: #FA8E1C;
+	}
+
+	/deep/ .uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .checkbox__inner .checkbox__inner-icon {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		background-color: #FA8E1C;
+		border-radius: 50%;
+		transform: translate(-50%, -50%);
+		width: 10px;
+		height: 10px;
+	}
+
+	/deep/ .uni-data-checklist .checklist-group .checklist-box .checklist-content .checklist-text {
+		color: #9A9FAF;
+	}
+
+	/deep/ .uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .checklist-text[data-v-84d5d996] {
+		color: #333;
+
+	}
+</style>
+
+<style lang="scss">
+	.uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .checklist-text {
+	  color: #333 !important;
+	}
 </style>

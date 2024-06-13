@@ -1,0 +1,498 @@
+<template>
+	<view class="merchant">
+		<u-navbar leftText="返回" :fixed="true" bgColor="#fff" :autoBack="false" :safeAreaInsetTop="true"
+			@leftClick="$mHelper.goBack()" leftIconColor="#363636" leftIcon="arrow-leftward" leftIconSize="25"
+			:titleStyle="{color: '#363636',fontSize: '32rpx'}">
+			<view class="search flex align-center" slot="right" @click="openSearchPop()" :style="{marginRight: rightX + 'px'}">
+				<text style="fontSize: 34rpx">筛选查询</text>
+				<u-icon size="30" color="#363636" name="search"></u-icon>
+			</view>
+		</u-navbar>
+		<common-view>
+			<view class="merchant-content">
+				<view class="top-pannel shadow flex align-center justify-between">
+					<view class="left">
+						<text class="margin-right-sm">{{initData.nianyue ? initData.nianyue : initData.riqi}}</text>
+						<text>合计：</text>
+					</view>
+					<view class="right">
+						{{initData.ri_total ? initData.ri_total : initData.yue_total}}
+					</view>
+				</view>
+				<view class="list margin-bottom">
+					<view class="item margin-top-sm padding-top" v-for="(item,index) in list" :key="index">
+						<view class="top flex align-center justify-between margin-bottom-sm">
+							<view class="left">
+								{{item.shname }}
+							</view>
+							<!-- 	<view class="detail" v-if="current == 0" @click="$tab.navigateTo('/pages/merchant/detail?shanghuno=' + item.shanghuno)">
+							交易明细
+						</view> -->
+						</view>
+						<view class="flex align-center justify-between margin-bottom-xs" v-if="item.jijuhao">
+							<view class="label">
+								SN：
+							</view>
+							<view class="right flex align-center">
+								<text>{{item.jijuhao}}</text>
+								<u--image @click="copy(item.jijuhao)" class="copy margin-left-xs" :showLoading="true"
+									src="/static/images/copy.png" width="25rpx" height="26rpx"
+									mode="aspectFit"></u--image>
+
+							</view>
+						</view>
+						<view class="flex align-center justify-between padding-bottom-xs">
+							<view class="label">
+								商户号
+							</view>
+							<view class="right flex align-center">
+								<text>{{item.shanghuno}}</text>
+								<u--image class="copy margin-left-xs" :showLoading="true" @click="copy(item.shanghuno)"
+									src="/static/images/copy.png" width="25rpx" height="26rpx"
+									mode="aspectFit"></u--image>
+						
+							</view>
+						</view>
+						<view class="flex align-center justify-between padding-bottom-xs">
+							<view class="label">
+								政策：
+							</view>
+						<!-- 	<view class="right flex align-center">
+								<text>{{item.zcname}}</text>
+								<u--image class="copy margin-left-xs" :showLoading="true" @click="copy(item.zcname)"
+									src="/static/images/copy.png" width="25rpx" height="26rpx"
+									mode="aspectFit"></u--image>
+
+							</view> -->
+						</view>
+						
+						<view class="flex align-center justify-between " v-if="tab == 'jiaoyi'">
+							<view class="label">
+								交易金额
+							</view>
+						<!-- 	<view class="right flex align-center">
+								<text>{{item.jine }}</text>
+								<u--image class="copy margin-left-xs" :showLoading="true" @click="copy(item.jine)"
+									src="/static/images/copy.png" width="25rpx" height="26rpx"
+									mode="aspectFit"></u--image>
+
+							</view> -->
+						</view>
+						<view class="flex align-center justify-between " v-if="tab == 'jihuo'">
+							<view class="">
+								<text class="label">激活时间：</text>
+
+							</view>
+							<view class="">
+								<text> {{item.jihuotime }}</text>
+							</view>
+						</view>
+						<!-- <view class="flex align-center justify-between padding-bottom">
+						<view class="">
+							<text class="label">归属代理：</text>
+							
+						</view>
+						<view class="">
+							<text>{{item.xiajiname}}</text>
+						</view>
+					</view> -->
+					</view>
+				</view>
+				<u-loadmore :status="status" @loadmore="loadmore" />
+			</view>
+		</common-view>
+		<search-pop ref="searchPop" :columns="columns" @submit="doSearch"></search-pop>
+	</view>
+</template>
+
+<script>
+	import {
+		getYejichaxunMap
+	} from '@/api/system/user.js'
+import SearchPop from '@/components/search/index.vue'
+	export default {
+		data() {
+			return {
+				rightX: 0,
+				current: 0,
+				tabs: [{
+						name: '本级激活月报',
+						val: 0
+					},
+					{
+						name: '团队激活月报',
+						val: 1
+					}
+				],
+				paramsMap: {
+					month_jiaoyi: {
+						api: '/api_yejichaxun_jiaoyi_month_list.ashx',
+						name: 'yhh.yejichaxun_jiaoyi_month_list'
+					},
+					day_jiaoyi: {
+						api: '/api_yejichaxun_jiaoyi_day_list.ashx',
+						name: 'yhh.yejichaxun_jiaoyi_day_list'
+					},
+					day_jihuo: {
+						api: '/api_yejichaxun_jihuo_day_list.ashx',
+						name: 'yhh.yejichaxun_jihuo_day_list'
+					},
+					month_jihuo: {
+						api: '/api_yejichaxun_jihuo_month_list.ashx',
+						name: 'yhh.yejichaxun_jihuo_month_list'
+					},
+				},
+				page: 1,
+				pageSize: 10,
+				total: 0,
+				pageNumber: 0,
+				status: 'loadmore',
+				params_name: '',
+				type: '',
+				riqi: '',
+				nian: '',
+				yue: '',
+				tab: '',
+				initData: {},
+				searh: {},
+				columns: [{
+						type: 'pinpai',
+						label: '品牌',
+						model: 'pinpai',
+						placeholder: '请选择',
+						isShow: true,
+						actions: []
+					},
+					{
+						type: 'zhengce',
+						label: '政策',
+						model: 'zhengce',
+						isShow: true,
+						placeholder: '请选择',
+						actions: []
+					},
+					{
+						type: 'keyword',
+						label: '模糊查询',
+						model: 'daili',
+						isShow: true,
+						placeholder: '输入代理商号',
+						actions: []
+					},
+					
+					
+				],
+			};
+		},
+		components: {
+			SearchPop
+		},
+		onReady() {
+			// #ifdef MP-WEIXIN
+			let res = uni.getMenuButtonBoundingClientRect()
+			console.log(res)
+			this.rightX = res.width
+			// #endif
+		},
+		onLoad(params) {
+			this.params_name = params.name
+			this.type = params.type
+			this.tab = params.tab
+			params.riqi ? this.riqi = params.riqi : null
+			params.nian ? this.nian = params.nian : null
+			params.yue ? this.yue = params.yue : null
+			console.log(this.riqi)
+			this.tabs = [{
+					name: `本级${this.type}月报`,
+					val: 0
+				},
+				{
+					name: `团队${this.type}月报`,
+					val: 1
+				}
+			];
+			// console.log(this.paramsMap[this.params_name].team.api)
+			this.getList()
+
+		},
+		onReachBottom() {
+			console.log('我滚动到底部了~')
+			if (this.page >= this.pageNumber) {
+				this.status = 'nomore';
+				return;
+			} else {
+				this.status = "loading"
+			}
+			// this.page++; 
+			this.pageSize += this.pageSize
+			this.getList()
+			// console.log('我滚动到底部了~')
+		},
+		onPullDownRefresh() {
+			this.page = 1;
+			this.getList();
+			// #ifndef MP-WEIXIN
+			uni.startPullDownRefresh({
+			
+			})
+			// #endif
+		},
+		methods: {
+			changeTab(item) {
+				this.current = item.val
+				this.page = 1;
+				this.getList()
+			},
+			getList() {
+				this.type == 'day' ? this.getDirectOpenList() : this.getDirectUnOpenList()
+			},
+			getDirectOpenList() {
+				getYejichaxunMap({
+					url: this.paramsMap[this.params_name].api,
+					apiname: this.paramsMap[this.params_name].name,
+				}, {
+					page: this.page,
+					pageSize: this.pageSize,
+					riqi: this.riqi,
+
+				}).then((res) => {
+					uni.stopPullDownRefresh()
+					this.total = res.totalnum
+					this.initData = res;
+					this.pageNumber = Math.ceil(Number(res.totalnum) / this.pageSize)
+					console.log(this.pageNumber)
+					if (this.page == 1) {
+						this.list = res.yejilist
+					} else {
+						this.list = this.list.concat(res.yejilist)
+
+					}
+					if (this.page >= this.pageNumber) {
+						this.status = 'nomore';
+					} else {
+						this.status = 'loadmore';
+					}
+
+				})
+			},
+			getDirectUnOpenList() {
+				getYejichaxunMap({
+					url: this.paramsMap[this.params_name].api,
+					apiname: this.paramsMap[this.params_name].name,
+				}, {
+					page: this.page,
+					pageSize: this.pageSize,
+
+					nian: this.nian,
+					yue: this.yue
+				}).then((res) => {
+					uni.stopPullDownRefresh()
+					this.total = res.totalnum
+					this.initData = res;
+					this.pageNumber = Math.ceil(Number(res.totalnum) / this.pageSize)
+					console.log(this.pageNumber)
+					if (this.page == 1) {
+						this.list = res.yejilist
+					} else {
+						this.list = this.list.concat(res.yejilist)
+
+					}
+					if (this.page >= this.pageNumber) {
+						this.status = 'nomore';
+					} else {
+						this.status = 'loadmore';
+					}
+
+
+				})
+			},
+			loadmore() {
+				if (this.page >= this.pageNumber) {
+					this.status = 'nomore';
+					return;
+				} else {
+					this.status = "loading"
+				}
+				// this.page++;
+				 this.pageSize += this.pageSize
+				this.getList()
+			},
+			openSearchPop() {
+				this.$refs.searchPop.show = true
+			},
+			doSearch(form) {
+				console.log(form)
+				// this.searh.DataFrom = uni.$u.timeFormat(form.startDate, 'yyyy-mm-dd') 
+				// this.searh.DataTo = uni.$u.timeFormat(form.endDate, 'yyyy-mm-dd')  
+				this.page = 1;
+				this.getList()
+				console.log(this.searh)
+			},
+			copy(text) {
+				// #ifdef H5
+				this.$mHelper.h5Copy(text)
+				// #endif
+				uni.setClipboardData({
+					data: text,
+					success: () => {
+						uni.showToast({
+							icon: 'success',
+							title: '复制成功'
+						});
+					}
+				});
+
+			}
+		},
+	}
+</script>
+<style lang="scss">
+	page {
+		background-color: #F6F5F8;
+	}
+</style>
+<style lang="scss" scoped>
+	page {
+		background-color: #F6F5F8
+	}
+
+	.merchant {
+		&-content {
+			padding: 25rpx;
+		}
+
+		.top-pannel {
+			padding: 45rpx 74rpx;
+			background: linear-gradient(130deg, #FA982B, #FFC079);
+			box-shadow: 6upx 6upx 8upx rgba(217, 109, 26, 0.2);
+			border-radius: 16rpx;
+			color: #FFFFFF;
+
+			h3 {
+				font-size: 27rpx;
+				font-weight: 400;
+				margin-bottom: 25rpx;
+			}
+
+			h1 {
+				font-size: 40rpx;
+				font-weight: bold;
+			}
+
+			.right {
+				font-size: 45rpx;
+				font-weight: bold;
+			}
+		}
+
+		.tabs {
+			padding: 10rpx;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			background: #FFFFFF;
+			border-radius: 12rpx;
+
+			.item {
+				width: 50%;
+				height: 60rpx;
+				line-height: 60rpx;
+				text-align: center;
+				color: #545454;
+				font-size: 32rpx;
+
+				&.active {
+					background: #F6F5F8;
+					border-radius: 12rpx;
+					color: #FA982B;
+				}
+			}
+		}
+
+		.list {
+			.item {
+				background: #FFFFFF;
+				border-radius: 12rpx;
+				padding-left: 35rpx;
+				padding-right: 35rpx;
+				font-size: 32rpx;
+				color: rgba(0, 0, 0, 1);
+
+				&>view {
+					&:last-child {
+						padding-bottom: 25rpx;
+					}
+				}
+
+				.top {
+					// padding: 18rpx 0;
+					position: relative;
+					padding-left: 25rpx;
+
+					&::before {
+						content: '';
+						position: absolute;
+						top: 50%;
+						left: 0;
+						transform: translateY(-50%);
+						width: 10rpx;
+						height: 39rpx;
+						background: linear-gradient(130deg, #FA982B, #FFC079);
+						border-radius: 5rpx;
+					}
+
+					.left {
+						color: #1B1B1B;
+						font-size: 32rpx;
+
+						text {
+							color: #747474;
+							margin-left: 18rpx;
+						}
+					}
+
+					.detail {
+						width: 129rpx;
+						height: 37rpx;
+						background: #FFF8ED;
+						border-radius: 12rpx;
+						text-align: center;
+						line-height: 37rpx;
+						color: #F49441;
+						font-size: 26rpx;
+					}
+				}
+
+				.label {
+					color: rgba(63, 63, 63, 0.8);
+					font-size: 30rpx;
+				}
+
+				.split {
+					height: 1rpx;
+					background: #000000;
+					opacity: 0.1;
+				}
+
+				.bottom {
+					padding-bottom: 25rpx;
+
+					&>view {
+						width: 33.33%;
+					}
+
+					h3 {
+						font-size: 28rpx;
+						color: rgba(63, 63, 63, 0.8);
+						margin-bottom: 10rpx;
+					}
+
+					h1 {
+						color: #000000;
+						font-size: 28rpx;
+					}
+				}
+			}
+		}
+	}
+</style>

@@ -1,3 +1,5 @@
+
+
 .text-center {
 	text-align: center;
 }
@@ -68,7 +70,7 @@
   
   
   .menu-list {
-    margin: 15px 15px;
+    // margin: 15px 15px;
   
     .menu-item-box {
       width: 100%;
@@ -154,8 +156,8 @@ uni-page-head .uni-page-head__title{
 .uni-tabbar {
     .uni-tabbar__item {
         .uni-tabbar__icon {
-            width: 65rpx !important;
-            height: 54rpx !important;
+            width: 38.19rpx !important;
+            height: 38.19rpx !important;
         }
     }
 }
@@ -165,3 +167,45 @@ uni-page-head .uni-page-head__title{
 		  padding: 30rpx 30rpx !important;
 	}
 }
+
+.u-button--primary{
+				background: linear-gradient(90deg, #FA8E1C, #FABF5A);
+				border-radius: 47rpx !important;
+				color: #FFFFFF !important;
+				font-size: 36rpx !important;
+				border: 0 !important;
+				font-weight: bold;;
+			}
+			.u-button--middle{
+							background: linear-gradient(-58deg, #FA982B, #FFC079);
+							border-radius: 47rpx !important;
+							color: #FFFFFF !important;
+							font-size: 32rpx !important;
+							border: 0 !important;
+							height: 81rpx !important;
+							width: 386rpx !important;
+							font-weight: bold;;
+						}
+			/deep/ .u-navbar__content__left__text{
+				font-size: 33rpx !important;
+				margin-left: 15rpx !important;
+			}
+			
+			/deep/ .u-button--plain {
+				height: 72rpx;
+				border: 1px solid #FA8E1C !important;
+				background: transparent;
+				color: #FA8E1C;
+			}
+			
+			.btn-action {
+				margin-top: 60rpx;
+			
+				/deep/ .u-button {
+					width: 242rpx !important;
+					height: 72rpx !important;
+				}
+			
+				
+				
+			}

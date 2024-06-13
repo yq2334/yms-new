@@ -27,6 +27,7 @@ const user = {
 
   mutations: {
     SET_TOKEN: (state, token) => {
+		  setToken(token)
       state.token = token
     },
     SET_NAME: (state, name) => {
@@ -46,6 +47,7 @@ const user = {
       storage.set(constant.permissions, permissions)
     },
     SET_USERINFO: (state, value) => {
+		
       state.userInfo = value
       storage.set(constant.userInfo, value)
     },

@@ -1,58 +1,6 @@
 <template>
 	<view class="hospital-home">
-		<view class="select-hosp" @tap="handleSelect">
-			<text class="name">{{ name }}</text>
-			<view class="sel">
-				选择
-			</view>
-		</view>
-		<view class="hospital-content">
-			<view class="hospital-wrapper">
-				<view class="name">
-					门急诊
-				</view>
-				<view class="list">
-					<view class="item" @tap="navTo('/pages/hospital/reserve')">
-						<view class="img">
-							<img src="../static/images/yuyueguahao.png" alt="">
-						</view>
-						<text class="tit">预约挂号</text>
-					</view>
-					<view class="item" @tap="navTo('/pages/order/guahao')">
-						<view class="img">
-							<img src="../static/images/guahaojilu.png" alt="">
-						</view>
-						<text class="tit">挂号记录</text>
-					</view>
-					<view class="item" @tap="navTo('/pages/order/index')">
-						<view class="img">
-							<img src="../static/images/jiaofeijilu.png" alt="">
-						</view>
-						<text class="tit">缴费订单</text>
-					</view>
-				</view>
-			</view>
-			<view class="hospital-wrapper">
-				<view class="name">
-					住院
-				</view>
-				<view class="list">
-					<view class="item" @tap="navTo('/pages/order/zhuyuan')">
-						<view class="img">
-							<img src="../static/images/riqingdan.png" alt="">
-						</view>
-						<text class="tit">每日清单</text>
-					</view>
-					<view class="item" @tap="navTo('/pages/order/list1')">
-						<view class="img">
-							<img src="../static/images/riqingdan.png" alt="">
-						</view>
-						<text class="tit">缴费订单</text>
-					</view>
-				</view>
-			</view>
-		</view>
-
+		这是首页
 	</view>
 </template>
 
@@ -69,17 +17,7 @@
 		},
 		onLoad(option) {
 			
-			console.log(option.id)
-			this.id = option.id
-			this.name = this.$store.getters.userInfo.defaultHospitalName
-			let token = this.$store.getters.token
-			if (!token) {
-				this.$tab.navigateTo('/pages/login')
-			}
-			uni.setNavigationBarTitle({
-				title: this.name
-			})
-			this.$store.dispatch('GetSysConfig')
+			
 		},
 		created() {
 			// this.getHospitalList()

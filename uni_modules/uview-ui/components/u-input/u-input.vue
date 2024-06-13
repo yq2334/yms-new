@@ -1,4 +1,5 @@
 <template>
+	
     <view class="u-input" :class="inputClass" :style="[wrapperStyle]">
         <view class="u-input__content">
             <view

@@ -12,5 +12,9 @@
             "前端组件",
             "通用组件"
         ]
+    },
+    "dependencies": {
+        "html2canvas": "^1.4.1",
+        "jweixin-module": "^1.6.0"
     }
 }

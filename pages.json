@@ -1,77 +1,8 @@
 {
 	"pages": [{
-			"path": "pages/index",
+			"path": "pages/home/home",
 			"style": {
-				"navigationBarTitleText": "信用就医",
-				"navigationStyle": "custom"
-			}
-		},
-		{
-			"path": "pages/login",
-			"style": {
-				"navigationBarTitleText": "登录",
-				"navigationStyle": "custom"
-			}
-		},
-		{
-			"path": "pages/work/index",
-			"style": {
-				"navigationBarTitleText": "工作台"
-				// "navigationStyle": "custom"
-			}
-		},
-		{
-			"path": "pages/mine/index",
-			"style": {
-				"navigationBarTitleText": "我的",
-				"navigationStyle": "custom"
-			}
-		},
-		{
-			"path": "pages/mine/avatar/index",
-			"style": {
-				"navigationBarTitleText": "修改头像"
-			}
-		},
-		{
-			"path": "pages/mine/info/index",
-			"style": {
-				"navigationBarTitleText": "个人信息",
-				"navigationStyle": "custom"
-			}
-		},
-		{
-			"path": "pages/mine/info/edit",
-			"style": {
-				"navigationBarTitleText": "编辑资料",
-				"navigationStyle": "custom"
-			}
-		},
-		{
-			"path": "pages/mine/pwd/index",
-			"style": {
-				"navigationBarTitleText": "修改密码",
-				"navigationStyle": "custom"
-			}
-		},
-		{
-			"path": "pages/mine/setting/index",
-			"style": {
-				"navigationBarTitleText": "设置",
-				"navigationStyle": "custom"
-			}
-		},
-		{
-			"path": "pages/mine/help/index",
-			"style": {
-				"navigationBarTitleText": "帮助",
-				"navigationStyle": "custom"
-			}
-		},
-		{
-			"path": "pages/mine/about/index",
-			"style": {
-				"navigationBarTitleText": "关于我们",
+				"navigationBarTitleText": "翼秘书",
 				"navigationStyle": "custom"
 			}
 		},
@@ -88,416 +19,501 @@
 			}
 		},
 		{
-			"path": "pages/feedback/index",
+			"path": "pages/login",
 			"style": {
-				"navigationBarTitleText": "意见反馈",
-				"enablePullDownRefresh": true
-			}
-		},
-		{
-			"path": "pages/search/index",
-			"style": {
-				"navigationBarTitleText": "搜索",
-				"enablePullDownRefresh": false,
+				"navigationBarTitleText": "登录",
 				"navigationStyle": "custom"
 			}
 		},
+
 		{
-			"path": "pages/message/message",
+			"path": "pages/mine/index",
 			"style": {
+				"navigationBarTitleText": "我的",
 				"enablePullDownRefresh": true,
-				"navigationBarTitleText": "消息"
+				"navigationStyle": "custom"
 			}
 		},
+
 		{
-			"path": "pages/demo/demo",
+			"path": "pages/register",
 			"style": {
-				"navigationBarTitleText": "演示",
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+		},
+		
+		
+		{
+			"path": "pages/performance/performance",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
+			}
+		},
+
+		
+		
+		
+		
+		{
+			"path": "pages/mine/service",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
 				"enablePullDownRefresh": false
 			}
 		},
+		
+		
+
+		
+		
 		{
-			"path": "pages/monitor/logininfo",
+			"path": "pages/performance/month-list",
 			"style": {
-				"navigationBarTitleText": "登录日志"
-			}
-		},
-		{
-			"path": "pages/monitor/operlog",
-			"style": {
-				"navigationBarTitleText": "操作日志",
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
 				"enablePullDownRefresh": true
 			}
 		},
 		{
-			"path": "pages/demo/table/table",
+			"path": "pages/performance/day-list",
 			"style": {
-				"navigationBarTitleText": "table演示",
-				"enablePullDownRefresh": false
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
+			}
+		},
+		
+		{
+			"path": "pages/performance/team-detail",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
 			}
 		},
 		{
-			"path": "pages/demo/table/edit/edit",
-			"style": {
-				"navigationBarTitleText": "demo编辑",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/message/details",
-			"style": {
-				"navigationBarTitleText": "公告详情",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/monitor/onlineuser",
-			"style": {
-				"navigationBarTitleText": "在线用户列表",
-				"enablePullDownRefresh": false
-			}
-
-		},
-		{
-			"path": "pages/demo/table/table2",
-			"style": {
-				"navigationBarTitleText": "表格演示",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/hospital/list",
+			"path": "pages/performance/direct-detail",
 			"style": {
 				"navigationBarTitleText": "",
 				"navigationStyle": "custom",
 				"enablePullDownRefresh": false
 			}
-
-		}, {
-			"path": "pages/hospital/index",
+		},
+		
+		
+		{
+			"path": "pages/register_ewm",
 			"style": {
 				"navigationBarTitleText": "",
 				"navigationStyle": "custom",
 				"enablePullDownRefresh": false
 			}
-
-		}, {
-			"path": "pages/hospital/reserve",
-			"style": {
-				"navigationBarTitleText": "预约挂号",
-				"navigationStyle": "custom",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/hospital/reserve-doctor",
-			"style": {
-				"navigationBarTitleText": "预约医生",
-				"enablePullDownRefresh": false,
-				"navigationStyle": "custom"
-			}
-
-		}, {
-			"path": "pages/hospital/reserve-time",
-			"style": {
-				"navigationBarTitleText": "预约排班",
-				"navigationStyle": "custom",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/hospital/submit",
-			"style": {
-				"navigationBarTitleText": "提交预约",
-				"navigationStyle": "custom",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/hospital/pay-order",
-			"style": {
-				"navigationBarTitleText": "已支付订单",
-				"navigationStyle": "custom",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/hospital/paying-order",
-			"style": {
-				"navigationBarTitleText": "支付订单",
-				"navigationStyle": "custom",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/hospital/reserve-success",
-			"style": {
-				"navigationBarTitleText": "预约成功",
-				"navigationStyle": "custom",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/order/index",
-			"style": {
-				"navigationBarTitleText": "缴费订单",
-				"navigationStyle": "custom",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/order/zhuyuan",
-			"style": {
-				"navigationBarTitleText": "住院清单",
-				"navigationStyle": "custom",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/order/list1",
-			"style": {
-				"navigationBarTitleText": "缴费订单 ",
-				"navigationStyle": "custom",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/order/list2",
-			"style": {
-				"navigationBarTitleText": "住院清单",
-				"navigationStyle": "custom",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/order/detail1",
-			"style": {
-				"navigationBarTitleText": "费用明细",
-				"navigationStyle": "custom",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/order/detail2",
-			"style": {
-				"navigationBarTitleText": "详情",
-				"enablePullDownRefresh": false,
-				"navigationStyle": "custom"
-			}
-
-		}, {
-			"path": "pages/order/detail3",
-			"style": {
-				"navigationBarTitleText": "详情",
-				"enablePullDownRefresh": false,
-				"navigationStyle": "custom"
-
-			}
-
-		}, {
-			"path": "pages/order/detail4",
-			"style": {
-				"navigationBarTitleText": "详情",
-				"enablePullDownRefresh": false,
-				"navigationStyle": "custom"
-
-			}
-
-		}, {
-			"path": "pages/order/guahao",
-			"style": {
-				"navigationBarTitleText": "挂号记录",
-				"navigationStyle": "custom",
-				"enablePullDownRefresh": false
-			}
-
 		}
-	    ,{
-            "path" : "pages/mine/info/phone-edit",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "更换手机号码",
-				"navigationStyle": "custom",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/mine/update/index",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "版本更新",
-				"navigationStyle": "custom",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/mine/update/detail",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "版本更新",
-				"navigationStyle": "custom",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/mine/auth/index",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "授权书",
-				"navigationStyle": "custom",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/mine/auth/service",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "信用服务",
-				"navigationStyle": "custom",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/mine/auth/logout",
-			"navigationStyle": "custom",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "注销账号",
-				"navigationStyle": "custom",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/mine/add/index",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "家庭共享",
-				"navigationStyle": "custom",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/mine/add/add",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "添加家人",
-				"navigationStyle": "custom",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/credit/index",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "我的信用",
-				"navigationStyle": "custom",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/credit/bank",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "专属额度授信",
-				"navigationStyle": "custom",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/credit/order",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "守约记录",
-				"navigationStyle": "custom",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/credit/class",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "教程",
-				"navigationStyle": "custom",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/credit/quota",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "获取额度",
-				"navigationStyle": "custom",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/mine/auth/identy",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "身份认证",
-				"navigationStyle": "custom",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/hospital/search",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "搜索医院",
-				"navigationStyle": "custom",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+	],
+	"subpackages": [{
+		"root": "packageA",
+		"pages": [
+			{
+				"path": "pages/agent/query",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": true
+				}
+			},
+			{
+				"path": "pages/control/control",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": true
+				}
+			},
+			{
+				"path": "pages/control/list",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": true
+				}
+			},
+			{
+				"path": "pages/finance/card-setting",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": false
+				}
+			},
+			{
+				"path": "pages/income/income",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": true
+				}
+			},
+			{
+				"path": "pages/income/detail",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": false
+				}
+			},
+			{
+				"path": "pages/merchant/merchant",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": true
+				}
+			},
+			{
+				"path": "pages/merchant/detail",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": false
+				}
+			},
+			{
+				"path": "pages/merchant/edit-fee",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": false
+				}
+			},
+			{
+				"path": "pages/merchant/merchant-date-detail",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": true
+				}
+			},
+			
+			{
+				"path": "pages/team/team",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": true
+				}
+			},
+			{
+				"path": "pages/team/detail",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": false
+				}
+			},
+			{
+				"path": "pages/terminal/terminal",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": true
+				}
+			},
+			{
+				"path": "pages/terminal/detail",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": false
+				}
+			},
+			{
+				"path": "pages/terminal/direct",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": true
+				}
+			},
+			
+			{
+				"path": "pages/terminal/select",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": false
+				}
+			},
+			{
+				"path": "pages/terminal/team",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": true
+				}
+			},
+			{
+				"path": "pages/terminal/jibie",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": true
+				}
+			},
+			{
+				"path": "pages/terminal/month-list",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": true
+				}
+			},
+			{
+				"path": "pages/transfer/transfer",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": true
+				}
+			},
+			{
+				"path": "pages/transfer/detail",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": false
+				}
+			},
+			{
+				"path": "pages/transfer/list",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": true
+				}
+			},
+			
+			{
+				"path": "pages/transfer/huishou",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": true
+				}
+			},
+			{
+				"path": "pages/transfer/recycle",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": true
+				}
+			},
+			{
+				"path": "pages/transfer/zone-select",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": true
+				}
+			},
+			{
+				"path": "pages/transfer/zone",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": true
+				}
+			}
+		]
+	},
+	{
+		"root": "packageB",
+		"pages": [
+			{
+				"path": "pages/ruwang/ruwang",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": false
+				}
+			},
+			{
+				"path": "pages/wallet/wallet",
+				"style": {
+					"navigationBarTitleText": "",
+					"enablePullDownRefresh": true,
+					"navigationStyle": "custom"
+				}
+			},	
+			{
+				"path": "pages/wallet/day-summary",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": true
+				}
+			},
+			{
+				"path": "pages/wallet/month-summary",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": true
+				}
+			},
+			{
+				"path": "pages/wallet/earning-detail",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": false
+				}
+			},
+			
+			
+			{
+				"path": "pages/withdraw/withdraw",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": false
+				}
+			},
+			{
+				"path": "pages/withdraw/detail",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": false
+				}
+			},
+			
+			{
+				"path": "pages/police/police",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": true
+				}
+			}
+		]
+	},
+	{
+		"root": "packageC",
+		"pages": [
+			{
+				"path": "pages/auth/mobile-login",
+				"style": {
+					"navigationBarTitleText": "",
+					"enablePullDownRefresh": false,
+					"navigationStyle": "custom"
+				}
+			},
+			{
+				"path": "pages/auth/find-password",
+				"style": {
+					"navigationBarTitleText": "",
+					"enablePullDownRefresh": false,
+					"navigationStyle": "custom"
+				}
+			},
+			{
+				"path": "pages/auth/edit-password",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": false
+				}
+			},
+			{
+				"path": "pages/feedback/index",
+				"style": {
+					"navigationBarTitleText": "",
+					"enablePullDownRefresh": false,
+					"navigationStyle": "custom"
+				}
+			},
+			{
+				"path": "pages/notice/notice",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": true
+				}
+			},
+			{
+				"path": "pages/notice/detail",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": false
+				}
+			},
+			{
+				"path": "pages/question/question",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": true
+				}
+			},
+			{
+				"path": "pages/question/detail",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": false
+				}
+			},
+			{
+				"path": "pages/share/share",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": false
+				}
+			}
+		]
+	}
+	],
 	"tabBar": {
-		"color": "#BFBFBF",
-		"selectedColor": "#38A4D1",
+		"color": "#5C5C5C",
+		"selectedColor": "#1F1F1F",
 		"borderStyle": "white",
 		"backgroundColor": "#ffffff",
 		"list": [{
-				"pagePath": "pages/index",
+				"pagePath": "pages/home/home",
 				"iconPath": "static/images/tabbar/tab-home.png",
 				"selectedIconPath": "static/images/tabbar/tab-home-active.png",
 				"text": "首页"
+			},
+			{
+				"pagePath": "pages/performance/performance",
+				"iconPath": "static/images/tabbar/tab-list.png",
+				"selectedIconPath": "static/images/tabbar/tab-mine-active.png",
+				"text": "数据"
 			},
 			{
 				"pagePath": "pages/mine/index",
 				"iconPath": "static/images/tabbar/tab-mine.png",
 				"selectedIconPath": "static/images/tabbar/tab-mine-active.png",
 				"text": "我的"
-			},
-			// {
-			//   "pagePath": "pages/message/message",
-			//   "iconPath": "static/images/tabbar/message.png",
-			//   "selectedIconPath": "static/images/tabbar/message_.png",
-			//   "text": "消息"
-			// },
-			{
-				"pagePath": "pages/mine/setting/index",
-				"iconPath": "static/images/tabbar/tab-set.png",
-				"selectedIconPath": "static/images/tabbar/tab-set-active.png",
-				"text": "设置"
 			}
+
 		]
 	},
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "信用就医",
-		"navigationBarBackgroundColor": "#FFFFFF"
+		"navigationBarTitleText": "翼秘书",
+		"navigationBarBackgroundColor": "#FFFFFF",
+		"app-plus": {
+			// 将回弹属性关掉
+			"bounce": "none"
+		}
 	}
 }
