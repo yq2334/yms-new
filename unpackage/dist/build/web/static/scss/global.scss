@@ -1,0 +1,211 @@
+
+
+.text-center {
+	text-align: center;
+}
+
+.font-13 {
+	font-size: 13px;
+}
+
+.font-12 {
+	font-size: 12px;
+}
+
+.font-11 {
+	font-size: 11px;
+}
+
+.text-grey1 {
+	color: #888;
+}
+.text-grey2 {
+	color: #aaa;
+}
+
+.list-cell-arrow::before {
+    content: ' ';
+    height: 10px;
+    width: 10px;
+    border-width: 2px 2px 0 0;
+    border-color: #c0c0c0;
+    border-style: solid;
+    -webkit-transform: matrix(0.5, 0.5, -0.5, 0.5, 0, 0);
+    transform: matrix(0.5, 0.5, -0.5, 0.5, 0, 0);
+    position: absolute;
+    top: 50%;
+    margin-top: -6px;
+    right: 30rpx;
+  }
+  
+  .list-cell {
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #fff;
+    color: #333;
+    padding: 30rpx 30rpx;
+  }
+  
+  .list-cell:first-child {
+    border-radius: 8rpx 8rpx 0 0;
+  }
+  
+  .list-cell:last-child {
+    border-radius: 0 0 8rpx 8rpx;
+  }
+  
+  .list-cell::after {
+    content: '';
+    position: absolute;
+    // border-bottom: 1px solid #eaeef1;
+    -webkit-transform: scaleY(0.5) translateZ(0);
+    transform: scaleY(0.5) translateZ(0);
+    transform-origin: 0 100%;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    pointer-events: none;
+  }
+  
+  
+  .menu-list {
+    // margin: 15px 15px;
+  
+    .menu-item-box {
+      width: 100%;
+      display: flex;
+      align-items: center;
+  
+      .menu-icon {
+        // color: #007AFF;
+        font-size: 18px;
+        margin-right: 5px;
+      }
+      
+      .text-right {
+        margin-left: auto;
+        margin-right: 34rpx;
+        color: #999;
+      }
+    }
+  }
+
+/* text color */
+.text-navy {
+  color: #1ab394;
+}
+.text-pink {
+  color: pink;
+}
+.text-primary {
+  color: inherit;
+}
+
+.text-success {
+  color: #1c84c6;
+}
+
+.text-info {
+  color: #23c6c8;
+}
+
+.text-warning {
+  color: #f8ac59;
+}
+
+.text-danger {
+  color: #ff0000;
+}
+
+.text-muted {
+  color: #888888;
+}
+
+.text-orange {
+  color: #ff7d00;
+}
+
+.text-hotpink {
+  color: hotpink;
+}
+
+.text-green {
+  color: green;
+}
+
+.text-greenyellow {
+  color: greenyellow;
+}
+.text-purple {
+  color: #ff00ff;
+}
+
+//导航栏字体
+.uni-page-head .uni-page-head__title {
+    font-size: 15px !important;
+}
+uni-page-head .uni-page-head__title{
+	font-weight: normal !important;
+}
+// tab图标
+// .uni-tabbar .uni-tabbar__icon {
+// 	width: 20px !important;
+// 	height: 20px !important;
+// }
+.uni-tabbar {
+    .uni-tabbar__item {
+        .uni-tabbar__icon {
+            width: 38.19rpx !important;
+            height: 38.19rpx !important;
+        }
+    }
+}
+
+.setting-container{
+	.u-cell__body {
+		  padding: 30rpx 30rpx !important;
+	}
+}
+
+.u-button--primary{
+				background: linear-gradient(90deg, #FA8E1C, #FABF5A);
+				border-radius: 47rpx !important;
+				color: #FFFFFF !important;
+				font-size: 36rpx !important;
+				border: 0 !important;
+				font-weight: bold;;
+			}
+			.u-button--middle{
+							background: linear-gradient(-58deg, #FA982B, #FFC079);
+							border-radius: 47rpx !important;
+							color: #FFFFFF !important;
+							font-size: 32rpx !important;
+							border: 0 !important;
+							height: 81rpx !important;
+							width: 386rpx !important;
+							font-weight: bold;;
+						}
+			/deep/ .u-navbar__content__left__text{
+				font-size: 33rpx !important;
+				margin-left: 15rpx !important;
+			}
+			
+			/deep/ .u-button--plain {
+				height: 72rpx;
+				border: 1px solid #FA8E1C !important;
+				background: transparent;
+				color: #FA8E1C;
+			}
+			
+			.btn-action {
+				margin-top: 60rpx;
+			
+				/deep/ .u-button {
+					width: 242rpx !important;
+					height: 72rpx !important;
+				}
+			
+				
+				
+			}

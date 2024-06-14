@@ -1,0 +1,112 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/common/webview/index",
+    "pages/common/textview/index",
+    "pages/login",
+    "pages/mine/index",
+    "pages/register",
+    "pages/performance/performance",
+    "pages/mine/service",
+    "pages/performance/month-list",
+    "pages/performance/day-list",
+    "pages/performance/team-detail",
+    "pages/performance/direct-detail",
+    "pages/register_ewm"
+  ],
+  "subPackages": [
+    {
+      "root": "packageA",
+      "pages": [
+        "pages/agent/query",
+        "pages/control/control",
+        "pages/control/list",
+        "pages/finance/card-setting",
+        "pages/income/income",
+        "pages/income/detail",
+        "pages/merchant/merchant",
+        "pages/merchant/detail",
+        "pages/merchant/edit-fee",
+        "pages/merchant/merchant-date-detail",
+        "pages/team/team",
+        "pages/team/detail",
+        "pages/terminal/terminal",
+        "pages/terminal/detail",
+        "pages/terminal/direct",
+        "pages/terminal/select",
+        "pages/terminal/team",
+        "pages/terminal/jibie",
+        "pages/terminal/month-list",
+        "pages/transfer/transfer",
+        "pages/transfer/detail",
+        "pages/transfer/list",
+        "pages/transfer/huishou",
+        "pages/transfer/recycle",
+        "pages/transfer/zone-select",
+        "pages/transfer/zone"
+      ]
+    },
+    {
+      "root": "packageB",
+      "pages": [
+        "pages/ruwang/ruwang",
+        "pages/wallet/wallet",
+        "pages/wallet/day-summary",
+        "pages/wallet/month-summary",
+        "pages/wallet/earning-detail",
+        "pages/withdraw/withdraw",
+        "pages/withdraw/detail",
+        "pages/police/police"
+      ]
+    },
+    {
+      "root": "packageC",
+      "pages": [
+        "pages/auth/mobile-login",
+        "pages/auth/find-password",
+        "pages/auth/edit-password",
+        "pages/feedback/index",
+        "pages/notice/notice",
+        "pages/notice/detail",
+        "pages/question/question",
+        "pages/question/detail",
+        "pages/share/share"
+      ]
+    }
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "翼秘书",
+    "navigationBarBackgroundColor": "#FFFFFF"
+  },
+  "tabBar": {
+    "color": "#5C5C5C",
+    "selectedColor": "#1F1F1F",
+    "borderStyle": "white",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "iconPath": "static/images/tabbar/tab-home.png",
+        "selectedIconPath": "static/images/tabbar/tab-home-active.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/performance/performance",
+        "iconPath": "static/images/tabbar/tab-list.png",
+        "selectedIconPath": "static/images/tabbar/tab-mine-active.png",
+        "text": "数据"
+      },
+      {
+        "pagePath": "pages/mine/index",
+        "iconPath": "static/images/tabbar/tab-mine.png",
+        "selectedIconPath": "static/images/tabbar/tab-mine-active.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {
+    "dict-tag": "/components/dict/DictTag/index",
+    "common-view": "/components/common-view"
+  }
+}
