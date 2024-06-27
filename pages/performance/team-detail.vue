@@ -1,6 +1,6 @@
 <template>
 	<view class="day-list">
-		<u-navbar leftText="返回" :fixed="true" bgColor="#fff" :autoBack="false" :safeAreaInsetTop="true"
+		<u-navbar leftText="返回" :fixed="true" :placeholder="true" bgColor="#fff" :autoBack="false" :safeAreaInsetTop="true"
 			@leftClick="$mHelper.goBack()" leftIconColor="#363636" leftIcon="arrow-leftward" leftIconSize="25"
 			:titleStyle="{color: '#363636',fontSize: '32rpx'}">
 			<view class="search flex align-center" slot="right" @click="show=true" :style="{marginRight: rightX + 'px'}">
@@ -9,7 +9,7 @@
 		
 			</view>
 		</u-navbar>
-		<common-view>
+		<view>
 		<view class="content">
 			<view class="top shadow flex align-center justify-between">
 				<view class="left">
@@ -46,7 +46,7 @@
 			</view>
 			<u-loadmore :status="status" @loadmore="loadmore" />
 		</view>
-		</common-view>
+		</view>
 	</view>
 </template>
 

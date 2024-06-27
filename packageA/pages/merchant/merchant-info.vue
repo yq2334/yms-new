@@ -8,7 +8,7 @@
 				<view class="right flex align-center">
 					<text>{{merchantInfo.shinfo.shanghuno}}</text>
 					<u--image class="copy margin-left-xs" :showLoading="true"
-						@click="copy(merchantInfo.shinfo.shanghuno)" src="../../static/images/wallet/copy.png"
+						@click="copy(merchantInfo.shinfo.shanghuno)" src="/packageA/static/images/copy.png"
 						width="25rpx" height="26rpx" mode="aspectFit"></u--image>
 				</view>
 			</view>
@@ -27,7 +27,7 @@
 				<view class="right flex align-center">
 					<text>{{merchantInfo.shinfo.wlno}}</text>
 					<u--image class="copy margin-left-xs" :showLoading="true"
-						@click="copy(merchantInfo.shinfo.wlno)" src="../../static/images/wallet/copy.png"
+						@click="copy(merchantInfo.shinfo.wlno)" src="/packageA/static/images/copy.png"
 						width="25rpx" height="26rpx" mode="aspectFit"></u--image>
 				</view>
 			</view>

@@ -1,10 +1,10 @@
 <template>
 	<view class="wallet">
-		<u-navbar leftText="返回" :fixed="true" bgColor="transparent" :autoBack="false" :safeAreaInsetTop="true"
+		<u-navbar leftText="返回" :fixed="true" :placeholder="true" bgColor="transparent" :autoBack="false" :safeAreaInsetTop="true"
 			@leftClick="$mHelper.goBack()" leftIconColor="#fff" leftIcon="arrow-leftward" leftIconSize="25"
 			:titleStyle="{color: '#fff',fontSize: '32rpx'}">
 		</u-navbar>
-		<common-view>
+	
 			<view class="wallet-content">
 				<view class="pannel margin-bottom-lg">
 					<view class="top">
@@ -145,7 +145,7 @@
 					</view>
 				</view>
 			</view>
-		</common-view>
+	
 	</view>
 </template>
 

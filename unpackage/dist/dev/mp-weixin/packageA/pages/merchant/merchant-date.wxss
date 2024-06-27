@@ -1,0 +1,59 @@
+@charset "UTF-8";
+/**
+ * uni-app内置的常用样式变量
+ */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.date-list.data-v-095afded {
+  padding: 0 30rpx;
+  background: #FFFFFF;
+  border-radius: 12rpx;
+}
+.date-list .item.data-v-095afded {
+  padding: 15rpx 0 20rpx 0;
+  border-bottom: 1rpx solid rgba(0, 0, 0, 0.1);
+}
+.date-list .item .left ._h3.data-v-095afded {
+  font-size: 29rpx;
+  color: #545454;
+}
+.date-list .item .left ._p.data-v-095afded {
+  color: #545454;
+  font-size: 22rpx;
+}
+.date-list .item .right ._h1.data-v-095afded {
+  font-size: 34rpx;
+  color: #747474;
+}
+.date-list .item .right ._p.data-v-095afded {
+  color: #747474;
+  font-size: 22rpx;
+}
+.month-list.data-v-095afded {
+  margin-top: 19rpx;
+}
+.month-list .item.data-v-095afded {
+  height: 86rpx;
+  background: #FFFFFF;
+  border-radius: 12rpx;
+  color: #747474;
+  font-size: 34rpx;
+  margin-bottom: 13rpx;
+  padding: 0 25rpx 0 40rpx;
+}
+.month-list .item text.data-v-095afded {
+  color: #545454;
+  font-size: 26rpx;
+  margin-right: 25rpx;
+}
+

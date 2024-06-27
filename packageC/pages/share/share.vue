@@ -1,13 +1,13 @@
 <template>
 	<view >
-		<u-navbar leftText="返回" :fixed="true" bgColor="transparent" :autoBack="false" :safeAreaInsetTop="true"
+		<u-navbar leftText="返回" :fixed="true" :placeholder="true" bgColor="transparent" :autoBack="false" :safeAreaInsetTop="true"
 			@leftClick="$mHelper.goBack()" leftIconColor="#363636" leftIcon="arrow-leftward" leftIconSize="25"
 			:titleStyle="{color: '#363636',fontSize: '32rpx'}">
 		</u-navbar>
-		<common-view>
+		<view>
 			<image id="canvasImg" :src="imgUrl" mode="aspectFit top"  style="width: 750rpx;height: 80vh;"
 				@longpress="handleSave"></image>
-		</common-view>
+		</view>
 		<!-- <image id="canvasImg"  :src="imgUrl" mode="scaleToFill" style="width: 750rpx;height: 100vh;" @longpress="handleSave"></image> -->
 		<!-- <u-image :showLoading="true" @longpress="saveImage" :src="imgUrl" width="750rpx" height="100vh" mode="scaleToFill"></u-image> -->
 	</view>

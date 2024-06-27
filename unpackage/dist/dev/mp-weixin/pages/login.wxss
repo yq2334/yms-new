@@ -1,0 +1,170 @@
+@charset "UTF-8";
+/**
+ * uni-app内置的常用样式变量
+ */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.login-container.data-v-18804380 {
+  height: auto;
+  padding: 80rpx 60rpx 0 60rpx;
+}
+.login-container .login-title.data-v-18804380 {
+  text-align: center;
+  font-size: 70rpx;
+  line-height: 85rpx;
+  color: #303030;
+  margin-bottom: 86rpx;
+  padding-top: 120rpx;
+  display: flex;
+  justify-content: center;
+}
+.login-container .login-sub-title.data-v-18804380 {
+  padding-left: 20rpx;
+  font-size: 70rpx;
+  text-align: center;
+  color: #FA8E1C;
+  line-height: 85rpx;
+  font-weight: bold;
+  margin-bottom: 100rpx;
+}
+.login-container .login-item.data-v-18804380 .u-input__content__prefix-icon {
+  margin-right: 18rpx;
+}
+.login-container .login-item.data-v-18804380 .u-input {
+  font-size: 36rpx !important;
+  padding: 45rpx 18rpx !important;
+}
+.login-container .login-item.data-v-18804380 .input-placeholder {
+  font-size: 36rpx;
+  color: #C7CBD2;
+}
+.login-container .tips.data-v-18804380 {
+  color: #181818;
+  font-size: 27rpx;
+}
+.login-container .tips text.data-v-18804380 {
+  color: #FA8E1C;
+}
+.login-container .login-code.data-v-18804380 {
+  border-bottom: none;
+  display: flex;
+}
+.login-container .login-code .img.data-v-18804380 {
+  width: 120rpx;
+  height: 54rpx;
+}
+.login-container .login-btn.data-v-18804380 {
+  padding-top: 69rpx;
+  margin: 50rpx 0 50rpx 0;
+}
+.login-container .login-btn .u-button--primary.data-v-18804380 {
+  background: linear-gradient(90deg, #FA8E1C, #FABF5A);
+  border-radius: 47rpx !important;
+  color: #FFFFFF;
+  font-size: 36rpx !important;
+  border: 0 !important;
+  font-weight: bold;
+}
+.login-container .login-mobile.data-v-18804380 {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #181818;
+  font-size: 27rpx;
+}
+.login-container .login-mobile .split.data-v-18804380 {
+  width: 1rpx;
+  height: 20rpx;
+  background: #C7CBD2;
+  margin: 0 22rpx;
+}
+.login-container .login-mobile text.data-v-18804380 {
+  color: #FA8E1C;
+}
+.login-other.data-v-18804380 {
+  display: flex;
+}
+.login-other .login-other-item.data-v-18804380 {
+  flex: 1;
+  margin: 0 25rpx;
+}
+.login-other .img.data-v-18804380 {
+  width: 50px;
+  height: 50px;
+  margin: 0 30rpx;
+}
+.login-other .img.data-v-18804380:first-child {
+  margin-left: 0;
+}
+.xieyi.data-v-18804380 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  margin-top: 157rpx;
+}
+.data-v-18804380 .uni-data-checklist .checklist-group .checklist-box {
+  margin-right: 0px;
+}
+.data-v-18804380 .uni-data-checklist {
+  flex: none;
+}
+.data-v-18804380 .uni-data-checklist .checklist-group .checklist-box .checkbox__inner {
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+}
+.data-v-18804380 .uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .checkbox__inner {
+  background-color: #fff;
+  border-color: #FA8E1C;
+}
+.data-v-18804380 .uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .checkbox__inner .checkbox__inner-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: #FA8E1C;
+  border-radius: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+}
+.data-v-18804380 .uni-data-checklist .checklist-group .checklist-box .checklist-content .checklist-text {
+  color: #9A9FAF;
+}
+.data-v-18804380 .uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .checklist-text[data-v-84d5d996] {
+  color: #333;
+}
+
+@charset "UTF-8";
+/**
+ * uni-app内置的常用样式变量
+ */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .checklist-text {
+  color: #333 !important;
+}
+

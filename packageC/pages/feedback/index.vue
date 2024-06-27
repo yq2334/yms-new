@@ -1,11 +1,11 @@
 <template>
 	<view class="content">
-		<u-navbar :fixed="true" bgColor="#fff" title="意见反馈" :autoBack="false" :safeAreaInsetTop="true"
+		<u-navbar :fixed="true" :placeholder="true" bgColor="#fff" title="意见反馈" :autoBack="false" :safeAreaInsetTop="true"
 			@leftClick="$mHelper.goBack()" leftIconColor="#363636" leftIcon="arrow-leftward" leftIconSize="25"
 			:titleStyle="{color: '#363636',fontSize: '32rpx'}">
 		</u-navbar>
 		<!-- 注意，如果需要兼容微信小程序，最好通过setRules方法设置rules规则 -->
-		<common-view>
+		<view>
 
 
 			<view class="padding">
@@ -23,7 +23,7 @@
 					</view>
 				</u--form>
 			</view>
-		</common-view>
+		</view>
 	</view>
 </template>
 

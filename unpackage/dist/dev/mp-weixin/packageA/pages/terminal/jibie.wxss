@@ -1,0 +1,130 @@
+@charset "UTF-8";
+/**
+ * uni-app内置的常用样式变量
+ */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+page {
+  background-color: #F6F5F8;
+}
+
+@charset "UTF-8";
+/**
+ * uni-app内置的常用样式变量
+ */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+page.data-v-46ae606d {
+  background-color: #F6F5F8;
+}
+.merchant-content.data-v-46ae606d {
+  padding: 25rpx;
+}
+.merchant .tabs.data-v-46ae606d {
+  padding: 10rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #FFFFFF;
+  border-radius: 12rpx;
+}
+.merchant .tabs .item.data-v-46ae606d {
+  width: 50%;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  color: #545454;
+  font-size: 32rpx;
+}
+.merchant .tabs .item.active.data-v-46ae606d {
+  background: #F6F5F8;
+  border-radius: 12rpx;
+  color: #FA982B;
+}
+.merchant .list .item.data-v-46ae606d {
+  background: #FFFFFF;
+  border-radius: 12rpx;
+  padding-left: 35rpx;
+  padding-right: 35rpx;
+  font-size: 32rpx;
+  color: black;
+}
+.merchant .list .item .top.data-v-46ae606d {
+  position: relative;
+  padding-left: 25rpx;
+}
+.merchant .list .item .top.data-v-46ae606d::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  width: 10rpx;
+  height: 39rpx;
+  background: linear-gradient(130deg, #FA982B, #FFC079);
+  border-radius: 5rpx;
+}
+.merchant .list .item .top .left.data-v-46ae606d {
+  color: #1B1B1B;
+  font-size: 32rpx;
+}
+.merchant .list .item .top .left text.data-v-46ae606d {
+  color: #747474;
+  margin-left: 18rpx;
+}
+.merchant .list .item .top .detail.data-v-46ae606d {
+  width: 129rpx;
+  height: 37rpx;
+  background: #FFF8ED;
+  border-radius: 12rpx;
+  text-align: center;
+  line-height: 37rpx;
+  color: #F49441;
+  font-size: 26rpx;
+}
+.merchant .list .item .label.data-v-46ae606d {
+  color: rgba(63, 63, 63, 0.8);
+  font-size: 30rpx;
+}
+.merchant .list .item .split.data-v-46ae606d {
+  height: 1rpx;
+  background: #000000;
+  opacity: 0.1;
+}
+.merchant .list .item .bottom.data-v-46ae606d {
+  padding-bottom: 25rpx;
+}
+.merchant .list .item .bottom > view.data-v-46ae606d {
+  width: 33.33%;
+}
+.merchant .list .item .bottom ._h3.data-v-46ae606d {
+  font-size: 28rpx;
+  color: rgba(63, 63, 63, 0.8);
+  margin-bottom: 10rpx;
+}
+.merchant .list .item .bottom ._h1.data-v-46ae606d {
+  color: #000000;
+  font-size: 28rpx;
+}
+

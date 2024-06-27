@@ -1,6 +1,6 @@
 <template>
 	<view class="withdraw">
-		<u-navbar leftText="返回" :fixed="false" bgColor="#fff" :autoBack="false" :safeAreaInsetTop="true"
+		<u-navbar leftText="返回" :fixed="false" :placeholder="true" bgColor="#fff" :autoBack="false" :safeAreaInsetTop="true"
 			@leftClick="$mHelper.goBack()" leftIconColor="#363636" leftIcon="arrow-leftward" leftIconSize="25"
 			:titleStyle="{color: '#363636',fontSize: '32rpx'}">
 			<!-- <view class="search flex align-center" slot="right">
@@ -9,7 +9,7 @@
 
 			</view> -->
 		</u-navbar>
-		<common-view>
+		
 			<view class="withdraw-content">
 				<!-- <view class="bank-select flex align-center justify-between" @click="showBank = true">
 				<view class="left flex align-center justify-start">
@@ -27,8 +27,8 @@
 				<u-icon class="margin-left-sm" color="#696969" size="18" name="arrow-down"></u-icon>
 			</view> -->
 				<view class="edit-bank">
-					<h1 class="margin-bottom-xl">{{info.bank}}</h1>
-					<h3>{{info.huming}}（{{info.kahao}}）</h3>
+					<h1 class="margin-bottom-xl">{{info.bank || ''}}</h1>
+					<h3>{{info.huming || ''}}（{{info.kahao || ''}}）</h3>
 					<view class="edit-wrapper flex align-center justify-center"
 						@click="$tab.navigateTo('/packageA/pages/finance/card-setting')">
 						<u--image :showLoading="true" src="../../static/images/wallet/edit.png" width="24rpx" height="24rpx"
@@ -40,7 +40,7 @@
 					<view class="flex align-center justify-between">
 						<view class="text-df">
 							可提现金额 <text class="text-orange">￥</text> <text class="text-xxl text-orange text-bold">
-								{{info.yuer}}</text>
+								{{info.yuer || 0}}</text>
 						</view>
 						<text @click="max" class="text-orange text-bold text-df">全部提现</text>
 					</view>
@@ -51,7 +51,7 @@
 						</u--input>
 					</view>
 					<view class="tips text-df">
-						税费{{info.shuidian}}% 服务费￥{{info.shouxufei}}元/笔 起提金额: {{info.zuidi}}元
+						税费{{info.shuidian || ''}}% 服务费￥{{info.shouxufei}}元/笔 起提金额: {{info.zuidi || 0}}元
 					</view>
 				</view>
 
@@ -68,7 +68,7 @@
 				<p>提现时间：每天早上9点到晚上18点（提现到账时间为T+1）</p> -->
 				</view>
 			</view>
-		</common-view>
+		
 		<u-action-sheet :show="showBank" :actions="actions" title="请选择银行" @close="showBank = false"
 			@select="bankSelect">
 		</u-action-sheet>
@@ -250,7 +250,7 @@
 		}
 	}
 
-	.u-button {
+	/deep/ .u-button {
 		background: linear-gradient(-58deg, #E95752, #FF7B76);
 		border-radius: 48rpx;
 	}

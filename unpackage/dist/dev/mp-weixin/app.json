@@ -106,7 +106,6 @@
     ]
   },
   "usingComponents": {
-    "dict-tag": "/components/dict/DictTag/index",
-    "common-view": "/components/common-view"
+    "dict-tag": "/components/dict/DictTag/index"
   }
 }

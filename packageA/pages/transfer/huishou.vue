@@ -1,6 +1,6 @@
 <template>
 	<view class="transfer">
-		<u-navbar leftText="返回" :fixed="true" bgColor="#fff" :autoBack="false" :safeAreaInsetTop="true"
+		<u-navbar leftText="返回" :fixed="true" :placeholder="true" bgColor="#fff" :autoBack="false" :safeAreaInsetTop="true"
 			@leftClick="$mHelper.goBack()" leftIconColor="#363636" leftIcon="arrow-leftward" leftIconSize="25"
 			:titleStyle="{color: '#363636',fontSize: '32rpx'}">
 			<!-- <view class="search flex align-center" slot="right" @click="openSearchPop()">
@@ -9,7 +9,7 @@
 
 			</view> -->
 		</u-navbar>
-		<common-view>
+		<view>
 			<view class="transfer-content">
 				<view class="data-top flex align-center">
 					<u--image class="arrow margin-right" :showLoading="true" src="/static/images/file.png" width="38rpx"
@@ -35,7 +35,7 @@
 					<u-loadmore :status="status" @loadmore="loadmore" />
 				</view>
 			</view>
-		</common-view>
+		</view>
 		<search-pop ref="searchPop" :columns="columns" @submit="doSearch"></search-pop>
 	</view>
 </template>

@@ -1,6 +1,6 @@
 <template>
 	<view class="merchant">
-		<u-navbar leftText="返回" :fixed="true" bgColor="#fff" :autoBack="false" :safeAreaInsetTop="true"
+		<u-navbar leftText="返回" :fixed="true" :placeholder="true" bgColor="#fff" :autoBack="false" :safeAreaInsetTop="true"
 			@leftClick="$mHelper.goBack()" leftIconColor="#363636" leftIcon="arrow-leftward" leftIconSize="25"
 			:titleStyle="{color: '#363636',fontSize: '32rpx'}">
 			<view class="search flex align-center" slot="right"  @click="openSearchPop"  v-if="current == 1 || current == 2" :style="{marginRight: rightX + 'px'}">
@@ -8,7 +8,7 @@
 				<u-icon size="30" color="#363636" name="search"></u-icon>
 			</view>
 		</u-navbar>
-		<common-view>
+		<view>
 			<view class="merchant-content">
 				<view class="tabs">
 					<view class="item " :class="current == 0 && 'active'" @click="changeTab(0)">
@@ -29,7 +29,7 @@
 				<merchant-date-detail :shanghuno="shanghuno" :riqi="riqi" v-if="current == 4"></merchant-date-detail>
 				<search-pop ref="searchPop" :columns="columns" @submit="doSearch"></search-pop>
 			</view>
-		</common-view>
+		</view>
 	</view>
 </template>
 
@@ -45,7 +45,7 @@
 	export default {
 		data() {
 			return {
-				current: 0,
+				current: 5,
 				rightX: 0,
 				shanghuno: '',
 				merchantInfo: {
@@ -99,7 +99,7 @@
 		},
 		onLoad(options) {
 			this.shanghuno = options.jijuhao
-			// this.getMerchantInfoData()
+			this.current = 0
 		},
 		onReady() {
 			// #ifdef MP-WEIXIN

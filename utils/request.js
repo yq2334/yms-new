@@ -116,19 +116,19 @@ const request = config => {
 
 						return;
 					};
-					if (res.data && res.data.msg && res.data.code == '04') {
-						uni.showToast({
-							icon: "none",
-							title: res.data.msg
-						})
-						setTimeout(() => {
-							uni.reLaunch({
-								url: "/pages/login"
-							})
-						}, 1000)
+					// if (res.data && res.data.msg && res.data.code == '04') {
+					// 	uni.showToast({
+					// 		icon: "none",
+					// 		title: res.data.msg
+					// 	})
+					// 	setTimeout(() => {
+					// 		uni.reLaunch({
+					// 			url: "/pages/login"
+					// 		})
+					// 	}, 1000)
 						
-						return;
-					};
+					// 	return;
+					// };
 					if (res.data && res.data.msg && res.data.code != '00' && res.data.code != '05') {
 						console.log(res.data.msg)
 						// if(!config.headers.hideErrorMsg) {

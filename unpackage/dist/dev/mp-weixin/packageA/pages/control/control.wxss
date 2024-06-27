@@ -1,0 +1,101 @@
+@charset "UTF-8";
+/**
+ * uni-app内置的常用样式变量
+ */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+page {
+  background-color: #F6F5F8;
+}
+
+@charset "UTF-8";
+/**
+ * uni-app内置的常用样式变量
+ */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+page.data-v-1937631a {
+  background-color: #F6F5F8;
+}
+.terminal-content.data-v-1937631a {
+  padding: 40rpx 22rpx;
+}
+.terminal-content .data-pannel .item.data-v-1937631a {
+  width: 48%;
+  height: 144rpx;
+  background: #FFFFFF;
+  border-radius: 15rpx;
+  position: relative;
+  margin-bottom: 26rpx;
+}
+.terminal-content .data-pannel .item ._h3.data-v-1937631a {
+  font-size: 30rpx;
+  color: #2C2C2C;
+  opacity: 0.8;
+  margin-bottom: 10rpx;
+}
+.terminal-content .data-pannel .item ._h1.data-v-1937631a {
+  font-size: 38rpx;
+  color: #000000;
+  font-family: 'AlimamaFangYuanTiVF';
+}
+.terminal-content .data-pannel .item.data-v-1937631a .u-image {
+  position: absolute !important;
+  bottom: 23rpx;
+  right: 32rpx;
+}
+.terminal-content .check-pannel .item.data-v-1937631a {
+  height: 134rpx;
+  background: #FFFFFF;
+  border-radius: 18rpx;
+  padding: 0 40rpx;
+  margin-bottom: 24rpx;
+}
+.terminal-content .check-pannel .item .img-wrapper.data-v-1937631a {
+  width: 58rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.terminal-content .check-pannel .item ._h3.data-v-1937631a {
+  font-size: 30rpx;
+  color: #2C2C2C;
+  opacity: 0.8;
+  margin-bottom: 10rpx;
+}
+.terminal-content .check-pannel .item ._h1.data-v-1937631a {
+  font-size: 42rpx;
+  color: #000000;
+  font-family: 'AlimamaFangYuanTiVF';
+}
+.terminal-content .check-pannel .item .btn-check.data-v-1937631a {
+  width: 176rpx;
+  height: 49rpx;
+  border: 2px solid #FF6E62;
+  border-radius: 24rpx;
+  text-align: center;
+  line-height: 45rpx;
+  color: #FF6E62;
+  font-size: 26rpx;
+}
+

@@ -1,6 +1,6 @@
 <template>
 	<view class="merchant">
-		<u-navbar leftText="返回" :fixed="true" bgColor="#fff" :autoBack="false" :safeAreaInsetTop="true"
+		<u-navbar leftText="返回" :fixed="true" :placeholder="true" bgColor="#fff" :autoBack="false" :safeAreaInsetTop="true"
 			@leftClick="$mHelper.goBack()" leftIconColor="#363636" leftIcon="arrow-leftward" leftIconSize="25"
 			:titleStyle="{color: '#363636',fontSize: '32rpx'}">
 			<view class="search flex align-center" slot="right" @click="openSearchPop()" :style="{marginRight: rightX + 'px'}" >
@@ -8,7 +8,7 @@
 				<u-icon size="30" color="#363636" name="search"></u-icon>
 			</view>
 		</u-navbar>
-		<common-view>
+		<view>
 			<view class="merchant-content">
 				<view class="tabs">
 					
@@ -86,7 +86,7 @@
 				<u-loadmore :status="status" @loadmore="loadmore" />
 				<search-pop ref="searchPop" :columns="columns" @submit="doSearch"></search-pop>
 			</view>
-		</common-view>
+		</view>
 	</view>
 </template>
 

@@ -1,12 +1,12 @@
 <template>
 	<view class="register">
-		<u-navbar :fixed="true" bgColor="#fff"  :autoBack="false" :safeAreaInsetTop="true"
+		<u-navbar :fixed="true" :placeholder="true" bgColor="#fff"  :autoBack="false" :safeAreaInsetTop="true"
 			@leftClick="$mHelper.goBack()" leftIconColor="#363636" leftIcon="arrow-leftward" leftIconSize="25"
 			:titleStyle="{color: '#363636',fontSize: '32rpx'}">
 		</u-navbar>
 		<view class="register-title text-black-1  text-center flex justify-center">
 
-			<u--image class="logo" :showLoading="true" src="/static/images/logo.jpg" width="250rpx"
+			<u--image class="logo" :showLoading="true" src="/static/images/logo.png" width="250rpx"
 				height="250rpx"></u--image>
 		</view>
 		<!-- 	<view class="register-sub-title text-orange text-M text-center">

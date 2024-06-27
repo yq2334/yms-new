@@ -1,6 +1,6 @@
 <template>
 	<view class="zone">
-		<u-navbar leftText="返回" :fixed="true" bgColor="#fff" :autoBack="false" :safeAreaInsetTop="true"
+		<u-navbar leftText="返回" :fixed="true" :placeholder="true" bgColor="#fff" :autoBack="false" :safeAreaInsetTop="true"
 			@leftClick="$mHelper.goBack()" leftIconColor="#363636" leftIcon="arrow-leftward" leftIconSize="25"
 			:titleStyle="{color: '#363636',fontSize: '32rpx'}">
 			<view class="search flex align-center" slot="right" @click="openSearchPop" :style="{marginRight: rightX + 'px'}">
@@ -8,7 +8,7 @@
 				<u-icon size="30" color="#363636" name="search"></u-icon>
 			</view>
 		</u-navbar>
-		<common-view>
+		<view>
 			<view class="zone-content">
 				<u-tabs :list="tabs" :current="current" lineWidth="30" :itemStyle="{height: '100rpx'}"
 					:activeStyle="{color: '#FA982B', fontSize: '32rpx', fontWeight: 'bold' }"
@@ -57,7 +57,7 @@
 				</view>
 			</view>
 			
-		</common-view>
+		</view>
 		<search-pop ref="searchPop" :columns="columns" @submit="doSearch"></search-pop>
 	</view>
 

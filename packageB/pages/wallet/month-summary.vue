@@ -1,6 +1,6 @@
 <template>
 	<view class="summary">
-		<u-navbar leftText="返回" :fixed="true" bgColor="#fff" :autoBack="false" :safeAreaInsetTop="true"
+		<u-navbar leftText="返回" :fixed="true"  :placeholder="true" bgColor="#fff" :autoBack="false" :safeAreaInsetTop="true"
 			@leftClick="$mHelper.goBack()" leftIconColor="#363636" leftIcon="arrow-leftward" leftIconSize="25"
 			:titleStyle="{color: '#363636',fontSize: '32rpx'}">
 			<view class="search flex align-center" slot="right">
@@ -9,7 +9,7 @@
 
 			</view>
 		</u-navbar>
-		<view class="common-content">
+		<view class="">
 			<view class="summary-content">
 				<view class="summary-data flex align-center justify-between">
 					<view class="pannel pannel-1 ">

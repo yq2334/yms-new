@@ -1,10 +1,10 @@
 <template>
 	<view class="finance">
-		<u-navbar leftText="返回" :fixed="true" bgColor="#fff" :autoBack="false" :safeAreaInsetTop="true"
+		<u-navbar leftText="返回" :fixed="true" :placeholder="true" bgColor="#fff" :autoBack="false" :safeAreaInsetTop="true"
 			@leftClick="$mHelper.goBack()" leftIconColor="#363636" leftIcon="arrow-leftward" leftIconSize="25"
 			:titleStyle="{color: '#363636',fontSize: '32rpx'}">
 		</u-navbar>
-		<common-view>
+		<view>
 			<view class="finance-content">
 				<u--form :model="form" ref="form" labelPosition="left" labelWidth="120" :borderBottom="true">
 					<u-form-item label="开户行" prop="bank" class="input-item " :borderBottom="true"
@@ -65,7 +65,7 @@
 					@close="showBank = false" @cancel="showBank = false" @confirm="bankSelect"></u-picker>
 
 			</view>
-		</common-view>
+		</view>
 	</view>
 </template>
 

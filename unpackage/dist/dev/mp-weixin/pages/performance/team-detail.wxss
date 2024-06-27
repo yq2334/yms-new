@@ -1,0 +1,85 @@
+@charset "UTF-8";
+/**
+ * uni-app内置的常用样式变量
+ */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+page {
+  background-color: #F6F5F8;
+}
+
+@charset "UTF-8";
+/**
+ * uni-app内置的常用样式变量
+ */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.day-list .content.data-v-3aabaaf9 {
+  padding: 23rpx;
+}
+.day-list .content .top.data-v-3aabaaf9 {
+  height: 83rpx;
+  background: linear-gradient(130deg, #FA982B, #FFC079);
+  box-shadow: 6rpx 6rpx 8rpx rgba(217, 109, 26, 0.2);
+  border-radius: 16rpx;
+  color: #fff;
+  padding: 0 20rpx;
+}
+.day-list .content .top .left.data-v-3aabaaf9 {
+  font-size: 29rpx;
+}
+.day-list .content .top .right.data-v-3aabaaf9 {
+  font-size: 45rpx;
+  font-weight: bold;
+}
+.day-list .content .table-head.data-v-3aabaaf9 {
+  background: linear-gradient(180deg, #EAEAEA, #FEFEFE);
+  border-radius: 10rpx;
+  margin-top: 30rpx;
+}
+.day-list .content .table-head > view.data-v-3aabaaf9 {
+  height: 69rpx;
+  line-height: 69rpx;
+  flex: 1;
+  color: #000000;
+  font-size: 28rpx;
+  text-align: center;
+}
+.day-list .content .table-body.data-v-3aabaaf9 {
+  margin-top: 20rpx;
+}
+.day-list .content .table-body .table-td.data-v-3aabaaf9 {
+  background: #FFFFFF;
+  border-radius: 10rpx;
+  margin-bottom: 10rpx;
+  padding: 0 20rpx;
+}
+.day-list .content .table-body .table-td > view.data-v-3aabaaf9 {
+  height: 69rpx;
+  line-height: 69rpx;
+  flex: 1;
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 28rpx;
+  text-align: center;
+}
+

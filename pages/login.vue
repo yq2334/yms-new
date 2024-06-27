@@ -1,7 +1,7 @@
 <template>
 	<view class="login-container">
 		<view class="login-title">
-			<u--image class="logo" :showLoading="true"  src="/static/images/logo.jpg" width="250rpx"
+			<u--image class="logo" :showLoading="true"  src="/static/images/logo.png" width="250rpx"
 				height="250rpx"></u--image>
 		</view>
 		<!-- <view class="login-sub-title">翼秘书伙伴</view> -->
@@ -135,9 +135,10 @@
 					}
 					this.loading = false;
 					this.$toast("登录成功,正在跳转!");
+					
 					// this.$store.commit("SET_USERINFO", result.data);
 					this.$store.commit("SET_TOKEN", result.token);
-
+					this.$store.commit("SET_NAME", this.userInfo.userName);
 					uni.switchTab({
 						url: "/pages/home/home"
 					})

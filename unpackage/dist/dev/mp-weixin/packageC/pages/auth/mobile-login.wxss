@@ -1,0 +1,131 @@
+@charset "UTF-8";
+/**
+ * uni-app内置的常用样式变量
+ */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.register-title.data-v-7e0c3236 {
+  font-size: 70rpx;
+  padding-top: 250rpx;
+  line-height: 1;
+}
+.register-sub-title.data-v-7e0c3236 {
+  font-size: 70rpx;
+  padding-top: 30rpx;
+  line-height: 1;
+}
+.register-form.data-v-7e0c3236 {
+  width: 568rpx;
+  margin: 105rpx auto 0 auto;
+}
+.register-form .input-item.data-v-7e0c3236 .u-input__content__prefix-icon {
+  margin-right: 18rpx;
+}
+.register-form .input-item.data-v-7e0c3236 .u-input {
+  height: 85rpx;
+  font-size: 36rpx !important;
+  padding: 0 47rpx !important;
+  background: #EEEFF3;
+}
+.register-form .input-item.data-v-7e0c3236 .input-placeholder {
+  font-size: 36rpx;
+  color: #C7CBD2;
+}
+.register-form .input-item.data-v-7e0c3236 .u-form-item__body {
+  padding: 0;
+}
+.register-form.data-v-7e0c3236 .u-button--text .u-button__text {
+  color: #FA8E1C;
+  font-size: 28rpx;
+  font-family: 'AlibabaPuHuiTiR';
+}
+.xieyi.data-v-7e0c3236 {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 28rpx;
+  margin-top: 180rpx;
+}
+.data-v-7e0c3236 .uni-data-checklist .checklist-group .checklist-box {
+  margin-right: 0px;
+}
+.data-v-7e0c3236 .uni-data-checklist {
+  flex: none;
+}
+.data-v-7e0c3236 .uni-data-checklist .checklist-group .checklist-box .checkbox__inner {
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+}
+.data-v-7e0c3236 .uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .checkbox__inner {
+  background-color: #fff;
+  border-color: #FA8E1C;
+}
+.data-v-7e0c3236 .uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .checkbox__inner .checkbox__inner-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: #FA8E1C;
+  border-radius: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+}
+.data-v-7e0c3236 .uni-data-checklist .checklist-group .checklist-box .checklist-content .checklist-text {
+  color: #9A9FAF;
+}
+.data-v-7e0c3236 .uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .checklist-text[data-v-84d5d996] {
+  color: #333;
+}
+
+@charset "UTF-8";
+/**
+ * uni-app内置的常用样式变量
+ */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+ .u-input__content__prefix-icon {
+  margin-right: 18rpx;
+}
+ .u-input {
+  height: 85rpx !important;
+  font-size: 36rpx !important;
+  padding: 0 47rpx !important;
+  background: #EEEFF3 !important;
+}
+ .u-input__content__field-wrapper__field {
+  height: 85rpx !important;
+}
+ .input-placeholder {
+  font-size: 36rpx;
+  color: #C7CBD2;
+}
+ .u-form-item__body {
+  padding: 0;
+}
+.uni-data-checklist .checklist-group .checklist-box.is--default.is-checked .checklist-text {
+  color: #333 !important;
+}
+

@@ -1,14 +1,14 @@
 <template>
 	<view class="police">
-		<u-navbar leftText="返回" :fixed="true" bgColor="#fff" :autoBack="false" :safeAreaInsetTop="true"
+		<u-navbar leftText="返回" :fixed="true"  :placeholder="true"  bgColor="#fff" :autoBack="false" :safeAreaInsetTop="true"
 			@leftClick="$mHelper.goBack()" leftIconColor="#363636" leftIcon="arrow-leftward" leftIconSize="25"
 			:titleStyle="{color: '#363636',fontSize: '32rpx'}">
 		</u-navbar>
-		<common-view>
+		<view>
 
 
 			<view class="police-content">
-				<view class="pannel">
+				<view class="pannel"> 
 					<!-- <view class="cell flex align-center justify-between ">
 						<view class="lable">
 							代理商名称
@@ -208,7 +208,7 @@
 					</view>
 				</view>
 			</view>
-		</common-view>
+		</view>
 		<u-picker :show="showBand" :columns="bandList" keyName="pinpainame" title="请选择品牌" @close="showBand = false"
 			@cancel="showBand = false" @confirm="bandSelect"></u-picker>
 		<u-picker :show="showPolice" :columns="policeList" keyName="zcname" title="请选择政策" @close="showPolice = false"

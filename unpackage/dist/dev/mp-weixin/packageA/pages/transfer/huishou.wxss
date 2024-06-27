@@ -1,0 +1,71 @@
+@charset "UTF-8";
+/**
+ * uni-app内置的常用样式变量
+ */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+page {
+  background-color: #F6F5F8;
+}
+
+@charset "UTF-8";
+/**
+ * uni-app内置的常用样式变量
+ */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+page.data-v-c7487718 {
+  background-color: #F6F5F8;
+}
+.transfer-content.data-v-c7487718 {
+  padding: 18rpx;
+}
+.transfer-content .data-top.data-v-c7487718 {
+  height: 85rpx;
+  background: #FFFFFF;
+  border-radius: 10rpx;
+  padding: 0 36rpx;
+  color: #333333;
+  font-size: 29rpx;
+}
+.transfer-content .data-top .amount.data-v-c7487718 {
+  font-size: 60rpx;
+  font-family: 'AlimamaFangYuanTiVF';
+  font-weight: bold;
+  margin-left: 11rpx;
+}
+.transfer-content .list .item.data-v-c7487718 {
+  background: #FFFFFF;
+  border-radius: 10rpx;
+  padding: 36rpx;
+  font-size: 28rpx;
+  color: rgba(63, 63, 63, 0.7);
+  line-height: 1;
+  margin-top: 17rpx;
+}
+.transfer-content .list .item .no.data-v-c7487718 {
+  color: #000000;
+  font-size: 28rpx;
+  font-family: 'AlimamaFangYuanTiVF';
+}
+

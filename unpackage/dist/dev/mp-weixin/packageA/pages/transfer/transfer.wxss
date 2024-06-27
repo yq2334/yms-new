@@ -1,0 +1,73 @@
+@charset "UTF-8";
+/**
+ * uni-app内置的常用样式变量
+ */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+page {
+  background-color: #F6F5F8;
+}
+
+@charset "UTF-8";
+/**
+ * uni-app内置的常用样式变量
+ */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+page.data-v-eff4d384 {
+  background-color: #F6F5F8;
+}
+.transfer-content.data-v-eff4d384 {
+  padding: 26rpx 18rpx;
+}
+.transfer-content .list .item.data-v-eff4d384 {
+  padding: 29rpx;
+  background: #FFFFFF;
+  border-radius: 10rpx;
+  font-size: 28rpx;
+  position: relative;
+  margin-bottom: 16rpx;
+}
+.transfer-content .list .item .label.data-v-eff4d384 {
+  color: rgba(63, 63, 63, 0.7);
+}
+.transfer-content .list .item .value.data-v-eff4d384 {
+  color: #3F3F3F;
+}
+.transfer-content .list .item .pd.data-v-eff4d384 {
+  padding-right: 180rpx;
+}
+.transfer-content .list .item .btn.data-v-eff4d384 {
+  position: absolute;
+  width: 146rpx;
+  height: 48rpx;
+  border: 1px solid #FA992C;
+  border-radius: 24rpx;
+  text-align: center;
+  line-height: 44rpx;
+  color: #FA992A;
+  font-size: 24rpx;
+  bottom: 25rpx;
+  right: 25rpx;
+}
+

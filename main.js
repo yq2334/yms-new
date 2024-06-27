@@ -9,14 +9,14 @@ import DictData from '@/components/dict/init'
 import DictTag from '@/components/dict/DictTag'
 import $mHelper from '@/utils/helper'
 import globalConfig from './config'
-import commonView from './components/common-view.vue'
+// import commonView from './components/view.vue'
 
 Vue.prototype.$mHelper = $mHelper
 Vue.prototype.globalConfig = globalConfig
 Vue.use(plugins)
 Vue.use(uView)
 Vue.component('DictTag', DictTag)
-Vue.component('commonView', commonView)
+// Vue.component('commonView', commonView)
 Vue.config.productionTip = false
 Vue.prototype.$store = store
 Vue.prototype.base=common;

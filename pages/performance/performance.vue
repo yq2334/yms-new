@@ -1,6 +1,6 @@
 <template>
 	<view class="performance">
-		<u-navbar leftText="返回" :fixed="true" bgColor="#fff" :autoBack="false" :safeAreaInsetTop="true"
+		<u-navbar leftText="返回" :fixed="true" :placeholder="true" bgColor="#fff" :autoBack="false" :safeAreaInsetTop="true"
 			@leftClick="$tab.switchTab('/pages/home/home')" leftIconColor="#363636" leftIcon="arrow-leftward"
 			leftIconSize="25" :titleStyle="{color: '#363636',fontSize: '32rpx'}">
 			<view class="search flex align-center" slot="right" @click="show=true" :style="{marginRight: rightX + 'px'}">
@@ -9,7 +9,7 @@
 
 			</view>
 		</u-navbar>
-		<common-view>
+		<view>
 
 			<view class="performance-content margin-top-sm">
 				<view class="pannel">
@@ -26,7 +26,7 @@
 					<view class="menu-wrapper flex flex-wrap margin-top justify-between">
 						<view class="flex item justify-start align-start "
 							@click="$tab.navigateTo('/pages/performance/day-list?name=jiaoyi_month_xiaji&type=交易&tab=1')">
-							<u--image class="img" :showLoading="true" src="../../static/images/wallet/jy.png" width="37rpx"
+							<u--image class="img" :showLoading="true" src="/static/images/wallet/jy.png" width="37rpx"
 								height="39rpx" mode="aspectFit"></u--image>
 							<view class="flex flex-direction">
 								<text class="fs1">今日交易</text>
@@ -35,7 +35,7 @@
 						</view>
 						<view class="flex item justify-start align-start "
 							@click="$tab.navigateTo('/pages/performance/day-list?name=jihuo_month_xiaji&type=激活&tab=1')">
-							<u--image class="img" :showLoading="true" src="../../static/images/wallet/cy.png" width="40rpx"
+							<u--image class="img" :showLoading="true" src="/static/images/wallet/cy.png" width="40rpx"
 								height="40rpx" mode="aspectFit"></u--image>
 							<view class="flex flex-direction">
 								<text class="fs1">今日激活</text>
@@ -43,8 +43,8 @@
 							</view>
 						</view>
 						<view class="flex item justify-start align-start margin-top-xl"
-							@click="$tab.navigateTo('/pages/performance/month-list?name=jihuo_month_xiaji&type=激活&tab=1')">
-							<u--image class="img" :showLoading="true" src="../../static/images/wallet/rili.png" width="39rpx"
+							@click="$tab.navigateTo('/pages/performance/month-list?name=jihuo_month_xiaji&type=激活&tab=1')"> 
+							<u--image class="img" :showLoading="true" src="/static/images/wallet/rili.png" width="39rpx"
 								height="39rpx" mode="aspectFit"></u--image>
 							<view class="flex flex-direction">
 								<text class="fs1">本月激活(台)</text>
@@ -52,7 +52,7 @@
 							</view>
 						</view>
 						<view class="flex item justify-start align-start margin-top-xl">
-							<u--image class="img" :showLoading="true" src="../../static/images/wallet/js.png" width="35rpx"
+							<u--image class="img" :showLoading="true" src="/static/images/wallet/js.png" width="35rpx"
 								height="40rpx" mode="aspectFit"></u--image>
 							<view class="flex flex-direction">
 								<text class="fs1">累积激活(台)</text>
@@ -76,7 +76,7 @@
 					<view class="menu-wrapper flex flex-wrap margin-top justify-between">
 						<view class="flex item justify-start align-start "
 							@click="$tab.navigateTo('/pages/performance/day-list?name=jiaoyi_month_xiaji&type=交易&tab=0')">
-							<u--image class="img" :showLoading="true" src="../../static/images/wallet/jy.png" width="37rpx"
+							<u--image class="img" :showLoading="true" src="/static/images/wallet/jy.png" width="37rpx"
 								height="39rpx" mode="aspectFit"></u--image>
 							<view class="flex flex-direction">
 								<text class="fs1">今日交易</text>
@@ -85,7 +85,7 @@
 						</view>
 						<view class="flex item justify-start align-start "
 							@click="$tab.navigateTo('/pages/performance/day-list?name=jihuo_month_xiaji&type=激活&tab=0')">
-							<u--image class="img" :showLoading="true" src="../../static/images/wallet/cy.png" width="40rpx"
+							<u--image class="img" :showLoading="true" src="/static/images/wallet/cy.png" width="40rpx"
 								height="40rpx" mode="aspectFit"></u--image>
 							<view class="flex flex-direction">
 								<text class="fs1">今日激活</text>
@@ -94,7 +94,7 @@
 						</view>
 						<view class="flex item justify-start align-start margin-top-xl"
 							@click="$tab.navigateTo('/pages/performance/month-list?name=jihuo_month_xiaji&type=激活&tab=0')">
-							<u--image class="img" :showLoading="true" src="../../static/images/wallet/rili.png" width="39rpx"
+							<u--image class="img" :showLoading="true" src="/static/images/wallet/rili.png" width="39rpx"
 								height="39rpx" mode="aspectFit"></u--image>
 							<view class="flex flex-direction">
 								<text class="fs1">本月激活(台)</text>
@@ -102,7 +102,7 @@
 							</view>
 						</view>
 						<view class="flex item justify-start align-start margin-top-xl">
-							<u--image class="img" :showLoading="true" src="../../static/images/wallet/js.png" width="35rpx"
+							<u--image class="img" :showLoading="true" src="/static/images/wallet/js.png" width="35rpx"
 								height="40rpx" mode="aspectFit"></u--image>
 							<view class="flex flex-direction">
 								<text class="fs1">累积激活(台)</text>
@@ -113,7 +113,7 @@
 					</view>
 				</view>
 			</view>
-		</common-view>
+		</view>
 		<u-popup :show="show" mode="top" @close="close" @open="open">
 			<view class="serach-pop">
 				<u-navbar leftText="返回" :fixed="false" bgColor="transparent" :autoBack="false" :safeAreaInsetTop="true"

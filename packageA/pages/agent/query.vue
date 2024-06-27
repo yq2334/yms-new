@@ -1,10 +1,10 @@
 <template>
 	<view class="agent">
-		<u-navbar leftText="返回" :fixed="true" bgColor="#fff" :autoBack="false" :safeAreaInsetTop="true"
+		<u-navbar leftText="返回" :fixed="true" :placeholder="true" bgColor="#fff" :autoBack="false" :safeAreaInsetTop="true"
 			@leftClick="$mHelper.goBack()" leftIconColor="#363636" leftIcon="arrow-leftward" leftIconSize="25"
 			:titleStyle="{color: '#363636',fontSize: '32rpx'}">
 		</u-navbar>
-		<common-view>
+		<view>
 			<view class="agent-search flex align-center margin-top">
 				<image class="search" src="../../static/images/terminal/search.png" mode=""></image>
 				<u--input v-model="keyword" placeholder="点击搜索内容" type="text" fontSize="16" color="#3F3F3F" border="none"
@@ -35,7 +35,7 @@
 					</view>
 				</view>
 			</view>
-		</common-view>
+		</view>
 		<u-loadmore :status="status" @loadmore="loadmore" />
 	</view>
 </template>

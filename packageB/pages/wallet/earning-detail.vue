@@ -1,6 +1,6 @@
 <template>
 	<view class="earning">
-		<u-navbar leftText="返回" :fixed="true" bgColor="#fff" :autoBack="false" :safeAreaInsetTop="true"
+		<u-navbar leftText="返回" :fixed="true" :placeholder="true" bgColor="#fff" :autoBack="false" :safeAreaInsetTop="true"
 			@leftClick="$mHelper.goBack()" leftIconColor="#363636" leftIcon="arrow-leftward" leftIconSize="25"
 			:titleStyle="{color: '#363636',fontSize: '32rpx'}">
 			<!-- <view class="search flex align-center" slot="right">
@@ -9,7 +9,7 @@
 
 			</view> -->
 		</u-navbar>
-		<common-view>
+		<view>
 			<view class="earning-content padding-lr padding-tb-sm">
 				<!-- <view class="pannel ">
 				<view class="title">
@@ -51,7 +51,7 @@
 					</u-cell-group>
 				</view>
 			</view>
-		</common-view>
+		</view>
 	</view>
 </template>
 

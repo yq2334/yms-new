@@ -1,10 +1,10 @@
 <template>
 	<view class="recyle">
-		<u-navbar leftText="返回" :fixed="true" bgColor="#fff" :autoBack="false" :safeAreaInsetTop="true"
+		<u-navbar leftText="返回" :fixed="true" :placeholder="true" bgColor="#fff" :autoBack="false" :safeAreaInsetTop="true"
 			@leftClick="$mHelper.goBack()" leftIconColor="#363636" leftIcon="arrow-leftward" leftIconSize="25"
 			:titleStyle="{color: '#363636',fontSize: '32rpx'}">
 		</u-navbar>
-		<common-view>
+		<view>
 			<view class="recyle-content">
 				<view class="pannel top-pannel flex justify-between align-center">
 					<view class="left">
@@ -71,7 +71,7 @@
 					</view>
 				</view>
 			</view>
-		</common-view>
+		</view>
 	</view>
 </template>
 

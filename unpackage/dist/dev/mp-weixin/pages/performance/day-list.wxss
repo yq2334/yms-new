@@ -1,0 +1,82 @@
+@charset "UTF-8";
+/**
+ * uni-app内置的常用样式变量
+ */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+page {
+  background-color: #F6F5F8;
+}
+
+@charset "UTF-8";
+/**
+ * uni-app内置的常用样式变量
+ */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.terminal-query .content.data-v-2180d7b2 {
+  padding: 36rpx 44rpx;
+}
+.terminal-query .top.data-v-2180d7b2 {
+  padding: 45rpx 74rpx;
+  background: linear-gradient(130deg, #FA982B, #FFC079);
+  box-shadow: 6rpx 6rpx 8rpx rgba(217, 109, 26, 0.2);
+  border-radius: 16rpx;
+  color: #FFFFFF;
+}
+.terminal-query .top ._h3.data-v-2180d7b2 {
+  font-size: 27rpx;
+  font-weight: 400;
+  margin-bottom: 25rpx;
+}
+.terminal-query .top ._h1.data-v-2180d7b2 {
+  font-size: 40rpx;
+  font-weight: bold;
+}
+.terminal-query .tabs.data-v-2180d7b2 {
+  border-radius: 22rpx;
+  background: linear-gradient(180deg, #EAEAEA, #FEFEFE);
+  margin-top: 47rpx;
+}
+.terminal-query .tabs .item.data-v-2180d7b2 {
+  width: 100%;
+  height: 69rpx;
+  line-height: 69rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #000000;
+}
+.terminal-query .tabs .item.active.data-v-2180d7b2 {
+  background: linear-gradient(130deg, #FA982B, #FFC079);
+  border-radius: 22rpx 22rpx 0rpx 10rpx;
+  color: #F6F6F6;
+}
+.terminal-query .list .item.data-v-2180d7b2 {
+  height: 69rpx;
+  background: linear-gradient(180deg, #EAEAEA, #FEFEFE);
+  border-radius: 10rpx;
+  color: #000000;
+  font-size: 29rpx;
+  padding: 0 17rpx 0 27rpx;
+}
+

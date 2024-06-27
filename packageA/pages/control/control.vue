@@ -1,11 +1,11 @@
 <template>
 	<view class="terminal">
-		<u-navbar leftText="返回" :fixed="true" bgColor="#fff" :autoBack="false" :safeAreaInsetTop="true"
+		<u-navbar leftText="返回" :fixed="true" :placeholder="true" bgColor="#fff" :autoBack="false" :safeAreaInsetTop="true"
 			@leftClick="$mHelper.goBack()" leftIconColor="#363636" leftIcon="arrow-leftward" leftIconSize="25"
 			:titleStyle="{color: '#363636',fontSize: '32rpx'}">
 
 		</u-navbar>
-		<common-view>
+		<view>
 			<view class="terminal-content">
 				<view class="data-pannel flex flex-wrap align-center justify-between">
 					<view class="item flex flex-direction justify-center "
@@ -96,7 +96,7 @@
 					</view>
 				</view>
 			</view>
-		</common-view>
+		</view>
 	
 	</view>
 </template>

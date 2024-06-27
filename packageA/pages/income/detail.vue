@@ -1,6 +1,6 @@
 <template>
 	<view class="income">
-		<u-navbar leftText="返回" :fixed="true" bgColor="transparent" :autoBack="false" :safeAreaInsetTop="true"
+		<u-navbar leftText="返回" :fixed="true" :placeholder="true" bgColor="transparent" :autoBack="false" :safeAreaInsetTop="true"
 			@leftClick="$mHelper.goBack()" leftIconColor="#fff" leftIcon="arrow-leftward" leftIconSize="25"
 			:titleStyle="{color: '#fff',fontSize: '32rpx'}">
 			<view class="search flex align-center" slot="right" @click="openSearchPop" :style="{marginRight: rightX + 'px'}">
@@ -9,7 +9,7 @@
 
 			</view>
 		</u-navbar>
-		<common-view>
+		<view>
 			
 		
 		<view class="income-top">
@@ -52,7 +52,7 @@
 			</view>
 			<u-loadmore :status="status" @loadmore="loadmore" />
 		</view>
-		</common-view>
+		</view>
 		<search-pop ref="searchPop" :columns="columns" @submit="doSearch"></search-pop>
 	</view>
 </template>

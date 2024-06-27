@@ -1,10 +1,10 @@
 <template>
 	<view class="notice">
-		<u-navbar leftText="返回" :fixed="true" bgColor="#fff" :autoBack="false" :safeAreaInsetTop="true"
+		<u-navbar leftText="返回" :fixed="true" :placeholder="true" bgColor="#fff" :autoBack="false" :safeAreaInsetTop="true"
 			@leftClick="$mHelper.goBack()" leftIconColor="#363636" leftIcon="arrow-leftward" leftIconSize="25"
 			:titleStyle="{color: '#363636',fontSize: '32rpx'}">
 		</u-navbar>
-		<common-view>
+		<view>
 			<view class="notice-content">
 				<view class="list">
 					<view class="item flex align-center justify-between" v-for="(item,index) in list" :key="index"
@@ -20,7 +20,7 @@
 					</view>
 				</view>
 			</view>
-		</common-view>
+		</view>
 	</view>
 </template>
 

@@ -1,10 +1,10 @@
 <template>
 	<view class="police">
-		<u-navbar leftText="返回" :fixed="true" bgColor="#fff" :autoBack="false" :safeAreaInsetTop="true"
+		<u-navbar leftText="返回" :fixed="true" :placeholder="true" bgColor="#fff" :autoBack="false" :safeAreaInsetTop="true"
 			@leftClick="$mHelper.goBack()" leftIconColor="#363636" leftIcon="arrow-leftward" leftIconSize="25"
 			:titleStyle="{color: '#363636',fontSize: '32rpx'}">
 		</u-navbar>
-		<common-view>
+		<view>
 			<view class="police-content">
 				<view class="pannel">
 					<view class="cell flex align-center justify-between ">
@@ -256,7 +256,7 @@
 					text="确认提交">
 				</u-button>
 			</view>
-		</common-view>
+		</view>
 		<!-- <p class="padding-lr padding-tb text-sm " style="color: rgba(51, 51, 51, 0.6);">提示: 政策只能提升,不允许降低调整</p> -->
 		<u-picker :show="showBand" :columns="bandList" keyName="pinpainame" title="请选择品牌" @close="showBand = false"
 			@cancel="showBand = false" @confirm="bandSelect"></u-picker>

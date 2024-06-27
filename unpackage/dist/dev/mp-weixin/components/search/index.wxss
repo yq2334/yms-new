@@ -1,0 +1,89 @@
+@charset "UTF-8";
+/**
+ * uni-app内置的常用样式变量
+ */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.serach-pop .serach-content {
+  border-top: 2rpx solid #FA8E1C;
+  padding: 20rpx 44rpx 44rpx 44rpx;
+}
+.serach-pop .u-form .u-form-item__body__left__content {
+  padding-left: 26rpx;
+}
+.serach-pop .u-form .u-form-item__body__left__content__label {
+  color: #3F3F3F;
+  font-size: 30rpx;
+  line-height: 30rpx;
+}
+.serach-pop .u-form .u-form-item__body__left__content__required {
+  font-size: 28rpx;
+  color: #FA8E1C;
+  left: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+.serach-pop .u-form .u-input {
+  flex: auto;
+}
+.serach-pop .u-form .uni-select {
+  margin-top: 20rpx;
+  border: 0;
+}
+.serach-pop .u-form .uni-select__input-placeholder {
+  color: #9A9A9A;
+  font-size: 30rpx;
+}
+.serach-pop .u-form .uni-input-placeholder {
+  color: #9A9A9A !important;
+  font-size: 30rpx;
+}
+.serach-pop .u-form .selectDate {
+  color: #9A9A9A;
+  font-size: 30rpx;
+}
+.serach-pop .u-form .selectDate .fs {
+  color: #3F3F3F;
+}
+.btn-action {
+  margin-top: 60rpx;
+}
+.btn-action .u-button {
+  width: 242rpx !important;
+  height: 72rpx !important;
+}
+
+@charset "UTF-8";
+/**
+ * uni-app内置的常用样式变量
+ */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+ .u-button--plain {
+  height: 72rpx;
+  border: 1px solid #FA8E1C !important;
+  background: transparent;
+  color: #FA8E1C;
+}
+

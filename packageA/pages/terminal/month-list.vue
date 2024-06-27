@@ -9,7 +9,7 @@
 		
 			</view>
 		</u-navbar>
-		<common-view>
+		<view>
 			<view class="top shadow flex align-center justify-between">
 				<view class="left">
 					<text class="margin-right-sm">2023-12</text>
@@ -43,7 +43,7 @@
 					</view>
 				</view>
 			</view>
-		</common-view>
+		</view>
 	</view>
 </template>
 

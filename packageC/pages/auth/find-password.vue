@@ -1,6 +1,6 @@
 <template>
 	<view class="register">
-		<u-navbar :fixed="true" bgColor="#fff"  :autoBack="false" :safeAreaInsetTop="true"
+		<u-navbar :fixed="true" :placeholder="true" bgColor="#fff"  :autoBack="false" :safeAreaInsetTop="true"
 			@leftClick="$mHelper.goBack()" leftIconColor="#363636" leftIcon="arrow-leftward" leftIconSize="25"
 			:titleStyle="{color: '#363636',fontSize: '32rpx'}">
 		</u-navbar>
