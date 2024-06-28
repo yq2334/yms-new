@@ -22,7 +22,7 @@
 			</view>
 		
 		</view>
-		<view class="home-data" v-if="name != 'test'">
+		<view class="home-data" v-if="name.toLocaleLowerCase() !=  'test'.toLocaleLowerCase() && name">
 			<view class="tab">
 				<view class="item" :class="current == item.key && 'active'" @click="changeTab(item)"
 					v-for="(item,index) in tabs" :key="index">
@@ -109,7 +109,7 @@
 					<p class="text-blak-2 margin-top-sm ">商户查询</p>
 				</view>
 				<view class="flex flex-direction align-center justify-center"
-					@click="$tab.navigateTo('/packageA/pages/team/team')" v-if="name != 'test'">
+					@click="$tab.navigateTo('/packageA/pages/team/team')" v-if="name.toLocaleLowerCase() != 'test'.toLocaleLowerCase() && name">
 					<u--image src="/static/images/home/tdgl.png" width="40px" height="40px" mode="aspectFit"></u--image>
 					<p class="text-blak-2 margin-top-sm">团队管理</p>
 				</view>
@@ -125,7 +125,7 @@
 			</view>
 			<view class="flex margin-top-lg align-center justify-between flex-wrap menu-list">
 				<view class="flex align-center basis-df-divider margin-bottom-sm"
-					@click="$tab.navigateTo('/packageB/pages/wallet/wallet')" v-if="name != 'test'">
+					@click="$tab.navigateTo('/packageB/pages/wallet/wallet')" v-if="name.toLocaleLowerCase() != 'test'.toLocaleLowerCase() && name">
 					<u--image class="" src="/static/images/home/syqb.png" width="40px" height="40px"
 						mode="aspectFit"></u--image>
 					<view class="margin-left-sm">
@@ -150,7 +150,7 @@
 						<h3 class="text-gray">代理疑难解答</h3>
 					</view>
 				</view>
-				<view class="flex align-center basis-df-divider" @click="$tab.navigateTo('/packageC/pages/share/share')" v-if="name != 'test'">
+				<view class="flex align-center basis-df-divider" @click="$tab.navigateTo('/packageC/pages/share/share')" v-if="name.toLocaleLowerCase() != 'test'.toLocaleLowerCase() && name">
 					<u--image class="" src="/static/images/home/yqfx.png" width="40px" height="40px"
 						mode="aspectFit"></u--image>
 					<view class="margin-left-sm">
@@ -223,7 +223,7 @@
 			// #endif
 		},
 		onLoad() {
-			if(this.name == 'test') {
+			if(this.name.toLocaleLowerCase() == 'test'.toLocaleLowerCase() || !this.name) {
 				uni.setTabBarItem({
 					index:1,
 					visible:false

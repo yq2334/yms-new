@@ -102,7 +102,7 @@ const request = config => {
 				}
 				if (res.statusCode == 200) {
 
-					if (res.data && res.data.msg && (res.data.code == '9999' )) {
+					if (res.data && res.data.msg && (res.data.code == '9999' )) {        
 						uni.showToast({
 							icon: "none",
 							title: res.data.msg

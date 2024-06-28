@@ -20,7 +20,7 @@
 
 		</view>
 
-		<view class="mine-menu " v-if="name != 'test'">
+		<view class="mine-menu " v-if="name.toLocaleLowerCase() != 'test'.toLocaleLowerCase() && name">
 			<view class="item " @click="$tab.navigateTo('/packageB/pages/police/police')">
 				<image class="img1" src="/static/images/mine/police.png" mode=""></image>
 				<view>
@@ -130,7 +130,7 @@
 		data() {
 			return {
 				userInfo: {},
-				bindCardUrl: '', 
+				bindCardUrl: '',  
 				platform: ''
 			}
 		},
@@ -149,7 +149,7 @@
 
 		},
 		onLoad() {
-			if(this.name == 'test') {
+			if(this.name.toLocaleLowerCase() == 'test'.toLocaleLowerCase() || !this.name) {
 				uni.setTabBarItem({
 					index:1,
 					visible:false

@@ -1,9 +1,9 @@
 {
     "name" : "翼秘书",
     "appid" : "__UNI__BED0722",
-    "description" : "翼秘书2.0.1",
-    "versionName" : "2.0.1",
-    "versionCode" : 201,
+    "description" : "翼秘书2.0.4",
+    "versionName" : "2.0.4",
+    "versionCode" : 204,
     "transformPx" : false,
     "app-plus" : {
         "usingComponents" : true,
