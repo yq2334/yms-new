@@ -20,7 +20,7 @@
 					<view class="flex justify-between align-center">
 						<view class="">
 							<h3>本级新增{{type}}</h3>
-							<h1>{{initData.self_total}}</h1>
+							<h1>{{initData.self_total}}</h1> 
 						</view>
 						<view class="">
 							<h3>下级新增{{type}}</h3>
@@ -109,7 +109,7 @@
 				params_name: '',
 				type: '',
 				initData: {},
-				searh: {},
+				search: {},
 				columns: [{
 						type: 'pinpai',
 						label: '品牌',
@@ -135,10 +135,17 @@
 						actions: []
 					},
 
-
+					{
+						type: 'daili',
+						label: '归属代理',
+						model: 'daili',
+						placeholder: '请选择 ',
+						isShow: true,
+						actions: []
+					},
 
 				],
-			};
+			}
 		},
 		components: {
 			SearchPop
@@ -157,7 +164,7 @@
 				}
 			];
 			console.log(this.paramsMap[this.params_name].team.api)
-			this.getList()
+			this.getList() 
 
 		},
 		onReady() {
@@ -191,8 +198,16 @@
 		},
 		methods: {
 			changeTab(item) {
+				
 				this.current = item.val
 				this.page = 1;
+				this.columns.forEach((item) => {
+				
+					if (item.type == 'daili') {
+						this.current == 1 ? item.isShow = true : item.isShow = false
+					}
+				
+				})
 				this.getList()
 			},
 			getList() {
@@ -204,7 +219,11 @@
 					apiname: this.paramsMap[this.params_name].team.name,
 				}, {
 					page: this.page,
-					pageSize: this.pageSize
+					pageSize: this.pageSize,
+					pinpai: this.search.pinpai,
+					zcno: this.search.zcno,
+					nianyue: this.search.nianyue,
+					xiaji: this.search.bianhao
 				}).then((res) => {
 					uni.stopPullDownRefresh()
 					this.total = res.totalnum
@@ -231,7 +250,11 @@
 					apiname: this.paramsMap[this.params_name].direct.name,
 				}, {
 					page: this.page,
-					pageSize: this.pageSize
+					pageSize: this.pageSize,
+					pinpai: this.search.pinpai,
+					zcno: this.search.zcno,
+					nianyue: this.search.nianyue,
+					// xiaji: this.search.bianhao
 				}).then((res) => {
 					uni.stopPullDownRefresh()
 					this.total = res.totalnum
@@ -269,6 +292,7 @@
 			},
 			doSearch(form) {
 				console.log(form)
+				this.search = form
 				// this.searh.DataFrom = uni.$u.timeFormat(form.startDate, 'yyyy-mm-dd') 
 				// this.searh.DataTo = uni.$u.timeFormat(form.endDate, 'yyyy-mm-dd')  
 				this.page = 1;

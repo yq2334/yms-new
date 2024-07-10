@@ -184,6 +184,7 @@
 				pageNumber: 0,
 				status: 'loadmore',
 				params_name: '',
+				search: {},
 				columns: [{
 						type: 'pinpai',
 						label: '品牌',
@@ -279,9 +280,14 @@
 				getFengkongMap({
 					url: this.paramsMap[this.params_name].team.api,
 					apiname: this.paramsMap[this.params_name].team.name,
+				
+					// xiaji: this.search.bianhao
 				}, {
 					page: this.page,
-					pageSize: this.pageSize
+					pageSize: this.pageSize,
+					pinpai: this.search.pinpai,
+					zcno: this.search.zcno,
+					txt: this.search.keyword
 				}).then((res) => {
 
 					this.total = res.totalnum
@@ -308,9 +314,14 @@
 				getFengkongMap({
 					url: this.paramsMap[this.params_name].direct.api,
 					apiname: this.paramsMap[this.params_name].direct.name,
+				
 				}, {
 					page: this.page,
-					pageSize: this.pageSize
+					pageSize: this.pageSize,
+					pinpai: this.search.pinpai,
+					zcno: this.search.zcno,
+					txt: this.search.keyword,
+					xiaji: this.search.bianhao
 				}).then((res) => {
 					this.total = res.totalnum
 
@@ -348,7 +359,8 @@
 			doSearch(form) {
 				console.log(form)
 				// this.searh.DataFrom = uni.$u.timeFormat(form.startDate, 'yyyy-mm-dd') 
-				// this.searh.DataTo = uni.$u.timeFormat(form.endDate, 'yyyy-mm-dd')  
+				// this.searh.DataTo = uni.$u.timeFormat(form.endDate, 'yyyy-mm-dd') 
+				this.search = form;
 				this.page = 1;
 				this.getList()
 				console.log(this.searh)

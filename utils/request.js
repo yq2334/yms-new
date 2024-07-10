@@ -74,7 +74,7 @@ const request = config => {
 					console.log(JSON.stringify(res))
 					uni.showToast({
 						icon: "none",
-						title: "服务器内部错误"
+						title: "系统繁忙，请重试"
 					})
 					return;
 				}

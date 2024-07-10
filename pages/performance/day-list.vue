@@ -3,7 +3,7 @@
 		<u-navbar leftText="返回" :fixed="true" :placeholder="true" bgColor="#fff" :autoBack="false" :safeAreaInsetTop="true"
 			@leftClick="$mHelper.goBack()" leftIconColor="#363636" leftIcon="arrow-leftward" leftIconSize="25"
 			:titleStyle="{color: '#363636',fontSize: '32rpx'}">
-			<view class="search flex align-center" slot="right" @click="show=true">
+			<view class="search flex align-center" slot="right" @click="openSearchPop()">
 				<text style="fontSize: 34rpx">筛选查询</text>
 				<u-icon size="30" color="#363636" name="search"></u-icon>
 
@@ -51,6 +51,7 @@
 				</view>
 			</view>
 		</view>
+		<search-pop ref="searchPop" :columns="columns" @submit="doSearch"></search-pop>
 	</view>
 </template>
 
@@ -58,7 +59,7 @@
 	import {
 		getYejichaxunMap
 	} from '@/api/system/user.js'
-
+	import SearchPop from '@/components/search/index.vue'
 	export default {
 		data() {
 			return {
@@ -107,8 +108,38 @@
 				params_name: '',
 				type: '',
 				initData: {},
-
+				search: {},
+				columns: [{
+						type: 'pinpai',
+						label: '品牌',
+						model: 'pinpai',
+						placeholder: '请选择',
+						isShow: true,
+						actions: []
+					},
+					{
+						type: 'zhengce',
+						label: '政策',
+						model: 'zhengce',
+						isShow: true,
+						placeholder: '请选择',
+						actions: []
+					},
+				
+					{
+						type: 'daili',
+						label: '归属代理',
+						model: 'daili',
+						placeholder: '请选择 ',
+						isShow: true,
+						actions: []
+					}
+					
+				],
 			};
+		},
+		components: {
+			SearchPop
 		},
 		onLoad(params) {
 			this.params_name = params.name
@@ -151,6 +182,13 @@
 			changeTab(item) {
 				this.current = item.val
 				this.page = 1;
+				this.columns.forEach((item) => {
+				
+					if (item.type == 'daili') {
+						this.current == 1 ? item.isShow = true : item.isShow = false
+					}
+				
+				})
 				this.getList()
 			},
 			getList() {
@@ -162,7 +200,10 @@
 					apiname: this.paramsMap[this.params_name].team.name,
 				}, {
 					page: this.page,
-					pageSize: this.pageSize
+					pageSize: this.pageSize,
+					pinpai: this.search.pinpai,
+					zcno: this.search.zcno,				
+					xiaji: this.search.bianhao
 				}).then((res) => {
 					uni.stopPullDownRefresh()
 					this.total = res.totalnum
@@ -189,7 +230,9 @@
 					apiname: this.paramsMap[this.params_name].direct.name,
 				}, {
 					page: this.page,
-					pageSize: this.pageSize
+					pageSize: this.pageSize,
+					pinpai: this.search.pinpai,
+					zcno: this.search.zcno,			
 				}).then((res) => {
 					uni.stopPullDownRefresh()
 					this.total = res.totalnum
@@ -236,6 +279,18 @@
 					}
 				});
 
+			},
+			openSearchPop() {
+				this.$refs.searchPop.show = true
+			},
+			doSearch(form) {
+				console.log(form)
+				this.search = form;
+				// this.searh.DataFrom = uni.$u.timeFormat(form.startDate, 'yyyy-mm-dd') 
+				// this.searh.DataTo = uni.$u.timeFormat(form.endDate, 'yyyy-mm-dd')  
+				this.page = 1;
+				this.getList()
+				console.log(this.searh)
 			},
 			navToDetail(item) {
 

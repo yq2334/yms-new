@@ -133,7 +133,11 @@
 			getList() {
 				getHuaboLog({
 					page: this.page,
-					pageSize: this.pageSize
+					pageSize: this.pageSize,
+					datefrom: this.search.datefrom,
+					dateto: this.search.dateto,					
+					txt: this.search.keyword,
+					xiaji: this.search.bianhao
 				}).then((res) => {
 					uni.stopPullDownRefresh()
 					this.total = res.totalnum
@@ -171,6 +175,11 @@
 			},
 			doSearch(form) {
 				console.log(form)
+				this.search = form;
+				this.page = 1;
+				this.getList()
+				console.log(this.searh)
+				
 			}
 		},
 	}

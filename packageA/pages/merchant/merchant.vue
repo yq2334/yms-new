@@ -113,6 +113,7 @@
 				total: 0,
 				pageNumber: 0,
 				status: 'loadmore',
+				search: {},
 				columns: [{
 						type: 'pinpai',
 						label: '品牌',
@@ -216,10 +217,11 @@
 				this.columns.forEach((item) => {
 
 					if (item.type == 'daili') {
-						item.isShow = true
+						this.current == 0 ? item.isShow = true : item.isShow = false
 					}
 
 				})
+				this.$refs.searchPop.reset()
 				this.current = tab
 				this.getList()
 
@@ -231,7 +233,13 @@
 			getDirectList() {
 				getDirectMerchantList({
 					page: this.page,
-					pageSize: this.pageSize
+					pageSize: this.pageSize,
+					pinpai: this.search.pinpai,
+					zcno: this.search.zcno,
+					datefrom: this.search.datefrom,
+					dateto: this.search.dateto,
+					txt: this.search.keyword,
+				
 				}).then((res) => {
 					uni.stopPullDownRefresh()
 					this.total = res.totalnum
@@ -256,7 +264,13 @@
 			getTeamList() {
 				getTeamMerchantList({
 					page: this.page,
-					pageSize: this.pageSize
+					pageSize: this.pageSize,
+					pinpai: this.search.pinpai,
+					zcno: this.search.zcno,
+					datefrom: this.search.datefrom,
+					dateto: this.search.dateto,
+					txt: this.search.keyword,
+					xiaji: this.search.bianhao
 				}).then((res) => {
 					uni.stopPullDownRefresh()
 					this.total = res.totalnum
@@ -285,6 +299,7 @@
 				console.log(form)
 				// this.searh.DataFrom = uni.$u.timeFormat(form.startDate, 'yyyy-mm-dd') 
 				// this.searh.DataTo = uni.$u.timeFormat(form.endDate, 'yyyy-mm-dd')  
+				this.search = form;
 				this.page = 1;
 				this.getList()
 				console.log(this.searh)

@@ -128,7 +128,7 @@
 		data() {
 			return {
 				show: false,
-				rightX: 0,
+
 				form: {
 					pinpainame: '',
 					pinpai: '',
@@ -144,7 +144,9 @@
 					startDate: '',
 					endDate: '',
 					DataFrom: '',
-					DataTo: ''
+					DataTo: '',
+					datefrom: '',
+					dateto: ''
 				},
 				showPinpai: false,
 				showZhengce: false,
@@ -166,11 +168,7 @@
 		},
 		created() {
 			this.initData()
-			// #ifdef MP-WEIXIN
-			let res = uni.getMenuButtonBoundingClientRect()
-			console.log(res)
-			this.rightX = res.width
-			// #endif
+		
 		},
 		methods: {
 			initData() {
@@ -236,6 +234,9 @@
 				})
 			},
 			pinpaiSelect(e) {
+				this.zclist = [];
+				this.form.zcname = '';
+				this.form.zcno = '';
 				this.form.pinpainame = e.value[0].pinpainame
 				this.form.pinpai = e.value[0].pinpai
 				this.getSelectZhengceList(e.value[0].pinpai)
@@ -266,6 +267,7 @@
 				console.log(uni.$u.timeFormat(e.value, 'yyyy-mm-dd'))
 				// this.startTime = e.value
 				this.form.startDate = uni.$u.timeFormat(e.value, 'yyyy-mm-dd')
+				this.form.datefrom =  uni.$u.timeFormat(e.value, 'yyyy-mm-dd')
 				console.log(this.form.startDate)
 				this.showStartDate = false
 
@@ -275,6 +277,7 @@
 				console.log(e.value)
 				// this.date2 = e.value
 				this.form.endDate = uni.$u.timeFormat(e.value, 'yyyy-mm-dd')
+				this.form.dateto = uni.$u.timeFormat(e.value, 'yyyy-mm-dd')
 				this.showEndDate = false
 			},
 			confirm() {
@@ -290,8 +293,11 @@
 				this.form.DataTo =  '';
 				const today = new Date();
 				const firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
-				this.form.startDate = firstDay;
-				this.form.endDate = new Date()
+				if(this.initDate) {
+					this.form.startDate = firstDay,
+					this.form.endDate = new Date()
+				}
+			
 				// this.columns.forEach((item) => {
 					
 				// 	if(item.type == 'date') {

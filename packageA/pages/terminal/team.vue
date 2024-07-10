@@ -208,7 +208,14 @@
 			getDirectOpenList() {
 				getTeamOpen({
 					page: this.page,
-					pageSize: this.pageSize
+					pageSize: this.pageSize,
+					pinpai: this.search.pinpai,
+					zcno: this.search.zcno,
+					// datefrom: this.search.datefrom,
+					// dateto: this.search.dateto,
+					zhuangtai: this.search.recflg,
+					txt: this.search.keyword,
+					xiaji: this.search.bianhao
 				}).then((res) => {
 					uni.stopPullDownRefresh()
 					this.total = res.totalnum
@@ -233,7 +240,14 @@
 			getDirectUnOpenList() {
 				getTeamUnOpen({
 					page: this.page,
-					pageSize: this.pageSize
+					pageSize: this.pageSize,
+					pinpai: this.search.pinpai,
+					zcno: this.search.zcno,
+					// datefrom: this.search.datefrom,
+					// dateto: this.search.dateto,
+					zhuangtai: this.search.recflg,
+					txt: this.search.keyword,
+					xiaji: this.search.bianhao
 				}).then((res) => {
 					uni.stopPullDownRefresh()
 					this.total = res.totalnum
@@ -271,6 +285,7 @@
 			},
 			doSearch(form) {
 				console.log(form)
+				this.search = form;
 				// this.searh.DataFrom = uni.$u.timeFormat(form.startDate, 'yyyy-mm-dd') 
 				// this.searh.DataTo = uni.$u.timeFormat(form.endDate, 'yyyy-mm-dd')  
 				this.page = 1;

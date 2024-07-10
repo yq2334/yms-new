@@ -103,6 +103,7 @@
 				total: 0,
 				pageNumber: 0,
 				status: 'loadmore',
+				search: {},
 				columns: [{
 						type: 'pinpai',
 						label: '品牌',
@@ -197,7 +198,13 @@
 			getDirectOpenList() {
 				getDirectOpen({
 					page: this.page,
-					pageSize: this.pageSize
+					pageSize: this.pageSize,
+					pinpai: this.search.pinpai,
+					zcno: this.search.zcno,
+					// datefrom: this.search.datefrom,
+					// dateto: this.search.dateto,
+					zhuangtai: this.search.recflg,
+					txt: this.search.keyword,
 				}).then((res) => {
 					uni.stopPullDownRefresh()
 					this.total = res.totalnum
@@ -222,7 +229,14 @@
 			getDirectUnOpenList() {
 				getDirectUnOpen({
 					page: this.page,
-					pageSize: this.pageSize
+					pageSize: this.pageSize,
+					pinpai: this.search.pinpai,
+					zcno: this.search.zcno,
+					// datefrom: this.search.datefrom,
+					// dateto: this.search.dateto,
+					zhuangtai: this.search.recflg,
+					txt: this.search.keyword,
+					xiaji: this.search.bianhao
 				}).then((res) => {
 					uni.stopPullDownRefresh()
 					this.total = res.totalnum
@@ -274,6 +288,7 @@
 				this.$refs.searchPop.show = true
 			},
 			doSearch(form) {
+				this.search = form;
 				console.log(form)
 				// this.searh.DataFrom = uni.$u.timeFormat(form.startDate, 'yyyy-mm-dd') 
 				// this.searh.DataTo = uni.$u.timeFormat(form.endDate, 'yyyy-mm-dd')  

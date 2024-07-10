@@ -4,7 +4,7 @@
 			@leftClick="$mHelper.goBack()" leftIconColor="#363636" leftIcon="arrow-leftward" leftIconSize="25"
 			:titleStyle="{color: '#363636',fontSize: '32rpx'}">
 		</u-navbar>
-		<view class="common-content">
+		<view class="">
 			<view class="notice-content">
 				<view class="wrapper">
 					<view class="flex align-start">
