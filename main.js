@@ -10,7 +10,20 @@ import DictTag from '@/components/dict/DictTag'
 import $mHelper from '@/utils/helper'
 import globalConfig from './config'
 // import commonView from './components/view.vue'
+// 小程序分享的封装
+import share from "@/utils/share.js"
 
+import globalPopup from '@/components/globalPopup/globalPopup.js';
+
+// 微信需要全局注册组件
+// #ifdef MP-WEIXIN 
+import popup from '@/components/globalPopup/globalPopup.vue' 
+Vue.component('popup',popup);
+// #endif
+
+Vue.use(globalPopup);
+
+Vue.mixin(share)
 Vue.prototype.$mHelper = $mHelper
 Vue.prototype.globalConfig = globalConfig
 Vue.use(plugins)

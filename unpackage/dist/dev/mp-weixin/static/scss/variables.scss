@@ -62,5 +62,5 @@ $mini: 20px;
 $status-bar: var(--status-bar-height);
 
 .common-content {
-	padding-top: calc(48px + #{$status-bar}) !important;
+	// padding-top: calc(48px + #{$status-bar}) !important;
 }

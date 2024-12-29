@@ -1,6 +1,6 @@
 import globalConfig from '@/config'
 import configService from '@/api/config.service'
-
+import Vue from 'vue'
 /**
  * 显示消息提示框
  * @param content 提示的标题
@@ -95,78 +95,102 @@ export const checkUpdate = () => {
 					// }	// 大包更新
 
 					if (osname == 'Android') {
-						if (widgetInfo.version < resData.apkver && resData.apkurl) {
-							uni.showModal({
-								title: '更新提示',
-								// showCancel:false,
-								content: '是否选择整包更新?',
-								success: (showResult) => {
-									if (showResult.confirm) {
-										uni.showLoading({
-											title: 'APP整包更新中'
-										})
-										// plus.runtime.openURL(openUrl);
-										uni.downloadFile({
-											url: decodeURIComponent(
-												resData
-												.apkurl),
-											success: (
-												downloadResult) => {
-												console.log(
-													decodeURIComponent(
-														resData
-														.apkurl
-													));
-												console.log(
-													downloadResult
-												);
-												if (downloadResult
-													.statusCode ===
-													200) {
-													plus.runtime
-														.install(
-															downloadResult
-															.tempFilePath, {
-																force: true
-															},
-															function() {
-																uni
-																	.hideLoading();
-																plus.runtime
-																	.restart();
-															},
-															function(
-																e
-															) {
-																uni
-																	.hideLoading();
-																uni.showToast({
-																	title: '整包更新失败',
-																	duration: 2000
-																});
+						if (widgetInfo.version != resData.apkver && resData.apkurl) {
+					
+							// uni.showModal({
+							// 	title: '更新提示',
+							// 	// showCancel:false,
+							// 	content: '是否选择整包更新?',
+							// 	success: (showResult) => {
+					
+							// 	}
+							// })
+							Vue.prototype.$popup.show({
+								type: 2,
+								title: '发现新版本',
+								subtitle: 'V' + resData.apkver,
+								content: '修复已知bug，升级后体验更顺畅。',
+								showCancel: false,
+								confirmText: '马上升级',
+								confirm: () => {
+									uni.showLoading({
+										title: 'APP整包更新中'
+									})
+									// plus.runtime.openURL(openUrl);
+									uni.downloadFile({
+										url: decodeURIComponent(
+											resData
+											.apkurl),
+										success: (
+											downloadResult) => {
+											console.log(
+												decodeURIComponent(
+													resData
+													.apkurl
+												));
+											console.log(
+												downloadResult
+											);
+											if (downloadResult
+												.statusCode ===
+												200) {
+												plus.runtime
+													.install(
+														downloadResult
+														.tempFilePath, {
+															force: true
+														},
+														function() {
+															uni
+																.hideLoading();
+															plus.runtime
+																.restart();
+														},
+														function(
+															e
+														) {
+															uni
+																.hideLoading();
+															uni.showToast({
+																title: '整包更新失败',
+																duration: 2000
 															});
-												}
+														});
 											}
-										});
-									}
+										}
+									});
+					
 								}
 							})
 						}
 					} else {
-						if (widgetInfo.version < resData.iosver && resData.iosurl) {
+					
+						if (widgetInfo.version != resData.iosver && resData.iosurl) {
 							console.log(11111111111111)
-
-							uni.showModal({
-								title: 'IOS更新提示',
-								content: 'APP变动，请及时更新',
-								success: (showResult) => {
-									if (showResult.confirm) {
+					
+							// uni.showModal({
+							// 	title: 'IOS更新提示',
+							// 	content: 'APP变动，请及时更新',
+							// 	success: (showResult) => {
+							// 		if (showResult.confirm) {
+							// 			plus.runtime.openURL(resData.iosurl);
+							// 		}
+							// 	}
+							// })
+							Vue.prototype.$popup.show({
+								type: 2,
+								title: '发现新版本',
+								subtitle: 'V' + resData.iosver,
+								content: '修复已知bug，升级后体验更顺畅。',
+								showCancel: false,
+								confirmText: '马上升级',
+								confirm: () => {
 										plus.runtime.openURL(resData.iosurl);
-									}
 								}
 							})
 						}
 					}
+					
 
 
 				}

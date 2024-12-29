@@ -473,9 +473,6 @@ uni-page-head .uni-page-head__title {
   width: 242rpx !important;
   height: 72rpx !important;
 }
-.common-content {
-  padding-top: calc(48px + 25px) !important;
-}
 /*
   ColorUi for uniApp  v2.1.6 | by 文晓港 2019-05-31 10:44:24
   仅供学习交流，如作它用所承受的法律责任一概与作者无关  
@@ -487,9 +484,6 @@ uni-page-head .uni-page-head__title {
 /* ==================
         初始化
  ==================== */
-.common-content {
-  padding-top: calc(48px + 25px) !important;
-}
 page {
   background-color: #fff;
   font-size: 28rpx;
